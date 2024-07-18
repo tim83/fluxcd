@@ -31,7 +31,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: "10.33.x"
+      version: "29.0.x"
       sourceRef:
         kind: HelmRepository
         name: traefik
