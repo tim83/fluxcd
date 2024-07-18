@@ -87,33 +87,6 @@ spec:
       kind: CustomResourceDefinition
       name: traefikservices.traefik.containo.us
 ---
-# Redirect to https
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: redirectscheme
-spec:
-  redirectScheme:
-    scheme: https
-    permanent: true
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: frontend-ingress-route-redirect
-  namespace: default
-spec:
-  entryPoints:
-    - web
-  routes:
-    - match: Host(`some-domain`)
-      kind: Rule
-      services:
-        - name: frontend
-          port: <ports>
-      middlewares:
-        - name: redirectscheme #enable redirect to https
----
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
