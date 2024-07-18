@@ -29,18 +29,3 @@ spec:
         enabled: false
       flux:
         enabled: true
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: kubeapps
-  namespace: kubeapps
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: kubeapps
