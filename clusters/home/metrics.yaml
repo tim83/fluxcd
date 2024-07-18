@@ -28,3 +28,21 @@ spec:
         kind: HelmRepository
         name: prometheus-community
   interval: 50m
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: metrics
+spec:
+  rules:
+  - host: "grafana.home.mees-olivier.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kube-prometheus-stack-grafana
+            port:
+              name: http-web
