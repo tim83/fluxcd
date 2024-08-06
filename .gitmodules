@@ -1,0 +1,3 @@
+[submodule "flux2-monitoring-example"]
+	path = flux2-monitoring-example
+	url = https://github.com/fluxcd/flux2-monitoring-example
