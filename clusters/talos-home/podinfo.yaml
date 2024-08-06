@@ -20,14 +20,13 @@ spec:
     metadata:
       labels:
         app: podinfo
-  spec:
-    containers:
-    - name: podinfo
-      image: ghcr.io/stefanprodan/podinfo:5.0.0 # {"$imagepolicy": "flux-system:podinfo"}
-      ports:
-        - name: http
-          containerPort: 9898
-          protocol: TCP
+  containers:
+  - name: podinfo
+    image: ghcr.io/stefanprodan/podinfo:5.0.0 # {"$imagepolicy": "flux-system:podinfo"}
+    ports:
+      - name: http
+        containerPort: 9898
+        protocol: TCP
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImagePolicy
