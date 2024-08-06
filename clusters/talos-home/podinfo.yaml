@@ -37,3 +37,6 @@ metadata:
 spec:
   imageRepositoryRef:
     name: podinfo
+  policy:
+    semver:
+      range: ">=5.0.0"
