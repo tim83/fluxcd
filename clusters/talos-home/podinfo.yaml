@@ -3,46 +3,29 @@ kind: Namespace
 metadata:
   name: podinfo
 ---
-apiVersion: image.toolkit.fluxcd.io/v1beta2
-kind: ImageRepository
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
 metadata:
   name: podinfo
   namespace: podinfo
 spec:
-  image: ghcr.io/stefanprodan/podinfo
-  interval: 5m
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: podinfo
-  namespace: default
-spec:
-  selector:
-    matchLabels:
-      app: podinfo
-  template:
-    metadata:
-      labels:
-        app: podinfo
+  releaseName: podinfo
+  chart:
     spec:
-      containers:
-        - name: podinfod
-          image: ghcr.io/stefanprodan/podinfo:5.0.0 # {"$imagepolicy": "podinfo:podinfo"}
-          imagePullPolicy: IfNotPresent
-          ports:
-            - name: http
-              containerPort: 9898
-              protocol: TCP
----
-apiVersion: image.toolkit.fluxcd.io/v1beta2
-kind: ImagePolicy
-metadata:
-  name: podinfo
-  namespace: podinfo
-spec:
-  imageRepositoryRef:
-    name: podinfo
-  policy:
-    semver:
-      range: ">=5.0.0"
+      chart: podinfo
+      version: "6.6.x"
+      sourceRef:
+        kind: HelmRepository
+        name: podinfo
+  interval: 50m
+  install:
+    remediation:
+      retries: 3
+  values:
+    ingress:
+      enabled: true
+      hosts:
+        - host: podinfo.home.mees-olivier.com
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
