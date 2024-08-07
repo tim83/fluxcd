@@ -24,7 +24,7 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: ingress-traefik
+      chart: traefik
       version: "3.1"
       sourceRef:
         kind: HelmRepository
