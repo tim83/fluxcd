@@ -30,6 +30,13 @@ spec:
         kind: HelmRepository
         name: traefik
         namespace: ingress-traefik
+  env:
+    CF_API_EMAIL: tim.mees83@gmail.com
+    CF_API_KEY:
+      valueFrom:
+        secretKeySecretRef:
+          name: cloudflare-api-token
+          key: apikey
   values:
     hostNetwork: false
     deployment:
@@ -45,3 +52,8 @@ spec:
       websecure:
         asDefault: true
         hostPort: 443
+    certificateResolvers:
+      letsencrypt:
+        acme:
+          dnsChallenge:
+            provider: cloudflare
