@@ -39,3 +39,4 @@ spec:
             - path: /
               pathType: ImplementationSpecific
       tls:
+        secretName: podinfo-tls-cert
