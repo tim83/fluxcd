@@ -31,6 +31,18 @@ spec:
         name: traefik
         namespace: ingress-traefik
   values:
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
+    deployment:
+      replicas: 2
     ingressClass:
       enabled: true
       isDefaultClass: true
+    ports:
+      web:
+        hostPort: 80
+        redirectTo: websecure
+      websecure:
+        asDefault: true
+        hostPort: 443
