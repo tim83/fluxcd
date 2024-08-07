@@ -27,15 +27,3 @@ spec:
         kind: HelmRepository
         name: starboard-operator
         namespace: starboard-system
----
-apiVersion: image.toolkit.fluxcd.io/v1beta2
-kind: ImagePolicy
-metadata:
-  name: starboard-operator
-  namespace: starboard-system
-spec:
-  imageRepositoryRef:
-    name: starboard-operator
-  policy:
-    semver:
-      range: "0.10.x"
