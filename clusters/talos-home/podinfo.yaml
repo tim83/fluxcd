@@ -2,7 +2,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageRepository
 metadata:
   name: podinfo
-  namespace: flux-system
+  namespace: podinfo
 spec:
   image: ghcr.io/stefanprodan/podinfo
   interval: 5m
@@ -23,9 +23,21 @@ spec:
     spec:
       containers:
         - name: podinfod
-          image: ghcr.io/stefanprodan/podinfo:5.0.0 # {"$imagepolicy": "flux-system:podinfo"}
+          image: ghcr.io/stefanprodan/podinfo:5.0.0 # {"$imagepolicy": "podinfo:podinfo"}
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
               containerPort: 9898
               protocol: TCP
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: podinfo
+  namespace: podinfo
+spec:
+  imageRepositoryRef:
+    name: podinfo
+  policy:
+    semver:
+      range: ">=5.0.0"
