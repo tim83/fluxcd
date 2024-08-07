@@ -45,7 +45,7 @@ spec:
       websecure:
         asDefault: true
         hostPort: 443
-    certificateResolvers:
+    certificatesResolvers:
       letsencrypt:
         acme:
           dnsChallenge:
