@@ -14,5 +14,5 @@ spec:
           cloudflare:
             email: tim.mees83@gmail.com
             apiKeySecretRef:
-              name: clusterissuer-cloudflare-apikey-secret
+              name: cloudflare-api-token
               key: apikey
