@@ -40,10 +40,8 @@ spec:
     ports:
       web:
         hostPort: 80
-        nodePort: 80
         redirectTo:
           port: websecure
       websecure:
         asDefault: true
         hostPort: 443
-        nodePort: 443
