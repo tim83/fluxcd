@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: kube-metrics
+  name: monitoring
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: monitoring-controllers
-  namespace: kube-metrics
+  namespace: monitoring
 spec:
   interval: 1h
   retryInterval: 2m
@@ -16,14 +16,14 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: kube-metrics
+    name: monitoring
   path: ./monitoring/controllers
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: monitoring-configs
-  namespace: kube-metrics
+  namespace: monitoring
 spec:
   dependsOn:
     - name: monitoring-controllers
@@ -34,5 +34,5 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: kube-metrics
+    name: monitoring
   path: ./monitoring/configs
