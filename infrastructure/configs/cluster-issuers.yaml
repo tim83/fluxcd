@@ -15,5 +15,4 @@ spec:
             email: tim.mees83@gmail.com
             apiKeySecretRef:
               name: cloudflare-api-token
-              namespace: flux-system
               key: apikey
