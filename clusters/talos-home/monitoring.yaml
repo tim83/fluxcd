@@ -1,13 +1,8 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: monitoring
----
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: monitoring-controllers
-  namespace: monitoring
+  namespace: flux-system
 spec:
   interval: 1h
   retryInterval: 2m
@@ -16,14 +11,14 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: monitoring
+    name: flux-system
   path: ./monitoring/controllers
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: monitoring-configs
-  namespace: monitoring
+  namespace: flux-system
 spec:
   dependsOn:
     - name: monitoring-controllers
@@ -34,5 +29,5 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: monitoring
+    name: flux-system
   path: ./monitoring/configs
