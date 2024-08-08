@@ -40,7 +40,7 @@ spec:
               pathType: ImplementationSpecific
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
-    tls:
-      - secretName: podinfo-tls
-        hosts:
-          - podinfo.home.mees-olivier.com
+      tls:
+        - secretName: podinfo-tls
+          hosts:
+            - podinfo.home.mees-olivier.com
