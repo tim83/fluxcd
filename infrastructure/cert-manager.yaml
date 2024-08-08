@@ -44,8 +44,6 @@ spec:
     solvers:
       - dns01:
           cloudflare:
-            email: tim.mees83@gmail.com
-            apiKeySecretRef:
+            apiTokenSecretRef:
               name: cloudflare-api-token
-              namespace: default
               key: apikey
