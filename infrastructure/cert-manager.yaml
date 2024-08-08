@@ -41,11 +41,7 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-prod
     solvers:
-      - selector:
-          dnsZones:
-          - mees-olivier.com
-          - mees.vip
-        dns01:
+      - dns01:
           cloudflare:
             email: tim.mees83@gmail.com
             apiKeySecretRef:
@@ -63,11 +59,7 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
-      - selector:
-          dnsZones:
-          - mees-olivier.com
-          - mees.vip
-        dns01:
+      - dns01:
           cloudflare:
             email: tim.mees83@gmail.com
             apiKeySecretRef:
