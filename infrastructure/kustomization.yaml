@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ingress-traefik.yaml
   - cloudflare-secrets.yaml
+  - volumes.yaml
