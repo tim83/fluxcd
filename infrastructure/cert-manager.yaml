@@ -43,10 +43,9 @@ spec:
     solvers:
       - dns01:
           cloudflare:
-            email: tim.mees83@gmail.com
-            apiKeySecretRef:
+            apiTokenSecretRef:
               name: cloudflare-api-token
-              key: api-key
+              key: api-token
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -61,7 +60,6 @@ spec:
     solvers:
       - dns01:
           cloudflare:
-            email: tim.mees83@gmail.com
-            apiKeySecretRef:
+            apiTokenSecretRef:
               name: cloudflare-api-token
-              key: api-key
+              key: api-token
