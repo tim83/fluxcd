@@ -4,7 +4,7 @@ metadata:
     name: cloudflare-api-token
     namespace: cert-manager
 type: Opaque
-stringData:
+data:
     api-token: ENC[AES256_GCM,data:J1DMW4M/KAG1vfCQfrEKJhc/8O8Qw4rLjqSFOqAIZubXGpUXothAMA==,iv:vsXRJ1+mE0H3/qW2idZXZL7H2sstGKIsIV5xYI+zEHc=,tag:1IRn3IUyFU0J37OK4FbVog==,type:str]
 sops:
     kms: []
