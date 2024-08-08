@@ -38,9 +38,3 @@ spec:
           paths:
             - path: /
               pathType: ImplementationSpecific
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-staging"
-      tls:
-        - secretName: podinfo-tls
-          hosts:
-            - podinfo.home.mees-olivier.com
