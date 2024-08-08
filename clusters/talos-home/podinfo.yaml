@@ -38,6 +38,9 @@ spec:
           paths:
             - path: /
               pathType: ImplementationSpecific
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
     tls:
-      hosts:
-        - podinfo.home.mees-olivier.com
+      - secretName: podinfo-tls
+        hosts:
+          - podinfo.home.mees-olivier.com
