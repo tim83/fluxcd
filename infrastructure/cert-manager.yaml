@@ -47,9 +47,10 @@ spec:
           - mees.vip
         dns01:
           cloudflare:
-            apiTokenSecretRef:
+            email: tim.mees83@gmail.com
+            apiKeySecretRef:
               name: cloudflare-api-token
-              key: api-token
+              key: api-key
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -68,6 +69,7 @@ spec:
           - mees.vip
         dns01:
           cloudflare:
-            apiTokenSecretRef:
+            email: tim.mees83@gmail.com
+            apiKeySecretRef:
               name: cloudflare-api-token
-              key: api-token
+              key: api-key
