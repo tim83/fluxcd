@@ -47,4 +47,5 @@ spec:
             email: tim.mees83@gmail.com
             apiKeySecretRef:
               name: cloudflare-api-token
+              namespace: default
               key: apikey
