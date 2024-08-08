@@ -39,7 +39,7 @@ spec:
             - path: /
               pathType: ImplementationSpecific
       annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-prod"
+        cert-manager.io/cluster-issuer: "letsencrypt-staging"
       tls:
         - secretName: podinfo-tls
           hosts:
