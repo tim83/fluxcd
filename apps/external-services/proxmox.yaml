@@ -25,11 +25,18 @@ subsets:
     port: 8006
     protocol: TCP
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: external-service-proxmox
   namespace: external-services
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Proxmox"
+    gethomepage.dev/description: "Virtualization Server"
+    gethomepage.dev/group: "Admin"
+    gethomepage.dev/icon: "proxmox"
 spec:
   rules:
   - host: proxmox.mees-olivier.com
@@ -40,13 +47,6 @@ spec:
           servicePort: 443
         path: /
         pathType: Prefix
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-staging"
-        gethomepage.dev/enabled: "true"
-        gethomepage.dev/name: "Proxmox"
-        gethomepage.dev/description: "Virtualization Server"
-        gethomepage.dev/group: "Admin"
-        gethomepage.dev/icon: "proxmox"
   tls:
     - secretName: external-service-proxmox-tls
       hosts: 
