@@ -6,3 +6,4 @@ resources:
   - github.com/kubernetes-sigs/nfs-subdir-external-provisioner//deploy
 patches:
   - path: deployment-patch.yaml
+  - path: storageclass-patch.yaml
