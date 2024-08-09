@@ -39,7 +39,7 @@ metadata:
     gethomepage.dev/icon: "proxmox"
 spec:
   rules:
-  - host: proxmox.mees-olivier.com
+  - host: proxmox.home.mees-olivier.com
     http:
       paths:
       - path: /
@@ -52,4 +52,4 @@ spec:
   tls:
     - secretName: external-service-proxmox-tls
       hosts: 
-      - proxmox.mees-olivier.com
+      - proxmox.home.mees-olivier.com
