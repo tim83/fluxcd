@@ -5,4 +5,5 @@ resources:
   - helm-repos.yaml
   - podinfo.yaml
   - starboard.yaml
+  - immich.yaml
   - external-services
