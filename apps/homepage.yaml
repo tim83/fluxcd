@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: homepage
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: jameswynn
+  namespace: homepage
+spec:
+  interval: 1h
+  url: https://jameswynn.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: homepage
+  namespace: homepage
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: homepage
+      version: "30.0.x"
+      sourceRef:
+        kind: HelmRepository
+        name: jameswynn
+        namespace: homepage
+  values:
+    config:
+      bookmarks:
+        - Developer:
+            - Github:
+                - abbr: GH
+                  href: https://github.com/
+      widgets:
+        - kubernetes:
+            cluster:
+              show: true
+              cpu: true
+              memory: true
+              showLabel: true
+              label: "cluster"
+            nodes:
+              show: true
+              cpu: true
+              memory: true
+              showLabel: true
+        - search:
+            provider: duckduckgo
+            target: _blank
+      kubernetes:
+        mode: cluster
+    serviceAccount:
+      create: true
+      name: homepage
+    enableRbac: true
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Homepage"
+          gethomepage.dev/description: "Dynamically Detected Homepage"
+          gethomepage.dev/group: "Dynamic"
+          gethomepage.dev/icon: "homepage.png"
+          cert-manager.io/cluster-issuer: "letsencrypt-staging"
+        hosts:
+          - host: homepage.home.mees-olivier.com
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: homepage-tls
+            hosts:
+              - homepage.home.mees-olivier.com
