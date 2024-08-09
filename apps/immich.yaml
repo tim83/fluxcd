@@ -69,16 +69,6 @@ spec:
                 - immich.home.mees-olivier.com
 ---
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: immich-library-pv
-  namespace: immich
-spec:
-  storageClassName: nfs-client
-  capacity:
-    storage: 500Gi
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: immich-library-pvc
