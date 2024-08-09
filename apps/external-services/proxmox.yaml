@@ -42,11 +42,13 @@ spec:
   - host: proxmox.mees-olivier.com
     http:
       paths:
-      - backend:
-          serviceName: external-service-proxmox
-          servicePort: 443
-        path: /
+      - path: /
         pathType: Prefix
+        backend:
+          service:
+            name: external-service-proxmox
+            port:
+              name: proxmox-webui
   tls:
     - secretName: external-service-proxmox-tls
       hosts: 
