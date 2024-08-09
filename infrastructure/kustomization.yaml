@@ -4,4 +4,3 @@ resources:
   - ingress-traefik.yaml
   - cert-manager.yaml
   - cert-manager-cloudflare.yaml
-  - volumes.yaml
