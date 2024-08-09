@@ -40,6 +40,11 @@ spec:
               pathType: ImplementationSpecific
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-staging"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "PodInfo"
+        gethomepage.dev/description: "K8s testpage"
+        gethomepage.dev/group: "Dynamic"
+        gethomepage.dev/icon: "podinfo"
       tls:
         - secretName: podinfo-tls
           hosts:
