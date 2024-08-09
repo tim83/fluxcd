@@ -34,7 +34,7 @@ spec:
     immich:
       persistence:
         library:
-          existingClaim: "immich-library"
+          existingClaim: immich-library-pvc
     postgresql:
       enabled: true
     redis:
@@ -69,14 +69,21 @@ spec:
                 - immich.home.mees-olivier.com
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: immich-library-pv
+spec:
+  storageClassName: nfs-client
+  capacity:
+    storage: 500Gi
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: immich-library
+  name: immich-library-pvc
   namespace: immich
 spec:
   storageClassName: nfs-client
-  accessModes:
-    - ReadWriteOnce
   resources:
     requests:
       storage: 500Gi
