@@ -85,6 +85,8 @@ metadata:
   namespace: immich
 spec:
   storageClassName: nfs-client
+  accessModes:
+    - ReadWriteMany
   resources:
     requests:
       storage: 500Gi
