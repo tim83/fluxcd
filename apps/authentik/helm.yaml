@@ -33,6 +33,15 @@ spec:
       postgresql:
         user: file:///postgres-creds/username
         password: file:///postgres-creds/password
+      email:
+        host: smtp.sendgrid.net
+        port: 587
+        username: file:///email-creds/username
+        password: file:///email-creds/password
+        use_tls: true
+        use_ssl: false
+        timeout: 30
+        from: "authentik@home.mees-olivier.com"
     server:
       volumes:
         - name: postgres-creds
@@ -41,12 +50,18 @@ spec:
         - name: authentik-secret
           secret:
             secretName: authentik-secret-key
+        - name: email-creds
+          secret:
+            secretName: authentik-email-credentials
       volumeMounts:
         - name: postgres-creds
           mountPath: /postgres-creds
           readOnly: true
         - name: authentik-secret
           mountPath: /authentik-secret
+          readOnly: true
+        - name: email-creds
+          mountPath: /email-creds
           readOnly: true
       ingress:
         enabled: true
@@ -55,7 +70,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-staging"
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "authentik"
+          gethomepage.dev/name: "Authentik"
           gethomepage.dev/description: "Account management"
           gethomepage.dev/group: "Admin"
           gethomepage.dev/icon: "authentik"
@@ -71,12 +86,18 @@ spec:
         - name: authentik-secret
           secret:
             secretName: authentik-secret-key
+        - name: email-creds
+          secret:
+            secretName: authentik-email-credentials
       volumeMounts:
         - name: postgres-creds
           mountPath: /postgres-creds
           readOnly: true
         - name: authentik-secret
           mountPath: /authentik-secret
+          readOnly: true
+        - name: email-creds
+          mountPath: /email-creds
           readOnly: true
     postgresql:
       enabled: true
