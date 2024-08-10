@@ -84,13 +84,6 @@ spec:
     postgresql:
       enabled: true
       auth:
-        user:
-          secretRef:
-            name: authentik-postgres-credentials
-            key: username
-        password:
-          secretRef:
-            name: authentik-postgres-credentials
-            key: password
+        existingSecret: authentik-postgres-credentials
     redis:
       enabled: true
