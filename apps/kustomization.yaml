@@ -7,3 +7,4 @@ resources:
   - starboard.yaml
   - immich.yaml
   - external-services
+  - authentik
