@@ -6,5 +6,3 @@ resources:
   - podinfo.yaml
   # - starboard.yaml
   - immich.yaml
-  - external-services
-  - authentik
