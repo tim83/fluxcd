@@ -4,7 +4,7 @@ resources:
   - homepage.yaml
   - helm-repos.yaml
   - podinfo.yaml
-  - starboard.yaml
+  # - starboard.yaml
   - immich.yaml
   - external-services
   - authentik
