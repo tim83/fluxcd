@@ -37,6 +37,7 @@ spec:
         - host: podinfo.home.mees-olivier.com
           paths:
             - path: /
+              pathType: ImplementationSpecific
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-staging"
         gethomepage.dev/enabled: "true"

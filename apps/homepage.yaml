@@ -66,6 +66,7 @@ spec:
           - host: homepage.home.mees-olivier.com
             paths:
               - path: /
+                pathType: Prefix
         tls:
           - secretName: homepage-tls
             hosts:
