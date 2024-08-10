@@ -51,10 +51,7 @@ spec:
       ingress:
         enabled: true
         hosts:
-          - host: authentik.home.mees-olivier.com
-            paths:
-              - path: /
-                pathType: Prefix
+          - authentik.home.mees-olivier.com
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-staging"
           gethomepage.dev/enabled: "true"
