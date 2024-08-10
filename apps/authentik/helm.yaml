@@ -54,7 +54,7 @@ spec:
           - host: authentik.home.mees-olivier.com
             paths:
               - path: /
-                pathType: ImplementationSpecific
+                pathType: Prefix
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-staging"
           gethomepage.dev/enabled: "true"
