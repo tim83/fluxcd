@@ -43,11 +43,7 @@ spec:
       isDefaultClass: true
     ports:
       web:
-        hostPort: 80
-        containerPort: 80
         redirectTo:
           port: websecure
       websecure:
         asDefault: true
-        containerPort: 443
-        hostPort: 443
