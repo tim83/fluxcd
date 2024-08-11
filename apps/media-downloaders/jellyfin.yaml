@@ -40,7 +40,8 @@ spec:
               storage: 2Ti
             nfs:
               path: /mnt/pool-1/Plex/media
-              server: truenas.local
+              server: 192.168.23.21
+              readonly: true
     ingress:
       enabled: true
       hostname: jellyfin.home.mees-olivier.com
