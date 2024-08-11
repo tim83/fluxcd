@@ -10,3 +10,5 @@ parameters:
   share: /mnt/pool-1/k8s/talos-home
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
+mountOptions:
+  - nolock
