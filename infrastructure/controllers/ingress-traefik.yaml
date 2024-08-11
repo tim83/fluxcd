@@ -36,7 +36,7 @@ spec:
       kind: DaemonSet
     tolerations:
       # Allow traefik to exist on control planes, since that is where the VIP will point to.
-      - key: "control-plane"
+      - key: "node-role.kubernetes.io/control-plane"
         operator: "Exists"
         effect: "NoSchedule"
     ingressClass:
