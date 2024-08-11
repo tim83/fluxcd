@@ -44,7 +44,9 @@ spec:
         maxSurge:
     ports:
       web:
+        hostPort: 80
         redirectTo:
           port: websecure
       websecure:
         asDefault: true
+        hostPort: 443
