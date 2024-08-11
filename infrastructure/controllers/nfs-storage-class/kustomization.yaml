@@ -3,7 +3,5 @@ kind: Kustomization
 namespace: nfs-provisioner
 resources:
   - namespace.yaml
-  - github.com/kubernetes-sigs/nfs-subdir-external-provisioner//deploy
-patches:
-  - path: deployment-patch.yaml
-  - path: storageclass-patch.yaml
+  - nfs-csi-driver.yaml
+  - storage-class.yaml

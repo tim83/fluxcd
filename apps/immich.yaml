@@ -46,7 +46,7 @@ spec:
           enabled: true
           type: pvc
           accessMode: ReadWriteMany
-          storageClass: nfs-client
+          storageClass: nfs-csi
     server:
       ingress:
         main:
@@ -74,7 +74,7 @@ metadata:
   name: immich-library-pvc
   namespace: immich
 spec:
-  storageClassName: nfs-client
+  storageClassName: nfs-csi
   accessModes:
     - ReadWriteMany
   resources:
