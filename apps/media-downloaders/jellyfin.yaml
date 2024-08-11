@@ -43,11 +43,8 @@ spec:
               server: truenas.local
     ingress:
       enabled: true
-      hosts:
-        - host: jellyfin.home.mees-olivier.com
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
+      hostname: jellyfin.home.mees-olivier.com
+      path: /
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-staging"
         gethomepage.dev/enabled: "true"
