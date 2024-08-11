@@ -31,7 +31,7 @@ spec:
         name: traefik
         namespace: ingress-traefik
   values:
-    hostNetwork: false
+    hostNetwork: true
     deployment:
       kind: DaemonSet
     ingressClass:
