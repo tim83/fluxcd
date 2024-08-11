@@ -8,3 +8,4 @@ resources:
   - immich.yaml
   - external-services
   - authentik
+  - media-downloaders

@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jellyfin
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: beluga-cloud
+  namespace: jellyfin
+spec:
+  interval: 5m
+  url: https://beluga-cloud.github.io/charts/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: jellyfin
+  namespace: jellyfin
+spec:
+  releaseName: jellyfin
+  chart:
+    spec:
+      chart: jellyfin
+      version: "2.3.x"
+      sourceRef:
+        kind: HelmRepository
+        name: beluga-cloud
+  interval: 50m
+  values:
+    ingress:
+      enabled: true
+      hosts:
+        - host: jellyfin.home.mees-olivier.com
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-staging"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "jellyfin"
+        gethomepage.dev/description: "TV & Movie streaming"
+        gethomepage.dev/group: "Media"
+        gethomepage.dev/icon: "jellyfin"
+      tls:
+        - secretName: jellyfin-tls
+          hosts:
+            - jellyfin.home.mees-olivier.com
