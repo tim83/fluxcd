@@ -33,7 +33,7 @@ spec:
   values:
     hostNetwork: true
     deployment:
-      kind: DaemonSet$
+      kind: DaemonSet
     ingressClass:
       enabled: true
       isDefaultClass: true
