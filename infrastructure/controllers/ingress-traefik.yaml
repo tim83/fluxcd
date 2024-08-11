@@ -33,11 +33,7 @@ spec:
   values:
     hostNetwork: true
     deployment:
-      kind: DaemonSet
-    updateStrategy:
-      type: RollingUpdate
-      rollingUpdate:
-        maxUnavailable: 2
+      kind: DaemonSet$
     ingressClass:
       enabled: true
       isDefaultClass: true
