@@ -4,3 +4,4 @@ resources:
   - ingress-traefik.yaml
   - cert-manager.yaml
   - nfs-storage-class
+  - nfs-storage-class-csi
