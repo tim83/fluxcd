@@ -8,6 +8,7 @@ provisioner: nfs.csi.k8s.io
 parameters:
   server: 192.168.23.21
   share: /mnt/pool-1/k8s/talos-home
+  subDir: ${pvc.metadata.namespace}-${pvc.metadata.name} # WARNING: Assumes pv.metadata.name does not make a difference.
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
