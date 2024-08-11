@@ -28,6 +28,19 @@ spec:
         name: beluga-cloud
   interval: 50m
   values:
+    jellyfin:
+      # -- The list of volumes that will be mounted inside jellyfin pod, to `/media`.
+      mediaVolumes:
+       - name: media # this volume will be mounted into `/media/media`
+         readOnly: true # is this volume readonly ? (optional, default true)
+         volumeSpec: # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#persistentvolumespec-v1-core
+           accessModes:
+             - ReadWriteOnce
+           capacity:
+             storage: 2Ti
+           nfs:
+             path: /mnt/pool-1/Plex/media
+             server: truenas.local
     ingress:
       enabled: true
       hosts:
@@ -42,7 +55,4 @@ spec:
         gethomepage.dev/description: "TV & Movie streaming"
         gethomepage.dev/group: "Media"
         gethomepage.dev/icon: "jellyfin"
-      tls:
-        - secretName: jellyfin-tls
-          hosts:
-            - jellyfin.home.mees-olivier.com
+      tls: true
