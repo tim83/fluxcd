@@ -20,6 +20,7 @@ spec:
       version: "4.8.x"
       sourceRef:
         kind: HelmRepository
-        name: nfs-provisioner
+        name: csi-driver-nfs
+        namespace: nfs-provisioner
   interval: 50m
   values:
