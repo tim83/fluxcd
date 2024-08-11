@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github
+  namespace: flux-system
+stringData:
+  token: ENC[AES256_GCM,data:QDW1LpFSx0G9YXE8uOp/jmxRlRStXn02JsI7VIRpzBOKYMlZvoPOLMhK46zRLmkbNi8HbASqncLFoZOGB60AbUZSMUV3aWh/89IA1qWg0BAADi/lWm8dNsMO9HQ8,iv:yUAfOLiMUBckW8xDYuEhBKwaEkr0X9QJgeJYcLgQ924=,tag:TWuphUBg2kqroaSZsnS0lg==,type:str]
+sops:
+  kms: []
+  gcp_kms: []
+  azure_kv: []
+  hc_vault: []
+  age:
+    - recipient: age1zsyjqn8zn2gmkp0tcxw7jqjzywf40rqw84heceaf60fq5k7yl5mq0esdzv
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB3OEJlQ0JIRndYYWNqd2wy
+        QldDc2c2R3JXWUNvbW85NzhSSGpoaEFzejBzCnAzYzhrWGpaQUJPYlNLbG9XWjVq
+        VUlLa216K2xFUGZGUGJJQllRckFCN00KLS0tIDBaMmc3NmlYU1orUC9kbFJWaG1M
+        WGF2RTMxRzRicGZMa05MbnVpRy9Pc0UKIv5m3sQldKBrZHSX8tcNU7Pd2+ONOfOr
+        3Zcyj9UP1ZI/qFDHjtc+Hjhz8lDI5vqpkAbuvZ4BEAN6We5PW43cNw==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2024-08-11T11:08:18Z"
+  mac: ENC[AES256_GCM,data:1WNjYzxewZdzwTcMDZGKKzNMTsNmj845iUFIrbFGU3IJ3GT+EJQxyFZ9LiQTYUyFOFcezJnuZnULmaLWY6ci4tTyzFGgiczTXgsR2T9DujEI9oYES7bfbHGYkT8/3D2L0zB2pePCBgChovUmCuiuqtPxzJQ3Zm3HJjAQBTjzC20=,iv:feQ0Wx8MExa8p6kwP+1Lju4yqhN4LxsD6yN+N4eizaE=,tag:Xukb9Nsz6QisQ3UdhdRaAQ==,type:str]
+  pgp: []
+  encrypted_regex: ^(data|stringData)$
+  version: 3.9.0
