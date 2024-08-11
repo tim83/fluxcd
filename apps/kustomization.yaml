@@ -2,8 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - homepage.yaml
-  - helm-repos.yaml
-  - podinfo.yaml
   # - starboard.yaml
   - immich.yaml
   - external-services
