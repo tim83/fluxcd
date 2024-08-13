@@ -19,11 +19,12 @@ spec:
     persistence:
       config:
         enabled: true
+        storageClassName: nfs-csi
       media:
         enabled: false
-        mountPath: /media
+        mountPath: /media/torrents
         type: nfs
-        path: /mnt/pool-1/Plex
+        path: /mnt/pool-1/Plex/torrents
         server: 192.168.23.21
     ingress:
       main:

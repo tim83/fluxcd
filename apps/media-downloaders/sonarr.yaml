@@ -19,6 +19,7 @@ spec:
     persistence:
       config:
         enabled: true
+        storageClassName: nfs-csi
       media:
         enabled: false
         mountPath: /media

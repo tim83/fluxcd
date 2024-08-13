@@ -19,12 +19,7 @@ spec:
     persistence:
       config:
         enabled: true
-      media:
-        enabled: false
-        mountPath: /media
-        type: nfs
-        path: /mnt/pool-1/Plex
-        server: 192.168.23.21
+        storageClassName: nfs-csi
     ingress:
       main:
         enabled: true
