@@ -3,7 +3,8 @@ kind: Kustomization
 resources:
   - homepage.yaml
   # - starboard.yaml
+  - jellyfin.yaml
   - immich.yaml
-  - external-services
   - authentik
+  - external-services
   - media-downloaders

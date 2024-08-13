@@ -1,0 +1,46 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: sonarr
+  namespace: media-downloaders
+spec:
+  releaseName: sonarr
+  chart:
+    spec:
+      chart: sonarr
+      version: "2.3.x"
+      sourceRef:
+        kind: HelmRepository
+        name: https://k8s-home-lab.github.io/helm-charts/
+  interval: 50m
+  values:
+    env:
+      TZ: Europe/Brussels
+    persistence:
+      config:
+        enabled: true
+      media:
+        enabled: false
+        mountPath: /media
+        type: nfs
+        path: /mnt/pool-1/Plex
+        server: 192.168.23.21
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-staging"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Sonarr"
+          gethomepage.dev/description: "TV downloading"
+          gethomepage.dev/group: "Media"
+          gethomepage.dev/icon: "sonarr"
+        hosts:
+          - host: sonarr.home.mees-olivier.com
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: sonarr-tls
+            hosts:
+              - sonarr.home.mees-olivier.com

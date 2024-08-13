@@ -49,7 +49,7 @@ spec:
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-staging"
         gethomepage.dev/enabled: "true"
-        gethomepage.dev/name: "jellyfin"
+        gethomepage.dev/name: "Jellyfin"
         gethomepage.dev/description: "TV & Movie streaming"
         gethomepage.dev/group: "Media"
         gethomepage.dev/icon: "jellyfin"
