@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: qbittorrent
-      version: "2.3.x"
+      version: "14.1.x"
       sourceRef:
         kind: HelmRepository
         name: k8s-home-lab

@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: prowlarr
-      version: "2.3.x"
+      version: "5.1.x"
       sourceRef:
         kind: HelmRepository
         name: k8s-home-lab
