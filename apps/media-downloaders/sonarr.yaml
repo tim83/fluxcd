@@ -11,7 +11,7 @@ spec:
       version: "2.3.x"
       sourceRef:
         kind: HelmRepository
-        name: https://k8s-home-lab.github.io/helm-charts/
+        name: k8s-home-lab
   interval: 50m
   values:
     env:
