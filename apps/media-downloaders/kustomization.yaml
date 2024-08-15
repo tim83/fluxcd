@@ -4,3 +4,6 @@ resources:
   - namespace.yaml
   - helmrepo.yaml
   - radarr.yaml
+  - sonarr.yaml
+  - qbittorrent.yaml
+  - prowlarr.yaml
