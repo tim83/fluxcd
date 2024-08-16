@@ -54,7 +54,6 @@ spec:
         - openmeteo:
           timezone: Europe/Brussels
           units: metric
-          cache: 10
           format:
             maximumFractionDigits: 1
         - search:
