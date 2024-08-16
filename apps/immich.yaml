@@ -44,9 +44,7 @@ spec:
       persistence:
         cache:
           enabled: true
-          type: pvc
-          accessMode: ReadWriteMany
-          storageClass: nfs-csi
+          type: emptyDir
     server:
       ingress:
         main:
