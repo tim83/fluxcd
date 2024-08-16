@@ -22,7 +22,7 @@ spec:
         storageClassName: nfs-csi
       media:
         enabled: false
-        mountPath: /media/torrents
+        mountPath: /media/Plex/torrents
         type: nfs
         path: /mnt/pool-1/Plex/torrents
         server: 192.168.23.21
