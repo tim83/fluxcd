@@ -14,4 +14,3 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nolock
-  - no_root_squash
