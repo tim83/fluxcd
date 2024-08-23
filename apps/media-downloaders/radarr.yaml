@@ -1,13 +1,23 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
-  - general
+metadata:
+  name: radarr
+  namespace: media-downloaders
+images:
+  - name: arr-image
+    newName: lscr.io/linuxserver/radarr
+    newTag: 5.9.1
 spec:
+  interval: 10min
+  prune: true
+  path: "./apps/media-downloaders/general"
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
   postBuild:
     substitute:
       mediavol_subdir: ""
       name: radarr
       label: Radarr
       description: Movie downloading
-      image: lscr.io/linuxserver/radarr:5.9.1.9070-ls234 # renovate: datasource=github-releases depName=lscr.io/linuxserver/radarr
-      port: 7878
+      port: "7878"

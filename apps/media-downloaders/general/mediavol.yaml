@@ -21,4 +21,3 @@ spec:
   nfs:
     path: /mnt/pool-1/Plex/media${mediavol_subdir}
     server: 192.168.23.21
-    readonly: true
