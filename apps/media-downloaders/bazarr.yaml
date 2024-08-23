@@ -1,47 +1,23 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
-kind: HelmRelease
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 metadata:
-  name: bazarr
+  name: radarr
   namespace: media-downloaders
+images:
+  - name: arr-image
+    newName: lscr.io/linuxserver/bazarr
+    newTag: 1.4.3
 spec:
-  releaseName: bazarr
-  chart:
-    spec:
-      chart: bazarr
-      version: "11.1.x"
-      sourceRef:
-        kind: HelmRepository
-        name: k8s-home-lab
-  interval: 50m
-  values:
-    env:
-      TZ: Europe/Brussels
-    persistence:
-      config:
-        enabled: true
-        storageClassName: nfs-csi
-      media:
-        enabled: false
-        mountPath: /media/Plex/media
-        type: nfs
-        path: /mnt/pool-1/Plex/media
-        server: 192.168.23.21
-    ingress:
-      main:
-        enabled: true
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-staging"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Bazarr"
-          gethomepage.dev/description: "Subtitle downloading"
-          gethomepage.dev/group: "Media"
-          gethomepage.dev/icon: "bazarr"
-        hosts:
-          - host: bazarr.home.mees-olivier.com
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - secretName: bazarr-tls
-            hosts:
-              - bazarr.home.mees-olivier.com
+  interval: 10min
+  prune: true
+  path: "./apps/media-downloaders/general"
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  postBuild:
+    substitute:
+      mediavol_subdir: "/media"
+      name: bazarr
+      label: Bazarr
+      description: Subtitle downloading
+      port: "6767"

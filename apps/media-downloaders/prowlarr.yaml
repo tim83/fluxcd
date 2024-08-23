@@ -1,41 +1,23 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
-kind: HelmRelease
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 metadata:
-  name: prowlarr
+  name: radarr
   namespace: media-downloaders
+images:
+  - name: arr-image
+    newName: lscr.io/linuxserver/sonarr
+    newTag: 1.21.2
 spec:
-  releaseName: prowlarr
-  chart:
-    spec:
-      chart: prowlarr
-      version: "5.1.x"
-      sourceRef:
-        kind: HelmRepository
-        name: k8s-home-lab
-  interval: 50m
-  values:
-    env:
-      TZ: Europe/Brussels
-    persistence:
-      config:
-        enabled: true
-        storageClassName: nfs-csi
-    ingress:
-      main:
-        enabled: true
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-staging"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Prowlarr"
-          gethomepage.dev/description: "Torrent indexer"
-          gethomepage.dev/group: "Media"
-          gethomepage.dev/icon: "prowlarr"
-        hosts:
-          - host: prowlarr.home.mees-olivier.com
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - secretName: prowlarr-tls
-            hosts:
-              - prowlarr.home.mees-olivier.com
+  interval: 10min
+  prune: true
+  path: "./apps/media-downloaders/general"
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  postBuild:
+    substitute:
+      mediavol_subdir: "/torrents"
+      name: prowlarr
+      label: Prowlarr
+      description: Torrent indexer
+      port: "9696"
