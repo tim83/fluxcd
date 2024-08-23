@@ -1,47 +1,13 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
-kind: HelmRelease
-metadata:
-  name: radarr
-  namespace: media-downloaders
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - general
 spec:
-  releaseName: radarr
-  chart:
-    spec:
-      chart: radarr
-      version: "17.1.x"
-      sourceRef:
-        kind: HelmRepository
-        name: k8s-home-lab
-  interval: 50m
-  values:
-    env:
-      TZ: Europe/Brussels
-    persistence:
-      config:
-        enabled: true
-        storageClassName: nfs-csi
-      media:
-        enabled: false
-        mountPath: /media/Plex
-        type: nfs
-        path: /mnt/pool-1/Plex
-        server: 192.168.23.21
-    ingress:
-      main:
-        enabled: true
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-staging"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Radarr"
-          gethomepage.dev/description: "Movie downloading"
-          gethomepage.dev/group: "Media"
-          gethomepage.dev/icon: "radarr"
-        hosts:
-          - host: radarr.home.mees-olivier.com
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - secretName: radarr-tls
-            hosts:
-              - radarr.home.mees-olivier.com
+  postBuild:
+    substitute:
+      mediavol_subdir: ""
+      name: radarr
+      label: Radarr
+      description: Movie downloading
+      image: lscr.io/linuxserver/radarr:5.9.1.9070-ls234 # renovate: datasource=github-releases depName=lscr.io/linuxserver/radarr
+      port: 7878

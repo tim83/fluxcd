@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${name}
+  namespace: media-downloaders
+spec:
+  selector:
+    matchLabels:
+      app: ${name}
+  template:
+    metadata:
+      labels:
+        app: ${name}
+    spec:
+      containers:
+        - name: ${name}
+          image: ${image}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: ${port}
+              protocol: TCP
+          env:
+            - name: TZ
+              value: Europe/Brussels
+            - name: PUID
+              value: ${puid:568}
+            - name: PGID
+              value: ${pguid:568}
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
