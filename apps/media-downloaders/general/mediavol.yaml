@@ -9,6 +9,8 @@ spec:
       mediavol: ${name}
   accessModes:
     - ReadWriteOnce
+  capacity:
+    storage: 3Ti
 ---
 apiVersion: v1
 kind: PersistentVolume

@@ -4,4 +4,9 @@ metadata:
   name: ${name}-config
   namespace: media-downloaders
 spec:
-  storageClassName: "nfs-csi"
+  storageClassName: nfs-csi
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
