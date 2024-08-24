@@ -26,8 +26,6 @@ spec:
           volumeMounts:
             - name: prowlarr-config
               mountPath: /config
-            - name: prowlarr-media
-              mountPath: /data
       volumes:
         - name: prowlarr-config
           persistentVolumeClaim:
