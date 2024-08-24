@@ -9,7 +9,6 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  volumeName: bazarr-config
 ---
 apiVersion: v1
 kind: PersistentVolume
