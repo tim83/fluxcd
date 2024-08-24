@@ -21,7 +21,7 @@ spec:
                 name: bazarr-env-vars
           ports:
             - name: "http"
-              containerPort: 7878
+              containerPort: 6767
               protocol: TCP
           volumeMounts:
             - name: bazarr-config

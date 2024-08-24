@@ -13,4 +13,4 @@ spec:
     - name: "http"
       protocol: TCP
       targetPort: 6767
-      port: 6767
+      port: 80
