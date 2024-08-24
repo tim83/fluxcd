@@ -72,7 +72,6 @@ metadata:
   name: immich-library-pvc
   namespace: immich
 spec:
-  storageClassName: nfs-csi
   accessModes:
     - ReadWriteMany
   resources:
