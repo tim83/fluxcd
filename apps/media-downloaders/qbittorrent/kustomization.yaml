@@ -11,7 +11,7 @@ commonLabels:
 
 images:
   - name: lscr.io/linuxserver/qbittorrent
-    newTag: 5.2.6
+    newTag: 4.6.6
 
 configMapGenerator:
   - name: qbittorrent-env-vars

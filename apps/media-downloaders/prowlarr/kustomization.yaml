@@ -11,7 +11,7 @@ commonLabels:
 
 images:
   - name: lscr.io/linuxserver/prowlarr
-    newTag: 5.2.6
+    newTag: 1.21.2
 
 configMapGenerator:
   - name: prowlarr-env-vars

@@ -11,7 +11,7 @@ commonLabels:
 
 images:
   - name: lscr.io/linuxserver/sonarr
-    newTag: 5.2.6
+    newTag: 4.0.8
 
 configMapGenerator:
   - name: sonarr-env-vars
