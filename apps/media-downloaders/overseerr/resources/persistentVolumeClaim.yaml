@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ${name}-config
+  name: overseerr-config
   namespace: media-downloaders
 spec:
-  storageClassName: nfs-csi
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
+  volumeName: overseerr-config

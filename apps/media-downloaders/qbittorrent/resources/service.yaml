@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent
+  namespace: media-downloaders
+  labels:
+    app: qbittorrent
+spec:
+  type: ClusterIP
+  selector:
+    app: qbittorrent
+  ports:
+    - name: "http"
+      protocol: TCP
+      targetPort: 7878
+      port: 7878

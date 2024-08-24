@@ -1,0 +1,27 @@
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: radarr
+  namespace: media-downloaders
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Radarr"
+    gethomepage.dev/description: "Movie Downloader"
+    gethomepage.dev/group: "Media Downloaders"
+    gethomepage.dev/icon: "radarr"
+spec:
+  rules:
+    - host: radarr.home.mees-olivier.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: radarr
+  tls:
+    - secretName: radarr-tls
+      hosts:
+        - radarr.home.mees-olivier.com

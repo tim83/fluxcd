@@ -57,7 +57,7 @@ spec:
           annotations:
             cert-manager.io/cluster-issuer: "letsencrypt-staging"
             gethomepage.dev/enabled: "true"
-            gethomepage.dev/name: "immich"
+            gethomepage.dev/name: "Immich"
             gethomepage.dev/description: "Photo backup"
             gethomepage.dev/group: "Files"
             gethomepage.dev/icon: "immich"

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: overseerr
+  namespace: media-downloaders
+spec:
+  serviceName: overseerr
+  selector:
+    matchLabels:
+      app: overseerr
+  template:
+    metadata:
+      labels:
+        app: overseerr
+    spec:
+      containers:
+        - name: overseerr
+          image: lscr.io/linuxserver/overseerr
+          envFrom:
+            - configMapRef:
+                name: overseerr-env-vars
+          ports:
+            - name: "http"
+              containerPort: 7878
+              protocol: TCP
+          volumeMounts:
+            - name: overseerr-config
+              mountPath: /config
+      volumes:
+        - name: overseerr-config
+          persistentVolumeClaim:
+            claimName: overseerr-config

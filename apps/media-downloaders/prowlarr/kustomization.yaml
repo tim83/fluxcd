@@ -1,0 +1,21 @@
+namespace: media-downloaders
+
+resources:
+  - resources/persistentVolumeClaim.yaml
+  - resources/service.yaml
+  - resources/ingress.yaml
+  - resources/statefulset.yaml
+
+commonLabels:
+  app.kubernetes.io/name: prowlarr
+
+images:
+  - name: lscr.io/linuxserver/prowlarr
+    newTag: 5.2.6
+
+configMapGenerator:
+  - name: prowlarr-env-vars
+    literals:
+      - TZ="Europe/Brussels"
+      - PUID="65534"
+      - PGID="65534"

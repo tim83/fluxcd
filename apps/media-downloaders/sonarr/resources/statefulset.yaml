@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sonarr
+  namespace: media-downloaders
+spec:
+  serviceName: sonarr
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+        - name: sonarr
+          image: lscr.io/linuxserver/sonarr
+          envFrom:
+            - configMapRef:
+                name: sonarr-env-vars
+          ports:
+            - name: "http"
+              containerPort: 7878
+              protocol: TCP
+          volumeMounts:
+            - name: sonarr-config
+              mountPath: /config
+            - name: sonarr-media
+              mountPath: /data
+      volumes:
+        - name: sonarr-config
+          persistentVolumeClaim:
+            claimName: sonarr-config
+        - name: sonarr-media
+          persistentVolumeClaim:
+            claimName: sonarr-media

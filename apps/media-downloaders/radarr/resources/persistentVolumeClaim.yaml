@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-config
+  namespace: media-downloaders
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: radarr-config
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: radarr-media
+  namespace: media-downloaders
+spec:
+  capacity:
+    storage: 3Ti
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    path: /mnt/pool-1/Plex
+    server: 192.168.23.21
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-media
+  namespace: media-downloaders
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Ti
+  volumeName: radarr-media
