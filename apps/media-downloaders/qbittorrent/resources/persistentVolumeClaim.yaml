@@ -17,6 +17,7 @@ metadata:
   name: qbittorrent-media
   namespace: media-downloaders
 spec:
+  storageClassName: manual
   capacity:
     storage: 3Ti
   accessModes:
@@ -31,6 +32,7 @@ metadata:
   name: qbittorrent-media
   namespace: media-downloaders
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
