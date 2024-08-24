@@ -16,7 +16,7 @@ metadata:
   name: bazarr-media
   namespace: media-downloaders
 spec:
-  storageClassName: manual
+  storageClassName: ""
   capacity:
     storage: 3Ti
   accessModes:
@@ -31,7 +31,7 @@ metadata:
   name: bazarr-media
   namespace: media-downloaders
 spec:
-  storageClassName: manual
+  storageClassName: ""
   accessModes:
     - ReadWriteOnce
   resources:
