@@ -11,7 +11,7 @@ commonLabels:
 
 images:
   - name: lscr.io/linuxserver/overseerr
-    newTag: 5.2.6
+    newTag: 2021.12.12
 
 configMapGenerator:
   - name: overseerr-env-vars
