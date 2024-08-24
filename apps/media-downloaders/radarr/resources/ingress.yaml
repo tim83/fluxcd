@@ -21,6 +21,8 @@ spec:
             backend:
               service:
                 name: radarr
+                port:
+                  name: http
   tls:
     - secretName: radarr-tls
       hosts:

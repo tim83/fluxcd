@@ -20,6 +20,8 @@ spec:
             backend:
               service:
                 name: bazarr
+                port:
+                  name: http
   tls:
     - secretName: bazarr-tls
       hosts:

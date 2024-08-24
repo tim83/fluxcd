@@ -21,6 +21,8 @@ spec:
             backend:
               service:
                 name: overseerr
+                port:
+                  name: http
   tls:
     - secretName: overseerr-tls
       hosts:

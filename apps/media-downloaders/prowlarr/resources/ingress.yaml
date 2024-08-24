@@ -21,6 +21,8 @@ spec:
             backend:
               service:
                 name: prowlarr
+                port:
+                  name: http
   tls:
     - secretName: prowlarr-tls
       hosts:

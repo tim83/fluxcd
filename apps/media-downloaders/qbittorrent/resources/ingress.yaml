@@ -21,6 +21,8 @@ spec:
             backend:
               service:
                 name: qbittorrent
+                port:
+                  name: http
   tls:
     - secretName: qbittorrent-tls
       hosts:
