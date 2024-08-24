@@ -14,3 +14,24 @@ spec:
       protocol: TCP
       targetPort: 8080
       port: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent-bittorrent
+  namespace: media-downloaders
+  labels:
+    app: qbittorrent
+spec:
+  type: LoadBalancer
+  selector:
+    app: qbittorrent
+  ports:
+    - name: "bittorrent-tcp"
+      protocol: TCP
+      targetPort: 6881
+      port: 6881
+    - name: "bittorrent-udp"
+      protocol: UDP
+      targetPort: 6881
+      port: 6881

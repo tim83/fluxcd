@@ -23,6 +23,12 @@ spec:
             - name: "http"
               containerPort: 8080
               protocol: TCP
+            - name: "bittorrent"
+              containerPort: 6881
+              protocol: TCP
+            - name: "bittorrent-udp"
+              containerPort: 6881
+              protocol: UDP
           volumeMounts:
             - name: qbittorrent-config
               mountPath: /config
