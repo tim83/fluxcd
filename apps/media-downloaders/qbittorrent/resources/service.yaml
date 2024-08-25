@@ -22,6 +22,7 @@ metadata:
   namespace: media-downloaders
   labels:
     app: qbittorrent
+    metallb.universe.tf/address-pool: default
 spec:
   type: LoadBalancer
   selector:
