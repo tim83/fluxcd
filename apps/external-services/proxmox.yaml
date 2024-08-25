@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: external-service-truenas
+  name: external-service-proxmox
   namespace: external-services
 spec:
   type: ExternalName
