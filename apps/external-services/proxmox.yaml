@@ -1,29 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: external-service-proxmox
+  name: external-service-truenas
   namespace: external-services
 spec:
+  type: ExternalName
+  externalName: 192.168.20.1
   ports:
-  - name: app
-    port: 443
-    protocol: TCP
-    targetPort: 8006
-  clusterIP: None
-  type: ClusterIP
----
-apiVersion: v1
-kind: Endpoints
-metadata:
-  name: external-service-proxmox
-  namespace: external-services
-subsets:
-- addresses:
-  - ip: 192.168.20.1
-  ports:
-  - name: proxmox-webui
-    port: 8006
-    protocol: TCP
+    - name: "http"
+      protocol: TCP
+      targetPort: 8006
+      port: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -48,7 +35,7 @@ spec:
           service:
             name: external-service-proxmox
             port:
-              name: proxmox-webui
+              name: http
   tls:
     - secretName: external-service-proxmox-tls
       hosts: 
