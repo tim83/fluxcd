@@ -4,13 +4,26 @@ metadata:
   name: external-service-truenas
   namespace: external-services
 spec:
-  type: ExternalName
-  externalName: 192.168.23.21
   ports:
-    - name: "https"
+    - name: app
+      port: 443
       protocol: TCP
       targetPort: 444
-      port: 443
+  clusterIP: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: external-service-truenas
+  namespace: external-services
+subsets:
+  - addresses:
+      - ip: 192.168.23.21
+    ports:
+      - name: truenas-webui
+        port: 444
+        protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -35,7 +48,7 @@ spec:
               service:
                 name: external-service-truenas
                 port:
-                  name: https
+                  name: truenas-webui
   tls:
     - secretName: external-service-truenas-tls
       hosts:
