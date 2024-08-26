@@ -50,7 +50,6 @@ spec:
           - secretName: authentik-tls
             hosts:
               - authentik.home.mees-olivier.com
-    worker:
     postgresql:
       enabled: true
     redis:
