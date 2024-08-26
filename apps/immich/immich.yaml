@@ -44,7 +44,7 @@ spec:
       persistence:
         cache:
           enabled: true
-          type: emptyDir
+          type: pvc
     server:
       ingress:
         main:
