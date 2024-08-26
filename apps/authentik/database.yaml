@@ -9,5 +9,12 @@ spec:
   bootstrap:
     initdb:
       database: authentik
-      secret: authentik-db-cluster
-    
+      owner: authentik
+    managed:
+      roles:
+        - name: authentik
+          login: true
+          superuser: false
+          createdb: true
+          passwordSecret:
+            name: authentik-db-cluster
