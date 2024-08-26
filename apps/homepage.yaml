@@ -40,11 +40,11 @@ spec:
                   href: https://youtube.com/
         - Files:
             - Google Drive:
-                icon: google-drive
-                href: https://drive.google.com
+                - icon: google-drive
+                  href: https://drive.google.com
             - Google Photos:
-                icon: google-photos
-                href: https://photos.google.com
+                - icon: google-photos
+                  href: https://photos.google.com
       services: []
       widgets:
         - logo:
