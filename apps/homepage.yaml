@@ -67,6 +67,7 @@ spec:
             label: Kontich
             latitude: 51.12144
             longitude: 4.44149
+            cache: 5
         - search:
             provider: duckduckgo
             target: _blank
