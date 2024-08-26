@@ -8,3 +8,4 @@ resources:
   # - authentik
   - external-services
   - media-downloaders
+  - cloudflared
