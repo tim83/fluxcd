@@ -43,6 +43,9 @@ spec:
                 - icon: youtube
                   href: https://youtube.com/
         - Files:
+            - Notion:
+                - icon: notion
+                  href: https://www.notion.so/
             - Google Drive:
                 - icon: google-drive
                   href: https://drive.google.com
