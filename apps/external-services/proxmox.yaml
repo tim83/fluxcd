@@ -3,25 +3,11 @@ kind: Service
 metadata:
   name: external-service-proxmox
 spec:
+  type: ExternalName
+  externalName: 192.168.20.1
   ports:
-  - name: http
-    port: 443
-    protocol: TCP
-    targetPort: 8006
----
-apiVersion: discovery.k8s.io/v1
-kind: EndpointSlice
-metadata:  
-  name: external-endpoint-proxmox
-  labels:
-    kubernetes.io/service-name: external-service-proxmox
-addressType: IPv4
-ports:
-  - port: 8006
-    name: http
-endpoints:
-  - addresses:
-    - "192.168.20.1"
+    - port: 8006
+      name: http
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
