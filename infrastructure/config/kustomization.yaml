@@ -5,3 +5,4 @@ resources:
   - alerts
   - metallb-ips.yaml
   - storageclass.yaml
+  - cnpg
