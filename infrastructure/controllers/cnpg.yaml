@@ -26,5 +26,5 @@ spec:
       version: "0.22.x"
       sourceRef:
         kind: HelmRepository
-        name: cnpg
+        name: cloudnative-pg
         namespace: cnpg-system
