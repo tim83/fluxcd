@@ -38,7 +38,7 @@ spec:
         auth:
           existingSecret: immich-db-cluster
     redis:
-      enabled: true
+      enabled: false
     machine-learning:
       enabled: true
       persistence:
