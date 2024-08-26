@@ -9,3 +9,4 @@ resources:
   - external-services
   - media-downloaders
   - cloudflared
+  - nextcloud
