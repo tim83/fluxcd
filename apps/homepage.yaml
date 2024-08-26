@@ -39,6 +39,8 @@ spec:
                   href: https://youtube.com/
       services: []
       widgets:
+        - logo:
+            icon: https://www.pngkey.com/png/detail/66-661551_white-blank-shield-logo-school-logo-template-free.png
         - kubernetes:
             cluster:
               show: true
