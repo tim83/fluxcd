@@ -26,8 +26,16 @@ spec:
   values:
     env:
       DB_HOSTNAME: postgresql-rw
-      DB_USERNAME: immich
-      DB_DATABASE_NAME: immich
+      DB_USERNAME:
+        valueFrom:
+          secretKeyRef:
+            name: immich-db-cluster
+            key: username
+      DB_PASSWORD:
+        valueFrom:
+          secretKeyRef:
+            name: immich-db-cluster
+            key: password
     immich:
       persistence:
         library:
