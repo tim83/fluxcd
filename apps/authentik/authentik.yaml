@@ -27,6 +27,9 @@ spec:
     authentik:
       error_reporting:
         enabled: true
+      postgresql:
+        host: postgresql
+        name: authentik
       email:
         host: smtp.sendgrid.net
         port: 587
@@ -51,7 +54,7 @@ spec:
             hosts:
               - authentik.home.mees-olivier.com
     postgresql:
-      enabled: true
+      enabled: false
     redis:
       enabled: true
   valuesFrom:
