@@ -2,34 +2,33 @@ apiVersion: v1
 kind: Service
 metadata:
   name: external-service-proxmox
-  namespace: external-services
 spec:
   ports:
-  - name: app
+  - name: http
     port: 443
     protocol: TCP
     targetPort: 8006
   clusterIP: None
   type: ClusterIP
 ---
-apiVersion: v1
-kind: Endpoints
-metadata:
-  name: external-service-proxmox
-  namespace: external-services
-subsets:
-- addresses:
-  - ip: 192.168.20.1
-  ports:
-  - name: proxmox-webui
-    port: 8006
-    protocol: TCP
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:  
+  name: external-endpoint-proxmox
+  labels:
+    kubernetes.io/service-name: external-service-proxmox
+addressType: IPv4
+ports:
+  - port: 8006
+    name: http
+endpoints:
+  - addresses:
+    - "192.168.20.1"
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: external-service-proxmox
-  namespace: external-services
+  name: external-ingress-proxmox
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
     gethomepage.dev/enabled: "true"
@@ -48,7 +47,7 @@ spec:
           service:
             name: external-service-proxmox
             port:
-              name: proxmox-webui
+              name: http
   tls:
     - secretName: external-service-proxmox-tls
       hosts: 
