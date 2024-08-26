@@ -11,7 +11,7 @@ metadata:
   namespace: cnpg-system
 spec:
   interval: 1h
-  url: https://cnpg-system.github.io/charts
+  url: https://cloudnative-pg.github.io/charts
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
