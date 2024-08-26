@@ -25,42 +25,16 @@ spec:
       retries: 3
   values:
     authentik:
-      secret_key: file:///authentik-secret/secret-key
       error_reporting:
         enabled: true
-      postgresql:
-        user: file:///postgres-creds/username
-        password: file:///postgres-creds/password
       email:
         host: smtp.sendgrid.net
         port: 587
-        username: file:///email-creds/username
-        password: file:///email-creds/password
         use_tls: true
         use_ssl: false
         timeout: 30
         from: "authentik@home.mees-olivier.com"
     server:
-      volumes:
-        - name: postgres-creds
-          secret:
-            secretName: authentik-postgres-credentials
-        - name: authentik-secret
-          secret:
-            secretName: authentik-secret-key
-        - name: email-creds
-          secret:
-            secretName: authentik-email-credentials
-      volumeMounts:
-        - name: postgres-creds
-          mountPath: /postgres-creds
-          readOnly: true
-        - name: authentik-secret
-          mountPath: /authentik-secret
-          readOnly: true
-        - name: email-creds
-          mountPath: /email-creds
-          readOnly: true
       ingress:
         enabled: true
         hosts:
@@ -77,29 +51,10 @@ spec:
             hosts:
               - authentik.home.mees-olivier.com
     worker:
-      volumes:
-        - name: postgres-creds
-          secret:
-            secretName: authentik-postgres-credentials
-        - name: authentik-secret
-          secret:
-            secretName: authentik-secret-key
-        - name: email-creds
-          secret:
-            secretName: authentik-email-credentials
-      volumeMounts:
-        - name: postgres-creds
-          mountPath: /postgres-creds
-          readOnly: true
-        - name: authentik-secret
-          mountPath: /authentik-secret
-          readOnly: true
-        - name: email-creds
-          mountPath: /email-creds
-          readOnly: true
     postgresql:
       enabled: true
-      auth:
-        existingSecret: authentik-postgres-credentials
     redis:
       enabled: true
+  valuesFrom:
+    - kind: Secret
+      name: authentik-secret-values
