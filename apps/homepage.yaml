@@ -31,6 +31,10 @@ spec:
   values:
     config:
       bookmarks:
+        - Mail:
+            - Zoho:
+                - icon: zohomail
+                  href: https://mail.zoho.eu/zm/
         - Media:
             - Netflix:
                 - icon: netflix
