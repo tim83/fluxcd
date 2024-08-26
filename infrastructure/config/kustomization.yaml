@@ -4,3 +4,4 @@ resources:
   - cert-manager
   - alerts
   - metallb-ips.yaml
+  - storageclass.yaml
