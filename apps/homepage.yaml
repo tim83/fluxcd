@@ -64,6 +64,9 @@ spec:
         - openmeteo:
           timezone: Europe/Brussels
           units: metric
+          label: Kontich
+          latitude: 51.12144
+          longitude: 4.44149
         - search:
             provider: duckduckgo
             target: _blank
