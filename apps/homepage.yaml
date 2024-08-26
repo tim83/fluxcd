@@ -61,6 +61,9 @@ spec:
               cpu: true
               memory: true
               showLabel: true
+        - search:
+            provider: duckduckgo
+            target: _blank
         - openmeteo:
             timezone: Europe/Brussels
             units: metric
@@ -68,9 +71,6 @@ spec:
             latitude: 51.12144
             longitude: 4.44149
             cache: 5
-        - search:
-            provider: duckduckgo
-            target: _blank
       kubernetes:
         mode: cluster
     serviceAccount:
