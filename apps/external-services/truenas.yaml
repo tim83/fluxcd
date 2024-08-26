@@ -8,9 +8,9 @@ spec:
     - name: app
       port: 443
       protocol: TCP
-      targetPort: 444
+      targetPort: 443
   type: ExternalName
-  externalName: truenas.fritz.box
+  externalName: truenas.mees.vip
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
