@@ -64,7 +64,6 @@ spec:
         - openmeteo:
           timezone: Europe/Brussels
           units: metric
-          cache: 5
         - search:
             provider: duckduckgo
             target: _blank
