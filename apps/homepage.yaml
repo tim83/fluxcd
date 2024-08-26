@@ -51,12 +51,10 @@ spec:
               cpu: true
               memory: true
               showLabel: true
-        # - openmeteo:
-        #   timezone: Europe/Brussels
-        #   units: metric
-        #   cache: 5
-        #   format:
-        #     maximumFractionDigits: 1
+        - openmeteo:
+          timezone: Europe/Brussels
+          units: metric
+          cache: 5
         - search:
             provider: duckduckgo
             target: _blank
