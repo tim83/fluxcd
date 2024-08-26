@@ -28,7 +28,7 @@ spec:
       error_reporting:
         enabled: true
       postgresql:
-        host: postgresql
+        host: postgresql-rw
         name: authentik
       email:
         host: smtp.sendgrid.net
