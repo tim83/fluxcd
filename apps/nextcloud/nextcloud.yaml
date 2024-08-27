@@ -28,9 +28,9 @@ spec:
       configs:
         previews.config.php: |-
           <?php
-          $CONFIG = array (
+          $CONFIG = array(
             'enable_previews' => true,
-            'enabledPreviewProviders' => array (
+            'enabledPreviewProviders' => array(
               'OC\Preview\Movie',
               'OC\Preview\PNG',
               'OC\Preview\JPEG',
@@ -43,6 +43,22 @@ spec:
               'OC\Preview\MarkDown',
               'OC\Preview\PDF'
             ),
+          );
+        proxy.config.php: |-
+          <?php
+          $CONFIG = array (
+            'trusted_proxies' => array(
+              0 => '127.0.0.1',
+              1 => '10.0.0.0/8',
+            ),
+            'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
+          );
+        locale.config.php: |-
+          <?php
+          $CONFIG = array(
+            'default_phone_region' => 'BE',
+            'default_language' => 'nl',
+            'default_locale' => 'nl_BE',
           );
     ingress:
       enabled: true
