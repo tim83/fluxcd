@@ -5,7 +5,7 @@ resources:
   # - starboard.yaml
   - jellyfin.yaml
   - plex.yaml
-  - immich
+  # - immich
   - authentik
   - external-services
   - media-downloaders
