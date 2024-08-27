@@ -3,6 +3,7 @@ kind: Cluster
 metadata:
   name: postgresql
 spec:
+  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs
   instances: 2
   storage:
     size: 2Gi
