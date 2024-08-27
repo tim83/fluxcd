@@ -21,7 +21,6 @@ spec:
         name: nextcloud
   interval: 50m
   values:
-    replicaCount: 2
     image:
       flavor: fpm
     nextcloud:
@@ -63,4 +62,6 @@ spec:
     cronjob:
       enabled: true
     redis:
+      enabled: true
+    hpa:
       enabled: true
