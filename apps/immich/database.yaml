@@ -7,6 +7,9 @@ spec:
   instances: 2
   storage:
     size: 2Gi
+  postgresql:
+    shared_preload_libraries:
+      - vectors.so
   bootstrap:
     initdb:
       database: immich
