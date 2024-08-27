@@ -21,6 +21,9 @@ spec:
         name: nextcloud
   interval: 50m
   values:
+    replicaCount: 2
+    image:
+      flavor: fpm
     nextcloud:
       host: nextcloud.home.mees-olivier.com
     ingress:
@@ -50,10 +53,11 @@ spec:
         secretName: nextcloud-db-cluster
     persistence:
       enabled: true
-      existingClaim: nextcloud-config
+      accessMode: ReadWriteMany
       nextcloudData:
         enabled: true
-        existingClaim: nextcloud-data
+        size: 1Ti
+        accessMode: ReadWriteMany
     cronjob:
       enabled: true
     redis:
