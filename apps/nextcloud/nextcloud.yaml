@@ -20,3 +20,40 @@ spec:
         kind: HelmRepository
         name: nextcloud
   interval: 50m
+  values:
+    host: &host nextcloud.home.mees-olivier.com
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-staging"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "Nextcloud"
+        gethomepage.dev/description: "Cloud File Storage"
+        gethomepage.dev/group: "Files"
+        gethomepage.dev/icon: "nextcloud"
+      tls:
+        - hosts:
+            - *host
+          secretName: nextcloud-tls
+    nginx:
+      enabled: true
+    internalDatabase:
+      enabled: false
+    externalDatabase:
+      enabled: true
+      type: postgresql
+      host: postgresql-rw
+      database: nextcloud
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-db-cluster
+    persistence:
+      enabled: true
+      existingClaim: nextcloud-config
+      nextcloudData:
+        enabled: true
+        existingClaim: nextcloud-data
+    cronjob:
+      enabled: true
+    redis:
+      enabled: true
