@@ -21,7 +21,7 @@ spec:
         name: nextcloud
   interval: 50m
   values:
-    host: &host nextcloud.home.mees-olivier.com
+    host: nextcloud.home.mees-olivier.com
     ingress:
       enabled: true
       annotations:
@@ -33,7 +33,7 @@ spec:
         gethomepage.dev/icon: "nextcloud"
       tls:
         - hosts:
-            - *host
+            - nextcloud.home.mees-olivier.com
           secretName: nextcloud-tls
     nginx:
       enabled: true
