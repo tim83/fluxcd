@@ -21,7 +21,8 @@ spec:
         name: nextcloud
   interval: 50m
   values:
-    host: nextcloud.home.mees-olivier.com
+    nextcloud:
+      host: nextcloud.home.mees-olivier.com
     ingress:
       enabled: true
       annotations:
