@@ -3,6 +3,7 @@ kind: Cluster
 metadata:
   name: postgresql
 spec:
+  image: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16
   instances: 2
   storage:
     size: 2Gi
@@ -14,9 +15,13 @@ spec:
       database: immich
       owner: immich
       postInitTemplateSQL:
-        - CREATE EXTENSION cube;
-        - CREATE EXTENSION earthdistance;
-        - CREATE EXTENSION vectors;
+          - CREATE EXTENSION IF NOT EXISTS cube;
+          - CREATE EXTENSION IF NOT EXISTS earthdistance;
+          - CREATE SCHEMA IF NOT EXISTS vectors;
+          - ALTER DATABASE immich SET search_path TO "immich", public, vectors;
+          - SET search_path TO "immich", public, vectors;
+          - GRANT SELECT ON TABLE pg_vector_index_stat TO PUBLIC;
+          - ALTER SCHEMA vectors OWNER TO immich;
   managed:
     roles:
       - name: immich
