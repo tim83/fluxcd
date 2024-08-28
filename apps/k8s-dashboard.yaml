@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kubernetes-dashboard
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+spec:
+  interval: 5m
+  url: https://kubernetes.github.io/dashboard/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+spec:
+  releaseName: kubernetes-dashboard
+  chart:
+    spec:
+      chart: kubernetes-dashboard
+      version: "7.5.x"
+      sourceRef:
+        kind: HelmRepository
+        name: kubernetes-dashboard
+  interval: 50m
+  values:
+    ingress:
+      enabled: true
+      hosts:
+        - kubernetes.home.mees-olivier.com
+      useDefaultIngressClass: true
+      issuer:
+        name: letsencrypt-staging
+        scope: cluster
+      tls:
+        enabled: true
+        secretName: kubernetes-dashboard-tls
+      annotations:
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "Kubernetes Dashboard"
+        gethomepage.dev/description: "Cluster Adminisitration"
+        gethomepage.dev/group: "Admin"
+        gethomepage.dev/icon: "kubernetes"

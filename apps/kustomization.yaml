@@ -11,3 +11,4 @@ resources:
   - media-downloaders
   - cloudflared
   - nextcloud
+  - k8s-dashboard.yaml
