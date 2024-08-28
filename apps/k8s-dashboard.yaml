@@ -28,20 +28,21 @@ spec:
         name: kubernetes-dashboard
   interval: 50m
   values:
-    ingress:
-      enabled: true
-      hosts:
-        - kubernetes.home.mees-olivier.com
-      ingressClassName: traefik
-      issuer:
-        name: letsencrypt-staging
-        scope: cluster
-      tls:
+    app:
+      ingress:
         enabled: true
-        secretName: kubernetes-dashboard-tls
-      annotations:
-        gethomepage.dev/enabled: "true"
-        gethomepage.dev/name: "Kubernetes Dashboard"
-        gethomepage.dev/description: "Cluster Adminisitration"
-        gethomepage.dev/group: "Admin"
-        gethomepage.dev/icon: "kubernetes"
+        hosts:
+          - kubernetes.home.mees-olivier.com
+        useDefaultIngressClass: true
+        issuer:
+          name: letsencrypt-staging
+          scope: cluster
+        tls:
+          enabled: true
+          secretName: kubernetes-dashboard-tls
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Kubernetes Dashboard"
+          gethomepage.dev/description: "Cluster Adminisitration"
+          gethomepage.dev/group: "Admin"
+          gethomepage.dev/icon: "kubernetes"
