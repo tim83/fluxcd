@@ -32,7 +32,7 @@ spec:
       enabled: true
       hosts:
         - kubernetes.home.mees-olivier.com
-      useDefaultIngressClass: true
+      ingressClassName: traefik
       issuer:
         name: letsencrypt-staging
         scope: cluster
