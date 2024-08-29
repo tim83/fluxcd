@@ -31,18 +31,18 @@ spec:
     - name: dns-tls
       protocol: TCP
       port: 853
-    - name: dns-quic
+    - name: dns-quic-1
       protocol: UDP
       port: 853
-    - name: dns-quic
+    - name: dns-quic-2
       protocol: UDP
       port: 784
-    - name: dns-quic
+    - name: dns-quic-3
       protocol: UDP
       port: 8853
-    - name: dns-crypt
+    - name: dns-crypt-1
       protocol: TCP
       port: 5443
-    - name: dns-crypt
+    - name: dns-crypt-2
       protocol: UDP
       port: 5443
