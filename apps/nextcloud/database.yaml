@@ -10,11 +10,3 @@ spec:
     initdb:
       database: nextcloud
       owner: nextcloud
-  managed:
-    roles:
-      - name: nextcloud
-        login: true
-        superuser: false
-        createdb: true
-        passwordSecret:
-          name: nextcloud-db-cluster

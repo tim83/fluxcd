@@ -80,7 +80,7 @@ spec:
       database: nextcloud
       existingSecret:
         enabled: true
-        secretName: nextcloud-db-cluster
+        secretName: postgresql-app
         usernameKey: username
         passwordKey: password
     persistence:

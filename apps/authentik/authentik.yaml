@@ -30,6 +30,16 @@ spec:
       postgresql:
         host: postgresql-rw
         name: authentik
+        username:
+          valueFrom:
+            secretKeyRef:
+              name: postgresql-app
+              key: username
+        password:
+          valueFrom:
+            secretKeyRef:
+              name: postgresql-app
+              key: password
       email:
         host: smtp.sendgrid.net
         port: 587

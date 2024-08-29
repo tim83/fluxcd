@@ -10,11 +10,3 @@ spec:
     initdb:
       database: authentik
       owner: authentik
-  managed:
-    roles:
-      - name: authentik
-        login: true
-        superuser: false
-        createdb: true
-        passwordSecret:
-          name: authentik-db-cluster

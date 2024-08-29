@@ -29,12 +29,12 @@ spec:
       DB_USERNAME:
         valueFrom:
           secretKeyRef:
-            name: immich-db-cluster
+            name: postgresql-app
             key: username
       DB_PASSWORD:
         valueFrom:
           secretKeyRef:
-            name: immich-db-cluster
+            name: postgresql-app
             key: password
     immich:
       persistence:
