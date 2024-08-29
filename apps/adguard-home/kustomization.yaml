@@ -1,4 +1,5 @@
 resources:
+  - resources/namespace.yaml
   - resources/persistentVolumeClaim.yaml
   - resources/service.yaml
   - resources/ingress.yaml
