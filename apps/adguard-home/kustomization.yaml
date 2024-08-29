@@ -1,0 +1,14 @@
+resources:
+  - resources/persistentVolumeClaim.yaml
+  - resources/service.yaml
+  - resources/ingress.yaml
+  - resources/statefulset.yaml
+
+namespace: dns
+commonLabels:
+  app.kubernetes.io/name: adguard-home
+  app: adguard-home
+
+images:
+  - name: adguard/adguardhome
+    newTag: v0.107.52

@@ -12,3 +12,4 @@ resources:
   - cloudflared
   - nextcloud
   - k8s-dashboard.yaml
+  - adguard-home
