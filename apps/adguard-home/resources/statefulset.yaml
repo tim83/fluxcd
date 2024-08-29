@@ -3,6 +3,7 @@ kind: StatefulSet
 metadata:
   name: &app adguard-home
 spec:
+  replicas: 2
   serviceName: *app
   selector:
     matchLabels:
