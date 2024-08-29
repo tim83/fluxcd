@@ -3,6 +3,5 @@ kind: Kustomization
 namespace: immich
 resources:
   - namespace.yaml
-  - secrets.yaml
   - database.yaml
   - immich.yaml
