@@ -80,7 +80,7 @@ spec:
         nameOverride: *app
         ports:
           http:
-            port: 400
+            port: 4000
       dns:
         controller: *app
         type: LoadBalancer
@@ -90,11 +90,11 @@ spec:
           dns-tcp:
             port: *port
             protocol: TCP
-            hostPort: *port
+            nodePort: *port
           dns-udp:
             port: *port
             protocol: UDP
-            hostPort: *port
+            nodePort: *port
     # serviceMonitor:
     #   app:
     #     serviceName: *app
