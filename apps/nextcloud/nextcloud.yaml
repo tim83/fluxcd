@@ -21,6 +21,10 @@ spec:
         name: nextcloud
   interval: 50m
   values:
+    image:
+      flavor: fpm
+    nginx:
+      enabled: true
     nextcloud:
       host: nextcloud.home.mees-olivier.com
       configs:
