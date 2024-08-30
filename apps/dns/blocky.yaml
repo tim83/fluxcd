@@ -75,7 +75,7 @@ spec:
             matchLabels:
               app.kubernetes.io/name: *app
     service:
-      app:
+      api:
         controller: *app
         ports:
           http:
@@ -95,8 +95,8 @@ spec:
             protocol: UDP
             nodePort: *port
     # serviceMonitor:
-    #   app:
-    #     serviceName: *app
+    #   api:
+    #     serviceName: *api
     #     endpoints:
     #       - port: http
     #         scheme: http
