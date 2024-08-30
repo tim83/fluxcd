@@ -11,3 +11,4 @@ configMapGenerator:
   - name: blocky-configmap
     files:
       - config.yml=./resources/config.yaml
+    namespace: dns
