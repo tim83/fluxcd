@@ -1,15 +1,12 @@
 resources:
-  - resources/namespace.yaml
-  - resources/persistentVolumeClaim.yaml
-  - resources/service.yaml
-  - resources/ingress.yaml
-  - resources/statefulset.yaml
+  - blocky.yaml
 
 namespace: dns
 commonLabels:
-  app.kubernetes.io/name: adguard-home
-  app: adguard-home
+  app.kubernetes.io/name: dns
+  app: dns
 
-images:
-  - name: adguard/adguardhome
-    newTag: v0.107.52
+configMapGenerator:
+  - name: blocky-configmap
+    files:
+      - config.yml=./resources/config.yaml
