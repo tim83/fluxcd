@@ -4,6 +4,7 @@ metadata:
   name: bjw-s
 spec:
   interval: 5m
+  type: oci
   url: oci://ghcr.io/bjw-s/helm
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
