@@ -11,3 +11,8 @@ configMapGenerator:
   - name: blocky-configmap
     files:
       - config.yml=./resources/config.yaml
+
+generatorOptions: # needed to ensure the name of the configmap does not get a random suffix
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
