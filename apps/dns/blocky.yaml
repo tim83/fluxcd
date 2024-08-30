@@ -81,6 +81,13 @@ spec:
         ports:
           http:
             port: 4000
+      dns-http:
+        controller: *app
+        ports:
+          http:
+            port: 80
+          https:
+            port: 443
       dns:
         controller: *app
         type: LoadBalancer
@@ -106,18 +113,13 @@ spec:
       app:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-staging"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Blocky"
-          gethomepage.dev/description: "DNS"
-          gethomepage.dev/group: "Admin"
-          gethomepage.dev/icon: "blocky"
         hosts:
-          - host: &host blocky.home.mees-olivier.com
+          - host: &host dns.home.mees-olivier.com
             paths:
               - path: /
                 service:
-                  identifier: app
-                  port: http
+                  identifier: dns-http
+                  port: https
     persistence:
       config:
         type: configMap
