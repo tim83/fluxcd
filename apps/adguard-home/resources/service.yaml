@@ -25,25 +25,33 @@ spec:
   ports:
     - name: dns
       port: 53
+      targetPort: 53
       protocol: TCP
     - name: dns-udp
       port: 53
+      targetPort: 53
       protocol: UDP
     - name: dns-tls
       protocol: TCP
       port: 853
+      targetPort: 853
     - name: dns-quic-1
       protocol: UDP
       port: 853
+      targetPort: 853
     - name: dns-quic-2
       protocol: UDP
       port: 784
+      targetPort: 784
     - name: dns-quic-3
       protocol: UDP
       port: 8853
+      targetPort: 8853
     - name: dns-crypt-1
       protocol: TCP
       port: 5443
+      targetPort: 5443
     - name: dns-crypt-2
       protocol: UDP
       port: 5443
+      targetPort: 5443
