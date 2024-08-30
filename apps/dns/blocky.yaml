@@ -90,11 +90,11 @@ spec:
           dns-tcp:
             port: *port
             protocol: TCP
-            nodePort: *port
+            hostPort: *port
           dns-udp:
             port: *port
             protocol: UDP
-            nodePort: *port
+            hostPort: *port
     # serviceMonitor:
     #   app:
     #     serviceName: *app
