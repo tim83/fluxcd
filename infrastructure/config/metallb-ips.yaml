@@ -7,3 +7,13 @@ metadata:
 spec:
   addresses:
   - 192.168.50.0/24
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: manual
+  namespace: metallb
+spec:
+  addresses:
+  - 192.168.10.0/24
+  autoAssign: false
