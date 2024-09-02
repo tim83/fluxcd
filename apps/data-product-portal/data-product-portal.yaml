@@ -4,7 +4,7 @@ metadata:
   name: dataminded
 spec:
   interval: 5m
-  url: https://github.com/conveyordata/data-product-portal/tree/main/helm
+  url: https://public.ecr.aws/conveyordata/data-product-portal
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
