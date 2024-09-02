@@ -20,53 +20,50 @@ spec:
         kind: HelmRepository
         name: authentik
   interval: 50m
-  install:
-    remediation:
-      retries: 3
-  values:
-    authentik:
-      error_reporting:
-        enabled: true
-      postgresql:
-        host: postgresql-rw
-        name: authentik
-        username:
-          valueFrom:
-            secretKeyRef:
-              name: postgresql-app
-              key: username
-        password:
-          valueFrom:
-            secretKeyRef:
-              name: postgresql-app
-              key: password
-      # email:
-      #   host: smtp.sendgrid.net
-      #   port: 587
-      #   use_tls: true
-      #   use_ssl: false
-      #   timeout: 30
-      #   from: "authentik@home.mees-olivier.com"
-    server:
-      ingress:
-        enabled: true
-        hosts:
-          - authentik.home.mees-olivier.com
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-staging"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Authentik"
-          gethomepage.dev/description: "Account management"
-          gethomepage.dev/group: "Admin"
-          gethomepage.dev/icon: "authentik"
-        tls:
-          - secretName: authentik-tls
-            hosts:
-              - authentik.home.mees-olivier.com
-    postgresql:
-      enabled: false
-    redis:
-      enabled: true
-  valuesFrom:
-    - kind: Secret
-      name: authentik-secret-values
+  # values:
+  #   authentik:
+  #     error_reporting:
+  #       enabled: true
+  #     postgresql:
+  #       host: postgresql-rw
+  #       name: authentik
+  #       username:
+  #         valueFrom:
+  #           secretKeyRef:
+  #             name: postgresql-app
+  #             key: username
+  #       password:
+  #         valueFrom:
+  #           secretKeyRef:
+  #             name: postgresql-app
+  #             key: password
+  #     email:
+  #       host: smtp.sendgrid.net
+  #       port: 587
+  #       use_tls: true
+  #       use_ssl: false
+  #       timeout: 30
+  #       from: "authentik@home.mees-olivier.com"
+  #   server:
+  #     ingress:
+  #       enabled: true
+  #       hosts:
+  #         - authentik.home.mees-olivier.com
+  #       annotations:
+  #         cert-manager.io/cluster-issuer: "letsencrypt-staging"
+  #         gethomepage.dev/enabled: "true"
+  #         gethomepage.dev/name: "Authentik"
+  #         gethomepage.dev/description: "Account management"
+  #         gethomepage.dev/group: "Admin"
+  #         gethomepage.dev/icon: "authentik"
+  #       tls:
+  #         - secretName: authentik-tls
+  #           hosts:
+  #             - authentik.home.mees-olivier.com
+  #   postgresql:
+  #     enabled: false
+  #   redis:
+  #     enabled: true
+  # valuesFrom:
+  #   - kind: Secret
+  #     name: authentik-secret-values
