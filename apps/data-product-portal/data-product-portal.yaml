@@ -20,7 +20,6 @@ spec:
         kind: HelmRepository
         name: conveyordata
   interval: 50m
-  install:
   values:
     global:
       postgresql:
@@ -66,7 +65,7 @@ spec:
         - secretName: data-product-portal-tls
           hosts:
             - data-product-portal.home.mees-olivier.com
-  frontendservice:
-    type: ClusterIP
-  service:
-    type: ClusterIP
+    frontendservice:
+      type: ClusterIP
+    service:
+      type: ClusterIP
