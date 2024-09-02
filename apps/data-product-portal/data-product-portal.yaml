@@ -1,0 +1,72 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: conveyordata
+spec:
+  interval: 5m
+  url: https://github.com/conveyordata/data-product-portal/tree/main/helm
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: data-product-portal
+spec:
+  releaseName: conveyordata
+  chart:
+    spec:
+      chart: data-product-portal
+      version: "0.1.3"
+      sourceRef:
+        kind: HelmRepository
+        name: conveyordata
+  interval: 50m
+  install:
+  values:
+    global:
+      postgresql:
+        auth:
+          server: postgresql-rw
+          database: data-product-portal
+          username:
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-app
+                key: username
+          password:
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-app
+                key: password
+    database:
+      server: postgresql-rw
+      database: data-product-portal
+      username:
+        valueFrom:
+          secretKeyRef:
+            name: postgresql-app
+            key: username
+      password:
+        valueFrom:
+          secretKeyRef:
+            name: postgresql-app
+            key: password
+    oidc:
+      disabled: true
+      cloudwatch_enabled: false
+    host: data-product-portal.home.mees-olivier.com
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-staging"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "Data Product Portal"
+        gethomepage.dev/description: "Data Minded - Data Product Portal"
+        gethomepage.dev/group: "Datashift"
+      tls:
+        - secretName: data-product-portal-tls
+          hosts:
+            - data-product-portal.home.mees-olivier.com
+  frontendservice:
+    type: ClusterIP
+  service:
+    type: ClusterIP

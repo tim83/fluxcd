@@ -12,3 +12,4 @@ resources:
   - cloudflared
   - nextcloud
   - dns
+  - data-product-portal
