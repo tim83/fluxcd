@@ -88,5 +88,6 @@ spec:
                   identifier: *app
                   port: http
         tls:
-          - hosts:
+          - secretName: radarr-tls
+            hosts:
               - *host
