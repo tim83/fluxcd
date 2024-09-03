@@ -23,11 +23,11 @@ spec:
   values:
     grafana:
       defaultDashboardsTimezone: Europe/Brussels
-      adminPassword:
-        valueFrom:
-          secretKeyRef:
-            name: grafana-admin
-            key: password
+      # adminPassword:
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: grafana-admin
+      #       key: password
       ingress:
         enabled: true
         annotations:
