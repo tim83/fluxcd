@@ -16,3 +16,5 @@ configMapGenerator:
       - TZ="Europe/Brussels"
       - PUID="65534"
       - PGID="65534"
+    options:
+      disableNameSuffixHash: true
