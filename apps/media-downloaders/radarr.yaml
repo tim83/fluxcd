@@ -58,7 +58,6 @@ spec:
         globalMounts:
           - path: /config
       media:
-        accessMode: ReadWriteOnce
         type: nfs
         server: 192.168.23.21
         path: /mnt/pool-1/Plex
