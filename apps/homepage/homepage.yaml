@@ -1,0 +1,54 @@
+# icons list: https://github.com/walkxcode/dashboard-icons/
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: homepage
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: jameswynn
+  namespace: homepage
+spec:
+  interval: 1h
+  url: https://jameswynn.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: homepage
+  namespace: homepage
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: homepage
+      version: "2.0.x"
+      sourceRef:
+        kind: HelmRepository
+        name: jameswynn
+        namespace: homepage
+  valuesFrom:
+    - kind: ConfigMap
+      name: homepage-config
+      valuesKey: config.yaml
+      targetPath: config
+  values:
+    serviceAccount:
+      create: true
+      name: homepage
+    enableRbac: true
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-staging"
+        hosts:
+          - host: homepage.home.mees-olivier.com
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: homepage-tls
+            hosts:
+              - homepage.home.mees-olivier.com
