@@ -3,9 +3,16 @@ kind: Kustomization
 namespace: media-downloaders
 resources:
   - namespace.yaml
-  - radarr
+  - radarr.yaml
   - sonarr
   - qbittorrent
   - prowlarr
   - bazarr
   - overseerr
+
+configMapGenerator:
+  - name: env-vars
+    literals:
+      - TZ="Europe/Brussels"
+      - PUID="65534"
+      - PGID="65534"

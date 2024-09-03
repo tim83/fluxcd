@@ -1,0 +1,93 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json
+
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app radarr
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.4.x
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: default
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      radarr:
+        containers:
+          radarr:
+            image:
+              repository: lscr.io/linuxserver/radarr
+              tag: 5.9.1
+            envFrom:
+              - configMapRef:
+                  name: env-vars
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: &port 7878
+                  initialDelaySeconds: 15
+                  periodSeconds: 30
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
+    persistence:
+      config:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        globalMounts:
+          - path: /config
+      media:
+        accessMode: ReadWriteOnce
+        type: nfs
+        server: 192.168.23.21
+        path: /mnt/pool-1/Plex
+        globalMounts:
+          - path: /data
+    service:
+      radarr:
+        controller: *app
+        ports:
+          http:
+            port: 80
+            targetPort: *port
+    ingress:
+      radarr:
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-staging"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Radarr"
+          gethomepage.dev/description: "Movie Downloader"
+          gethomepage.dev/group: "Media Downloaders"
+          gethomepage.dev/icon: *app
+        hosts:
+          - host: &host radarr.home.mees-olivier.com
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: *app
+                  port: http
+        tls:
+          - hosts:
+              - *host
