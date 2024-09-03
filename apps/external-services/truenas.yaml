@@ -10,17 +10,16 @@ spec:
       targetPort: 444
 ---
 apiVersion: discovery.k8s.io/v1
-kind: EndpointSlice
+kind: Endpoints
 metadata:  
   name: external-service-truenas
   labels:
     kubernetes.io/service-name: external-service-truenas
-addressType: IPv4
-ports:
-  - port: 444
-endpoints:
+subsets:
   - addresses:
-    - 192.168.23.21
+    - ip: 192.168.23.21
+    ports:
+    - port: 444
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
