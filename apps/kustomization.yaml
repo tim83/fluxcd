@@ -12,5 +12,5 @@ resources:
   - cloudflared
   # - nextcloud
   - dns
-  - data-product-portal
+  # - data-product-portal
   - monitoring
