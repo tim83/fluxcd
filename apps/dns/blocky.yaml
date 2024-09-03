@@ -1,12 +1,3 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: bjw-s
-spec:
-  interval: 5m
-  type: oci
-  url: oci://ghcr.io/bjw-s/helm
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -20,6 +11,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: bjw-s
+        namespace: default
   install:
     remediation:
       retries: 3
