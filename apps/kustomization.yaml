@@ -6,11 +6,11 @@ resources:
   - jellyfin.yaml
   - plex.yaml
   # - immich
-  - authentik
+  # - authentik
   - external-services
   - media-downloaders
   - cloudflared
-  - nextcloud
+  # - nextcloud
   - dns
   - data-product-portal
   - monitoring
