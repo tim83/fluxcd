@@ -35,6 +35,8 @@ spec:
               TZ: Europe/Brussels
               PUBLIC_DASHBOARD: true
               APP_DEBUG: true
+              SPEEDTEST_SERVERS: "http://speedtest.behostings.com:8080/speedtest/upload.php" # see: https://c.speedtest.net/speedtest-servers-static.php
+              SPEEDTEST_SCHEDULE: "15 */2 * * *"
               APP_KEY:
                 secretKeyRef:
                   name: app-key-sercret
