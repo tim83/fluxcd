@@ -1,6 +1,7 @@
 resources:
   - namespace.yaml
-  - secrets.yam
+  - secrets.yaml
+  - database.yaml
   - speedtest-tracker.yaml
 
 namespace: speedtest-tracker

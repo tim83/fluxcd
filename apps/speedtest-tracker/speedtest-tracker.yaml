@@ -34,6 +34,7 @@ spec:
             envFrom:
               - secretKeyRef:
                   name: speedtest-tracker-secret-env
+                  key: env.yaml
             env:
               TZ: Europe/Brussels
               DB_CONNECTION: pgsql
