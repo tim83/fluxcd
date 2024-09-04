@@ -25,9 +25,9 @@ spec:
       retries: 3
   values:
     controllers:
-      radarr:
+      sonarr:
         containers:
-          radarr:
+          sonarr:
             image:
               repository: lscr.io/linuxserver/sonarr
               tag: 4.0.9
