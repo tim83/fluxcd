@@ -64,7 +64,7 @@ spec:
         globalMounts:
           - path: /data/torrents
     service:
-      qbittorrent:
+      webui:
         controller: *app
         ports:
           http:
@@ -74,9 +74,11 @@ spec:
         controller: *app
         type: LoadBalancer
         ports:
-          - protocol: TCP
+          tcp:
+            protocol: TCP
             port: 6881
-          - protocol: UDP
+          udp:
+            protocol: UDP
             port: 6881
     ingress:
       qbittorrent:
@@ -93,7 +95,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: *app
+                  identifier: webui
                   port: http
         tls:
           - secretName: qbittorrent-tls
