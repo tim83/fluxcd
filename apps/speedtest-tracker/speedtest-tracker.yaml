@@ -39,7 +39,7 @@ spec:
                   name: app-key-sercret
                   key: app-key
               DB_CONNECTION: pgsql
-              DB_HOST: postgres-rw
+              DB_HOST: postgresql-rw
               DB_PORT: 5432
               DB_DATABASE: speedtest
               DB_USERNAME:
