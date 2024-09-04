@@ -20,7 +20,14 @@ bookmarks:
       - Google Photos:
           - icon: google-photos
             href: https://photos.google.com
-services: []
+services:
+  - Machines:
+      Proxmox ThinkCentre:
+        icon: proxmox
+        href: "https://proxmox.home.mees-olivier.com/"
+        description: Main proxmox server
+        namespace: external-services
+        app: external-service-proxmox
 widgets:
   - logo:
       icon: https://gethomepage.dev/main/assets/favicon.ico
