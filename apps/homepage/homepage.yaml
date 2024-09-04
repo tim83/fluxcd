@@ -34,6 +34,7 @@ spec:
       valuesKey: config.yaml
       targetPath: config
   values:
+    config: {}
     serviceAccount:
       create: true
       name: homepage
