@@ -4,7 +4,7 @@ namespace: media-downloaders
 resources:
   - namespace.yaml
   - radarr.yaml
-  - sonarr
+  - sonarr.yaml
   - qbittorrent
   - prowlarr
   - bazarr
