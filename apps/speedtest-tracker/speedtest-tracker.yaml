@@ -31,12 +31,12 @@ spec:
             image:
               repository: lscr.io/linuxserver/speedtest-tracker
               tag: v0.21.2
-            envFrom:
-              secretKeyRef:
-                name: speedtest-tracker-secret-env
-                key: env.yaml
             env:
               TZ: Europe/Brussels
+              APP_KEY:
+                secretKeyRef:
+                  name: app-key-sercret
+                  key: app-key
               DB_CONNECTION: pgsql
               DB_HOST: postgres-rw
               DB_PORT: 5432
