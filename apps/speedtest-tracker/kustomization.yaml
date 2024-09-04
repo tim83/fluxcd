@@ -1,0 +1,10 @@
+resources:
+  - namespace.yaml
+  - secrets.yam
+  - speedtest-tracker.yaml
+
+namespace: speedtest-tracker
+commonLabels:
+  app.kubernetes.io/name: speedtest-tracker
+  app: speedtest-tracker
+

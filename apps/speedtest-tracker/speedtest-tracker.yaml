@@ -1,0 +1,103 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json
+
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app speedtest-tracker
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.4.x
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: default
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      speedtest-tracker:
+        containers:
+          speedtest-tracker:
+            image:
+              repository: lscr.io/linuxserver/speedtest-tracker
+              tag: v0.21.2
+            envFrom:
+              - secretKeyRef:
+                  name: speedtest-tracker-secret-env
+            env:
+              TZ: Europe/Brussels
+              DB_CONNECTION: pgsql
+              DB_HOST: postgres-rw
+              DB_PORT: 5432
+              DB_DATABASE: speedtest
+              DB_USERNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgresql-app
+                    key: username
+              DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgresql-app
+                    key: password
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: &port 80
+                  initialDelaySeconds: 15
+                  periodSeconds: 30
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
+    persistence:
+      config:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 500Mi
+        globalMounts:
+          - path: /config
+    service:
+      speedtest-tracker:
+        controller: *app
+        ports:
+          http:
+            port: 80
+            targetPort: *port
+    ingress:
+      speedtest-tracker:
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-staging"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Speedtest"
+          gethomepage.dev/description: "Internet speed tracker"
+          gethomepage.dev/group: "Admin"
+          gethomepage.dev/icon: *app
+        hosts:
+          - host: &host speedtest.home.mees-olivier.com
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: *app
+                  port: http
+        tls:
+          - secretName: speedtest-tracker-tls
+            hosts:
+              - *host
