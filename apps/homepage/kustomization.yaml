@@ -1,5 +1,4 @@
 resources:
-  - secrets.yaml
   - homepage.yaml
 
 namespace: homepage

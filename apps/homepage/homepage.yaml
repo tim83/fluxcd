@@ -34,9 +34,6 @@ spec:
       valuesKey: config.yaml
       targetPath: config
   values:
-    envFrom:
-      - secretRef:
-          name: secret-envs
     config: {}
     serviceAccount:
       create: true
