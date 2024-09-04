@@ -30,7 +30,7 @@ spec:
           speedtest-tracker:
             image:
               repository: lscr.io/linuxserver/speedtest-tracker
-              tag: v0.21.2
+              tag: 0.21.2
             env:
               TZ: Europe/Brussels
               APP_KEY:
