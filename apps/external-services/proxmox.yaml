@@ -4,7 +4,7 @@ metadata:
   name: external-service-proxmox
 spec:
   ports:
-    - name: http
+    - name: https
       port: 8006
 ---
 apiVersion: v1
@@ -41,7 +41,7 @@ spec:
           service:
             name: external-service-proxmox
             port:
-              name: http
+              name: https
   tls:
     - secretName: external-service-proxmox-tls
       hosts: 
