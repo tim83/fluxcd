@@ -94,7 +94,7 @@ spec:
           gethomepage.dev/description: "Internet speed tracker"
           gethomepage.dev/group: "Admin"
           gethomepage.dev/icon: *app
-          gethomepage.dev/widget.type: type
+          gethomepage.dev/widget.type: speedtest
           gethomepage.dev/widget.url: speedtest-tracker.speedtest-tracker.svc.cluster.local:80
         hosts:
           - host: &host speedtest.home.mees-olivier.com
