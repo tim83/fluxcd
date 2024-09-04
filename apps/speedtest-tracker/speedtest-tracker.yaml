@@ -33,6 +33,7 @@ spec:
               tag: 0.21.2
             env:
               TZ: Europe/Brussels
+              PUBLIC_DASHBOARD: true
               APP_DEBUG: true
               APP_KEY:
                 secretKeyRef:
