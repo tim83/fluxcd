@@ -23,10 +23,6 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  valuesFrom:
-    - kind: ConfigMap
-      name: env-values
-      targetPath: controllers.radarr.containers.radarr.env
   values:
     controllers:
       radarr:
@@ -35,6 +31,9 @@ spec:
             image:
               repository: lscr.io/linuxserver/radarr
               tag: 5.9.1
+            envFrom:
+              - configMapRef:
+                  name: env-vars
             probes:
               liveness: &probes
                 enabled: true
