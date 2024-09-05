@@ -8,7 +8,6 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: jameswynn
-  namespace: homepage
 spec:
   interval: 1h
   url: https://jameswynn.github.io/helm-charts
@@ -17,7 +16,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: homepage
-  namespace: homepage
 spec:
   interval: 30m
   chart:
@@ -27,7 +25,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: jameswynn
-        namespace: homepage
   valuesFrom:
     - kind: ConfigMap
       name: homepage-config
