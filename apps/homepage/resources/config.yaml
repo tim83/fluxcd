@@ -32,7 +32,7 @@ widgets:
         showLabel: true
         label: "cluster"
       nodes:
-        show: false
+        show: true
         cpu: true
         memory: true
         showLabel: true
