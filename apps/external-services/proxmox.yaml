@@ -10,28 +10,28 @@ spec:
 ---
 apiVersion: v1
 kind: Endpoints
-metadata:  
+metadata:
   name: proxmox
   labels:
     kubernetes.io/service-name: proxmox
 subsets:
   - addresses:
-    - ip: 192.168.20.1
+      - ip: 192.168.20.1
     ports:
-    - port: 8006
+      - port: 8006
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: proxmox
   annotations:
+    traefik.frontend.passHostHeader: "false"
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "Proxmox ThinkCentre"
     gethomepage.dev/description: "Virtualization Server"
     gethomepage.dev/group: "Admin"
     gethomepage.dev/icon: "proxmox"
-    gethomepage.dev/ping: "https://192.168.20.1:8006"
     gethomepage.dev/widget.type: "proxmox"
     gethomepage.dev/widget.url: "https://proxmox.external-services.svc.cluster.local"
     gethomepage.dev/widget.node: "pve"
@@ -39,17 +39,17 @@ metadata:
     gethomepage.dev/widget.password: "{{HOMEPAGE_VAR_PROXMOX_PVE_PASSWORD}}"
 spec:
   rules:
-  - host: proxmox.home.mees-olivier.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: proxmox
-            port:
-              name: https
+    - host: proxmox.home.mees-olivier.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: proxmox
+                port:
+                  name: https
   tls:
     - secretName: proxmox-tls
-      hosts: 
-      - proxmox.home.mees-olivier.com
+      hosts:
+        - proxmox.home.mees-olivier.com
