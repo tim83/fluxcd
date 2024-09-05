@@ -8,7 +8,7 @@ resources:
   - qbittorrent.yaml
   - prowlarr.yaml
   - bazarr
-  - overseerr
+  - overseerr.yaml
 
 configMapGenerator:
   - name: env-vars
