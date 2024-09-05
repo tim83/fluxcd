@@ -21,9 +21,9 @@ spec:
         kind: HelmRepository
         name: jameswynn
   values:
-    # envFrom:
-    #   - secretRef:
-    #       name: secret-envs
+    envFrom:
+      - secretRef:
+          name: secret-envs
     config:
       useExistingConfigMap: homepage-config
     serviceAccount:
