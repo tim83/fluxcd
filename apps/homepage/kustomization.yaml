@@ -3,10 +3,6 @@ resources:
   - homepage.yaml
 
 namespace: homepage
-commonLabels:
-  app.kubernetes.io/name: homepage
-  app: homepage
-
 configMapGenerator:
   - name: homepage-config
     files:
