@@ -1,9 +1,4 @@
 # icons list: https://github.com/walkxcode/dashboard-icons/
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: homepage
----
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
