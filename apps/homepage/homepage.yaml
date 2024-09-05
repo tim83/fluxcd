@@ -20,16 +20,12 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: jameswynn
-  # valuesFrom:
-  #   - kind: ConfigMap
-  #     name: homepage-config
-  #     valuesKey: config.yaml
-  #     targetPath: config
   values:
     # envFrom:
     #   - secretRef:
     #       name: secret-envs
-    config: {}
+    config:
+      useExistingConfigMap: homepage-config
     serviceAccount:
       create: true
       name: homepage
