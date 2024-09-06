@@ -3,7 +3,8 @@ kind: Service
 metadata:
   name: proxmox
   labels:
-    app: proxmox
+    app.kubernetes.io/name: external-service
+    app.kubernetes.io/instance: proxmox
 spec:
   ports:
     - name: https
@@ -14,7 +15,8 @@ kind: Endpoints
 metadata:
   name: proxmox
   labels:
-    app: proxmox
+    app.kubernetes.io/name: external-service
+    app.kubernetes.io/instance: proxmox
     kubernetes.io/service-name: proxmox
 subsets:
   - addresses:
@@ -27,7 +29,8 @@ kind: Ingress
 metadata:
   name: proxmox
   labels:
-    app: proxmox
+    app.kubernetes.io/name: external-service
+    app.kubernetes.io/instance: proxmox
   annotations:
     traefik.frontend.passHostHeader: "false"
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
