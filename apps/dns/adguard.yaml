@@ -1,0 +1,136 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app adguard-home
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.4.x
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: default
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      blocky:
+        replicas: 2
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: adguard/adguardhome
+              tag: v0.107.52
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: &port 53
+                  initialDelaySeconds: 15
+                  periodSeconds: 30
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
+    service:
+      webui:
+        controller: *app
+        ports:
+          http:
+            port: 80
+            targetPort: 3000
+      dns:
+        controller: *app
+        type: LoadBalancer
+        loadBalancerIP: 192.168.10.2
+        externalTrafficPolicy: Local
+        ports:
+          dns-tcp:
+            port: *port
+            protocol: TCP
+            targetPort: *port
+          dns-udp:
+            port: *port
+            protocol: UDP
+            targetPort: *port
+          dhcp-1:
+            port: 67
+            protocol: UDP
+          dhcp-2:
+            port: 68
+            protocol: UDP
+          dns-http:
+            port: 80
+            protocol: TCP
+          dns-https-tcp:
+            port: 443
+            protocol: TCP
+          dns-https-udp:
+            port: 443
+            protocol: UDP
+          dns-tls:
+            port: 853
+            protocol: TCP
+          dns-quic-1:
+            port: 784
+            protocol: UDP
+          dns-quic-2:
+            port: 853
+            protocol: UDP
+          dns-quic-3:
+            port: 8853
+            protocol: UDP
+          dns-crypt-tcp:
+            port: 5443
+            protocol: TCP
+          dns-crypt-udp:
+            port: 5443
+            protocol: UDP
+    persistence:
+      config:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        globalMounts:
+          - path: /opt/adguardhome/conf
+      work:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        globalMounts:
+          - path: /opt/adguardhome/work
+    ingress:
+      webui:
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-staging"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Adguard Home"
+          gethomepage.dev/description: "DNS Management"
+          gethomepage.dev/group: "Admin"
+          gethomepage.dev/icon: adguard-home
+        hosts:
+          - host: &host adguard.home.mees-olivier.com
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: webui
+                  port: http
+        tls:
+          - secretName: adguard-tls
+            hosts:
+              - *host
