@@ -22,7 +22,7 @@ spec:
       retries: 3
   values:
     controllers:
-      blocky:
+      adguard-home:
         replicas: 2
         strategy: RollingUpdate
         containers:
