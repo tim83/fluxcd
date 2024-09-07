@@ -73,15 +73,15 @@ spec:
             port: *port
             protocol: UDP
             targetPort: *port
-    # serviceMonitor:
-    #   api:
-    #     serviceName: *api
-    #     endpoints:
-    #       - port: http
-    #         scheme: http
-    #         path: /metrics
-    #         interval: 1m
-    #         scrapeTimeout: 10s
+    serviceMonitor:
+      api:
+        serviceName: api
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
     persistence:
       config:
         type: configMap
