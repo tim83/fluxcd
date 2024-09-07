@@ -21,7 +21,7 @@ spec:
   releaseName: plex
   chart:
     spec:
-      chart: plex
+      chart: plex-media-server
       version: "0.4.x"
       sourceRef:
         kind: HelmRepository
