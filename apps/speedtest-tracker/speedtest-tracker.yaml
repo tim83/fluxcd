@@ -60,8 +60,9 @@ spec:
                 enabled: true
                 custom: true
                 spec:
-                  tcpSocket:
+                  httpGet:
                     port: &port 80
+                    path: /api/healthcheck
                   initialDelaySeconds: 15
                   periodSeconds: 30
                   failureThreshold: 3
