@@ -32,3 +32,17 @@ spec:
         kind: HelmRepository
         name: metallb
         namespace: metallb
+  values:
+    prometheus:
+      serviceAccount: kube-prometheus-stack-prometheus
+      namespace: monitoring
+      podMonitor:
+        enabled: true
+      prometheusRule:
+        enabled: true
+    speaker:
+      tolerateMaster: true
+      frr:
+        enabled: true
+    crds:
+      enabled: true
