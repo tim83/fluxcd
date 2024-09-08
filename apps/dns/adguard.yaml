@@ -30,17 +30,17 @@ spec:
             image:
               repository: adguard/adguardhome
               tag: v0.107.52
-            # probes:
-            #   liveness: &probes
-            #     enabled: true
-            #     custom: true
-            #     spec:
-            #       tcpSocket:
-            #         port: &port 53
-            #       initialDelaySeconds: 15
-            #       periodSeconds: 30
-            #       failureThreshold: 3
-            #   readiness: *probes
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: &port 53
+                  initialDelaySeconds: 15
+                  periodSeconds: 30
+                  failureThreshold: 3
+              readiness: *probes
             resources:
               requests:
                 cpu: 10m
@@ -60,7 +60,7 @@ spec:
         externalTrafficPolicy: Local
         ports:
           dns-tcp:
-            port: &port 53
+            port: *port
             protocol: TCP
             targetPort: *port
           dns-udp:
