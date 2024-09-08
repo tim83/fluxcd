@@ -6,3 +6,7 @@ resources:
   - configmap.yaml
   - secret.yaml
   - deployment.yaml
+configMapGenerator:
+  - name: cloudflared
+    files:
+      - config.yaml=./resources/config.yaml
