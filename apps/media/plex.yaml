@@ -1,0 +1,113 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json
+
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app plex
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.4.x
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: default
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      plex:
+        containers:
+          plex:
+            image:
+              repository: lscr.io/linuxserver/plex
+              tag: .40.5
+            envFrom:
+              - configMapRef:
+                  name: env-vars
+            env:
+              ADVERTISE_IP: "http://${CONFIG_MAIN_SVC_PLEX_ADDR}:32400,https://{{ .Release.Name }}.${SECRET_DOMAIN_NAME}:443"
+              ALLOWED_NETWORKS: "10.0.0.0/8"
+              HOSTNAME: "plex-k8s"
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: &port 32400
+                  initialDelaySeconds: 15
+                  periodSeconds: 30
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 100m
+                memory: 2Gi
+              limits:
+                memory: 10Gi
+    persistence:
+      config:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 10Gi
+        globalMounts:
+          - path: /config
+      media:
+        type: nfs
+        server: 192.168.23.21
+        path: /mnt/pool-1/Plex/media
+        globalMounts:
+          - path: /data/media
+      transcode:
+        type: emptyDir
+        globalMounts:
+          - path: /transcode
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/Library/Application Support/Plex Media Server/Logs
+      cache:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 100Gi
+        globalMounts:
+          - path: /config/Library/Application Support/Plex Media Server/Cache
+    service:
+      radarr:
+        controller: *app
+        type: LoadBalancer
+        ports:
+          http:
+            port: *port
+            targetPort: *port
+    ingress:
+      radarr:
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-staging"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Plex"
+          gethomepage.dev/description: "TV & Movie streaming"
+          gethomepage.dev/group: "Media"
+          gethomepage.dev/icon: *app
+        hosts:
+          - host: &host "{{ .Release.Name }}.home.mees-olivier.com"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: *app
+                  port: http
+        tls:
+          - secretName: "{{ .Release.Name }}-tls"
+            hosts:
+              - *host

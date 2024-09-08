@@ -7,12 +7,10 @@ resources:
   - minio.yaml
   - homepage
   # - starboard.yaml
-  - jellyfin.yaml
-  - plex.yaml
   # - immich
   # - authentik
   - external-services
-  - media-downloaders
+  - media
   - cloudflared
   # - nextcloud
   - dns
