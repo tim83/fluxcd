@@ -74,7 +74,7 @@ spec:
           gethomepage.dev/group: "Media"
           gethomepage.dev/icon: *app
         hosts:
-          - host: &host request.home.mees-olivier.com
+          - host: &host request.mees-olivier.com
             paths:
               - path: /
                 pathType: Prefix

@@ -37,7 +37,7 @@ spec:
               readonly: true
     ingress:
       enabled: true
-      hostname: jellyfin.home.mees-olivier.com
+      hostname: jellyfin.mees-olivier.com
       path: /
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-staging"

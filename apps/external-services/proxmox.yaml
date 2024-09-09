@@ -36,7 +36,7 @@ metadata:
     gethomepage.dev/widget.password: "{{HOMEPAGE_VAR_PROXMOX_PVE_PASSWORD}}"
 spec:
   rules:
-    - host: proxmox.home.mees-olivier.com
+    - host: proxmox.mees-olivier.com
       http:
         paths:
           - path: /
@@ -49,4 +49,4 @@ spec:
   tls:
     - secretName: proxmox-tls
       hosts:
-        - proxmox.home.mees-olivier.com
+        - proxmox.mees-olivier.com

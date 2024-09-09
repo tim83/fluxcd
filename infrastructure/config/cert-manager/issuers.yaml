@@ -4,7 +4,7 @@ metadata:
   name: letsencrypt-prod
 spec:
   acme:
-    email: dns@home.mees-olivier.com
+    email: dns@mees-olivier.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-prod
@@ -21,7 +21,7 @@ metadata:
   name: letsencrypt-staging
 spec:
   acme:
-    email: dns@home.mees-olivier.com
+    email: dns@mees-olivier.com
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-staging

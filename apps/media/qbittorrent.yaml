@@ -90,7 +90,7 @@ spec:
           gethomepage.dev/group: "Media Downloaders"
           gethomepage.dev/icon: *app
         hosts:
-          - host: &host qbittorrent.home.mees-olivier.com
+          - host: &host qbittorrent.mees-olivier.com
             paths:
               - path: /
                 pathType: Prefix

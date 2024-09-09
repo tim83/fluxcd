@@ -100,7 +100,7 @@ spec:
           gethomepage.dev/group: "Media"
           gethomepage.dev/icon: *app
         hosts:
-          - host: &host "{{ .Release.Name }}.home.mees-olivier.com"
+          - host: &host "{{ .Release.Name }}.mees-olivier.com"
             paths:
               - path: /
                 pathType: Prefix

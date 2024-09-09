@@ -36,11 +36,11 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-staging"
         hosts:
-          - host: homepage.home.mees-olivier.com
+          - host: homepage.mees-olivier.com
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - secretName: homepage-tls
             hosts:
-              - homepage.home.mees-olivier.com
+              - homepage.mees-olivier.com

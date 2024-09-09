@@ -38,9 +38,9 @@ spec:
           gethomepage.dev/group: "Admin"
           gethomepage.dev/icon: "grafana"
         hosts:
-          - grafana.home.mees-olivier.com
+          - grafana.mees-olivier.com
         path: /
         tls:
           - secretName: grafana-tls
             hosts:
-              - grafana.home.mees-olivier.com
+              - grafana.mees-olivier.com

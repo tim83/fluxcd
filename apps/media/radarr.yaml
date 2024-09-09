@@ -80,7 +80,7 @@ spec:
           gethomepage.dev/group: "Media Downloaders"
           gethomepage.dev/icon: *app
         hosts:
-          - host: &host radarr.home.mees-olivier.com
+          - host: &host radarr.mees-olivier.com
             paths:
               - path: /
                 pathType: Prefix

@@ -26,7 +26,7 @@ spec:
       existingSecretPasswordKey: "password"
     ingress:
       enabled: true
-      hostname: &host keycloak.home.mees-olivier.com
+      hostname: &host keycloak.mees-olivier.com
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-staging"
         gethomepage.dev/enabled: "true"

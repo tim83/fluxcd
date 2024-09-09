@@ -27,7 +27,7 @@ metadata:
     gethomepage.dev/icon: "truenas"
 spec:
   rules:
-    - host: truenas.home.mees-olivier.com
+    - host: truenas.mees-olivier.com
       http:
         paths:
           - path: /
@@ -40,4 +40,4 @@ spec:
   tls:
     - secretName: truenas-tls
       hosts:
-        - truenas.home.mees-olivier.com
+        - truenas.mees-olivier.com

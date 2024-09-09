@@ -80,7 +80,7 @@ spec:
           gethomepage.dev/group: "Media Downloaders"
           gethomepage.dev/icon: *app
         hosts:
-          - host: &host sonarr.home.mees-olivier.com
+          - host: &host sonarr.mees-olivier.com
             paths:
               - path: /
                 pathType: Prefix

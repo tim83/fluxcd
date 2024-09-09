@@ -74,7 +74,7 @@ spec:
           gethomepage.dev/group: "Media Downloaders"
           gethomepage.dev/icon: *app
         hosts:
-          - host: &host prowlarr.home.mees-olivier.com
+          - host: &host prowlarr.mees-olivier.com
             paths:
               - path: /
                 pathType: Prefix
