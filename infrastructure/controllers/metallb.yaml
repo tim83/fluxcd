@@ -40,9 +40,5 @@ spec:
         enabled: true
       prometheusRule:
         enabled: true
-    speaker:
-      tolerateMaster: true
-      frr:
-        enabled: true
     crds:
       enabled: true
