@@ -5,6 +5,9 @@ metadata:
   labels:
     app.kubernetes.io/name: external-service
     app.kubernetes.io/instance: proxmox
+  annotations:
+    traefik.ingress.kubernetes.io/service.serversscheme: https
+    traefik.ingress.kubernetes.io/service.serverstransport: selfsignedssl@kubernetescrd
 spec:
   type: ExternalName
   externalName: 192.168.20.1
@@ -20,8 +23,6 @@ metadata:
     app.kubernetes.io/name: external-service
     app.kubernetes.io/instance: proxmox
   annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: https
-    traefik.ingress.kubernetes.io/service.serverstransport: selfsigned-ssl-transport@kubernetescrd
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "Proxmox ThinkCentre"
