@@ -5,3 +5,4 @@ resources:
   - metallb.yaml
   - nfs-csi-driver.yaml
   - cnpg.yaml
+  - traefik.yaml

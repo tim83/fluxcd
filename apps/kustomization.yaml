@@ -3,7 +3,6 @@ kind: Kustomization
 configurations:
   - kustomizeconfig.yaml
 resources:
-  - traefik.yaml
   - helmrepos.yaml
   - minio.yaml
   - homepage
