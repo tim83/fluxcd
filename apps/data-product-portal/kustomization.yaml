@@ -1,9 +1,0 @@
-resources:
-  - namespace.yaml
-  - database.yaml
-  - data-product-portal.yaml
-
-namespace: data-product-portal
-commonLabels:
-  app.kubernetes.io/name: data-product-portal
-  app: data-product-portal
