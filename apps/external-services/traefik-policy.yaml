@@ -1,6 +1,6 @@
 apiVersion: traefik.io/v1alpha1
 kind: ServersTransport
 metadata:
-  name: selfsigned-ssl
+  name: selfsigned-ssl-transport
 spec:
   insecureSkipVerify: true # Skip SSL verification
