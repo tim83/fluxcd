@@ -1,0 +1,41 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json
+
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app keycloak
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: keycloak
+      version: 22.2.x
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: default
+  values:
+    postgresql:
+      enabled: false
+    externalDatabase:
+      host: postgres-rw
+      database: keycloak
+      existingSecret: "postgres-app"
+      existingSecretUserKey: "username"
+      existingSecretPasswordKey: "password"
+    ingress:
+      enabled: true
+      hostname: &host keycloak.home.mees-olivier.com
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-staging"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "Keycloak"
+        gethomepage.dev/description: "Single Sign On"
+        gethomepage.dev/group: "Admin"
+        gethomepage.dev/icon: *app
+      tls: true
+      extraTls:
+        - secretName: keycloak-tls
+          hosts:
+            - *host
