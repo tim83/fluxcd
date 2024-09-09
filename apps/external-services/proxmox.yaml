@@ -23,7 +23,7 @@ metadata:
     app.kubernetes.io/name: external-service
     app.kubernetes.io/instance: proxmox
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "Proxmox ThinkCentre"
     gethomepage.dev/description: "Virtualization Server"
