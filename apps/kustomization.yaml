@@ -6,13 +6,10 @@ resources:
   - helmrepos.yaml
   - minio.yaml
   - homepage
-  # - starboard.yaml
-  # - immich
-  # - authentik
+  - starboard.yaml
   - external-services
   - media
   - cloudflared
-  # - nextcloud
   - dns
   - monitoring
   - speedtest-tracker
