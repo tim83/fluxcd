@@ -74,7 +74,14 @@ spec:
           gethomepage.dev/group: "Media"
           gethomepage.dev/icon: *app
         hosts:
-          - host: &host request.mees-olivier.com
+          - host: &host requests.mees-olivier.com
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: *app
+                  port: http
+          - host: overseerr.mees-olivier.com
             paths:
               - path: /
                 pathType: Prefix
@@ -85,3 +92,4 @@ spec:
           - secretName: overseerr-tls
             hosts:
               - *host
+              - overseerr.mees-olivier.com

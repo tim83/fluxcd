@@ -23,5 +23,7 @@ ingress:
   # in the connection from cloudflared to your local service, not from the internet to cloudflared.
   - hostname: requests.mees-olivier.com
     service: https://overseerr.media:443
+  - hostname: kuma.mees-olivier.com
+    service: https://kuma.media:443
   # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
   - service: http_status:404

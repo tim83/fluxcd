@@ -39,11 +39,16 @@ spec:
         gethomepage.dev/group: "Admin"
         gethomepage.dev/icon: uptime-kuma
       hosts:
-        - host: &host kuma.mees-olivier.com
+        - host: kuma.mees-olivier.com
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+        - host: uptime-kuma.mees-olivier.com
           paths:
             - path: /
               pathType: ImplementationSpecific
     tls:
       - secretName: kuma-tls
         hosts:
-          - *host
+          - kuma.mees-olivier.com
+          - uptime-kuma.mees-olivier.com
