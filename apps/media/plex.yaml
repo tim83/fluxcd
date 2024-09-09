@@ -30,7 +30,7 @@ spec:
           plex:
             image:
               repository: lscr.io/linuxserver/plex
-              tag: .40.5
+              tag: 1.40.5
             envFrom:
               - configMapRef:
                   name: env-vars
@@ -83,7 +83,7 @@ spec:
         globalMounts:
           - path: /config/Library/Application Support/Plex Media Server/Cache
     service:
-      radarr:
+      plex:
         controller: *app
         type: LoadBalancer
         ports:
@@ -91,7 +91,7 @@ spec:
             port: *port
             targetPort: *port
     ingress:
-      radarr:
+      plex:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-staging"
           gethomepage.dev/enabled: "true"
