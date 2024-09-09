@@ -32,7 +32,7 @@ spec:
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: "Keycloak"
         gethomepage.dev/description: "Single Sign On"
-        gethomepage.dev/group: "Admin"
+        gethomepage.dev/group: "User"
         gethomepage.dev/icon: *app
       tls: true
       extraTls:
