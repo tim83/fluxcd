@@ -16,6 +16,8 @@ kind: Ingress
 metadata:
   name: truenas
   annotations:
+    traefik.ingress.kubernetes.io/service.serversscheme: https
+    traefik.ingress.kubernetes.io/service.serverstransport: selfsigned-ssl-transport@kubernetescrd
     traefik.ingress.kubernetes.io/service.passhostheader: "false"
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
     gethomepage.dev/enabled: "true"
@@ -34,7 +36,7 @@ spec:
               service:
                 name: truenas
                 port:
-                  name: http
+                  name: https
   tls:
     - secretName: truenas-tls
       hosts:
