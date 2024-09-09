@@ -5,3 +5,4 @@ resources:
   - namespace.yaml
   - proxmox.yaml
   - truenas.yaml
+  - google.yaml
