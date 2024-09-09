@@ -7,12 +7,9 @@ resources:
   - minio.yaml
   - homepage
   # - starboard.yaml
-  # - immich
-  # - authentik
   - external-services
   - media
   - cloudflared
-  # - nextcloud
   - dns
   - monitoring
   - speedtest-tracker
