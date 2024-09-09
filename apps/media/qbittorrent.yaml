@@ -83,7 +83,7 @@ spec:
     ingress:
       qbittorrent:
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-staging"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
           gethomepage.dev/enabled: "true"
           gethomepage.dev/name: "qBittorrent"
           gethomepage.dev/description: "Torrent Downloader"
