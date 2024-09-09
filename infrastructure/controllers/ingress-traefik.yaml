@@ -55,3 +55,10 @@ spec:
       websecure:
         asDefault: true
         hostPort: 443
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowExternalNameServices: true
+      kubernetesIngress:
+        enabled: true
+        allowExternalNameServices: true
