@@ -63,3 +63,11 @@ spec:
       kubernetesIngress:
         enabled: true
         allowExternalNameServices: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: selfsignedssl
+  namespace: ingress-traefik
+spec:
+  insecureSkipVerify: true # Skip SSL verification
