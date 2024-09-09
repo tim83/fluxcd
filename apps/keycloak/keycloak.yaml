@@ -19,9 +19,9 @@ spec:
     postgresql:
       enabled: false
     externalDatabase:
-      host: postgres-rw
+      host: postgresql-rw
       database: keycloak
-      existingSecret: "postgres-app"
+      existingSecret: "postgresql-app"
       existingSecretUserKey: "username"
       existingSecretPasswordKey: "password"
     ingress:
