@@ -14,6 +14,7 @@ kind: Ingress
 metadata:
   name: truenas
   annotations:
+    traefik.ingress.kubernetes.io/service.passhostheader: "false"
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "TrueNAS Scale"

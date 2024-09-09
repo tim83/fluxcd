@@ -20,7 +20,7 @@ metadata:
     app.kubernetes.io/name: external-service
     app.kubernetes.io/instance: google
   annotations:
-    traefik.frontend.passHostHeader: "false"
+    traefik.ingress.kubernetes.io/service.passhostheader: "false"
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "Google"
