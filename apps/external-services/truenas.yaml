@@ -6,6 +6,8 @@ spec:
   type: ExternalName
   externalName: truenas.fritz.box
   ports:
+    - name: http
+      port: 81
     - name: https
       port: 444
 ---
@@ -32,7 +34,7 @@ spec:
               service:
                 name: truenas
                 port:
-                  name: https
+                  name: http
   tls:
     - secretName: truenas-tls
       hosts:
