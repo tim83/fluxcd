@@ -6,7 +6,7 @@ resources:
   - helmrepos.yaml
   - minio.yaml
   - homepage
-  - starboard.yaml
+  # - starboard.yaml
   - external-services
   - media
   - cloudflared
