@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/instance: proxmox
   annotations:
     traefik.ingress.kubernetes.io/service.serversscheme: https
-    traefik.ingress.kubernetes.io/service.serverstransport: ingress-traefik-selfsignedssl@kubernetescrd
+    traefik.ingress.kubernetes.io/service.serverstransport: traefik-selfsignedssl@kubernetescrd
 spec:
   type: ExternalName
   externalName: 192.168.20.1
