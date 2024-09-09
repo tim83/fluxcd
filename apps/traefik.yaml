@@ -46,12 +46,12 @@ spec:
       loadBalancerIp: 192.168.10.10
     ports:
       web:
-        port: 80
+        exposedPort: 80
         redirectTo:
           port: websecure
       websecure:
         asDefault: true
-        port: 443
+        exposedPort: 443
     providers:
       kubernetesCRD:
         enabled: true
