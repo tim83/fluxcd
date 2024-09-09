@@ -6,23 +6,12 @@ metadata:
     app.kubernetes.io/name: external-service
     app.kubernetes.io/instance: proxmox
 spec:
+  type: ExternalName
+  externalName: 192.168.20.1
   ports:
     - name: https
-      port: 8006
----
-apiVersion: v1
-kind: Endpoints
-metadata:
-  name: proxmox
-  labels:
-    app.kubernetes.io/name: external-service
-    app.kubernetes.io/instance: proxmox
-    kubernetes.io/service-name: proxmox
-subsets:
-  - addresses:
-      - ip: 192.168.20.1
-    ports:
-      - port: 8006
+      port: 443
+      targetPort: 8006
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -40,7 +29,7 @@ metadata:
     gethomepage.dev/group: "Admin"
     gethomepage.dev/icon: "proxmox"
     gethomepage.dev/widget.type: "proxmox"
-    gethomepage.dev/widget.url: "https://192.168.20.1:8006"
+    gethomepage.dev/widget.url: "https://proxmox.external-services.svc.cluster.local"
     gethomepage.dev/widget.node: "pve"
     gethomepage.dev/widget.username: "{{HOMEPAGE_VAR_PROXMOX_PVE_USER}}"
     gethomepage.dev/widget.password: "{{HOMEPAGE_VAR_PROXMOX_PVE_PASSWORD}}"
