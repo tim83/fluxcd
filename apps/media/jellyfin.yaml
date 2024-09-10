@@ -33,7 +33,7 @@ spec:
               storage: 3Ti
             nfs:
               path: /mnt/pool-1/Plex/media
-              server: 192.168.23.21
+              server: 192.168.30.1
               readonly: true
     ingress:
       enabled: true
