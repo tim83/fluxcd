@@ -36,9 +36,7 @@ spec:
               - configMapRef:
                   name: env-vars
             env:
-              ADVERTISE_IP: "http://${CONFIG_MAIN_SVC_PLEX_ADDR}:32400,https://{{ .Release.Name }}.${SECRET_DOMAIN_NAME}:443"
-              ALLOWED_NETWORKS: "10.0.0.0/8"
-              HOSTNAME: "plex-k8s"
+              HOSTNAME: "Home"
             probes:
               liveness: &probes
                 enabled: true
