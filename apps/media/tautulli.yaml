@@ -59,14 +59,14 @@ spec:
         globalMounts:
           - path: /config
     service:
-      overseerr:
+      tautulli:
         controller: *app
         ports:
           http:
             port: 80
             targetPort: *port
     ingress:
-      overseerr:
+      tautulli:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           gethomepage.dev/enabled: "true"
