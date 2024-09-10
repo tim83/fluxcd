@@ -30,6 +30,7 @@ spec:
           speedtest-tracker:
             image:
               repository: lscr.io/linuxserver/speedtest-tracker
+              # renovate: datasource=docker depName=lscr.io/linuxserver/speedtest-tracker
               tag: 0.21.2
             env:
               TZ: Europe/Brussels

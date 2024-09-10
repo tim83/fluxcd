@@ -30,6 +30,7 @@ spec:
           plex:
             image:
               repository: lscr.io/linuxserver/plex
+              # renovate: datasource=docker depName=lscr.io/linuxserver/plex
               tag: 1.40.5
             envFrom:
               - configMapRef:

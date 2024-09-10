@@ -30,6 +30,7 @@ spec:
           qbittorrent:
             image:
               repository: lscr.io/linuxserver/qbittorrent
+              # renovate: datasource=docker depName=lscr.io/linuxserver/qbittorrent
               tag: 20.04.1
             envFrom:
               - configMapRef:
