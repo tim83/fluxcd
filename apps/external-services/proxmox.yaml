@@ -25,7 +25,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: "Proxmox ThinkCentre"
+    gethomepage.dev/name: "Proxmox Cluster"
     gethomepage.dev/description: "Virtualization Server"
     gethomepage.dev/group: "Admin"
     gethomepage.dev/icon: "proxmox"
