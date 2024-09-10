@@ -21,8 +21,8 @@ ingress:
   # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
   # issues. If hello.example.com resolves and tunnel.example.com does not, then the problem is
   # in the connection from cloudflared to your local service, not from the internet to cloudflared.
-  - hostname: requests.mees-olivier.com
-    service: https://overseerr.media:443
+  - hostname: request.mees-olivier.com
+    service: http://overseerr.media:80
   - hostname: kuma.mees-olivier.com
     service: http://uptime-kuma.kuma:3001
   # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
