@@ -10,9 +10,9 @@ spec:
   externalName: truenas.fritz.box
   ports:
     - name: http
-      port: 81
+      port: 80
     - name: https
-      port: 444
+      port: 443
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
