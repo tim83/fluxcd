@@ -11,6 +11,7 @@ resources:
   - overseerr.yaml
   - plex.yaml
   - jellyfin.yaml
+  - tautulli.yaml
 
 configMapGenerator:
   - name: env-vars
