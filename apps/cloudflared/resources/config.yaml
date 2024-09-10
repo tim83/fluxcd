@@ -24,6 +24,6 @@ ingress:
   - hostname: requests.mees-olivier.com
     service: https://overseerr.media:443
   - hostname: kuma.mees-olivier.com
-    service: https://kuma.media:443
+    service: http://uptime-kuma.kuma:3001
   # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
   - service: http_status:404
