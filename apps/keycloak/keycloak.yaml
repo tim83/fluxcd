@@ -39,3 +39,7 @@ spec:
         - secretName: keycloak-tls
           hosts:
             - *host
+  auth:
+    adminUser: admin
+    existingSecret: keycloak-admin
+    passwordSecretKey: password
