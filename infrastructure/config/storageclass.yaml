@@ -12,17 +12,3 @@ reclaimPolicy: Retain
 volumeBindingMode: Immediate
 mountOptions:
   - nolock
----
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: longhorn
-  annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
-provisioner: driver.longhorn.io
-allowVolumeExpansion: true
-parameters:
-  numberOfReplicas: "3"
-  staleReplicaTimeout: "2880" # 48 hours in minutes
-  fromBackup: nfs://192.168.30.1:/mnt/pool-1/k8s/longhorn
-  fsType: "ext4"
