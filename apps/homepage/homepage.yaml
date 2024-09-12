@@ -34,7 +34,7 @@ spec:
       main:
         enabled: true
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          cert-manager.io/cluster-issuer: "letsencrypt-staging"
         hosts:
           - host: homepage.mees-olivier.com
             paths:

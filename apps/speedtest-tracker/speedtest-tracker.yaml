@@ -90,7 +90,7 @@ spec:
     ingress:
       speedtest-tracker:
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          cert-manager.io/cluster-issuer: "letsencrypt-staging"
           gethomepage.dev/enabled: "true"
           gethomepage.dev/name: "Speedtest"
           gethomepage.dev/description: "Internet speed tracker"
