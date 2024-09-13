@@ -13,4 +13,3 @@ resources:
   - monitoring
   - speedtest-tracker
   - keycloak
-  - uptime-kuma.yaml
