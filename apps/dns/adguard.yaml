@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: adguard/adguardhome
-              # renovate: datasource=docker depName=adguard/adguardhome
+              # renovate: datasource=docker depName=adguard/adguardhome versioning=docker
               tag: v0.107.52
             probes:
               liveness: &probes

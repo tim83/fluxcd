@@ -30,7 +30,7 @@ spec:
           sonarr:
             image:
               repository: lscr.io/linuxserver/sonarr
-              # renovate: datasource=docker depName=lscr.io/linuxserver/sonarr
+              # renovate: datasource=docker depName=lscr.io/linuxserver/sonarr versioning=docker
               tag: 5.14
             envFrom:
               - configMapRef:

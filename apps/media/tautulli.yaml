@@ -30,7 +30,7 @@ spec:
           tautulli:
             image:
               repository: lscr.io/linuxserver/tautulli
-              # renovate: datasource=docker depName=lscr.io/linuxserver/tautulli
+              # renovate: datasource=docker depName=lscr.io/linuxserver/tautulli versioning=docker
               tag: 2.14.4
             envFrom:
               - configMapRef:
