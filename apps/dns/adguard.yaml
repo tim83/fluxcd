@@ -23,6 +23,7 @@ spec:
   values:
     controllers:
       adguard-home:
+        type: statefulset
         replicas: 1
         strategy: RollingUpdate
         containers:

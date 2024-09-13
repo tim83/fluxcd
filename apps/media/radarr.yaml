@@ -26,6 +26,7 @@ spec:
   values:
     controllers:
       radarr:
+        type: statefulset
         containers:
           radarr:
             image:
