@@ -74,7 +74,7 @@ spec:
     ingress:
       radarr:
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-staging"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
           gethomepage.dev/enabled: "true"
           gethomepage.dev/name: "Radarr"
           gethomepage.dev/description: "Movie Downloader"

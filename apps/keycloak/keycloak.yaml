@@ -28,7 +28,7 @@ spec:
       enabled: true
       hostname: &host keycloak.mees-olivier.com
       annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-staging"
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: "Keycloak"
         gethomepage.dev/description: "Single Sign On"

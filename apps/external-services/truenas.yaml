@@ -19,7 +19,7 @@ kind: Ingress
 metadata:
   name: truenas
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "TrueNAS Scale"
     gethomepage.dev/description: "Storage Server"

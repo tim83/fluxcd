@@ -40,7 +40,7 @@ spec:
       host: longhorn.mees-olivier.com
       tls: true
       annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-staging"
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: "Longhorn"
         gethomepage.dev/description: "Volume storage manager"
