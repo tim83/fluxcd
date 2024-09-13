@@ -6,3 +6,4 @@ resources:
   - metallb-ips.yaml
   - storageclass.yaml
   - traefik.yaml
+  - longhorn-backups.yaml
