@@ -31,7 +31,7 @@ spec:
             image:
               repository: lscr.io/linuxserver/radarr
               # renovate: datasource=docker depName=lscr.io/linuxserver/radarr
-              tag: 5.9.1
+              tag: 5.14
             envFrom:
               - configMapRef:
                   name: env-vars
