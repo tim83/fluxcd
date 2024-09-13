@@ -26,7 +26,6 @@ spec:
   values:
     controllers:
       overseerr:
-        type: statefulset
         containers:
           overseerr:
             image:

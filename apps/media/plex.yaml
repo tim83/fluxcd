@@ -26,7 +26,6 @@ spec:
   values:
     controllers:
       plex:
-        type: statefulset
         containers:
           plex:
             image:
