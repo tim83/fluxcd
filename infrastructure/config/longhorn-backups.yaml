@@ -21,7 +21,6 @@ spec:
   task: "snapshot"
   groups:
     - default
-  retain: 48
   concurrency: 2
 ---
 apiVersion: longhorn.io/v1beta1
@@ -34,6 +33,6 @@ spec:
   task: "backup"
   groups:
     - default
-  retain: 48
+  retain: 60
   concurrency: 2
   full-backup-interval: 30
