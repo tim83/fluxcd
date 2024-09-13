@@ -50,10 +50,11 @@ spec:
               readiness: *probes
             resources:
               requests:
-                cpu: 100m
-                memory: 2Gi
+                cpu: 700m
+                memory: 5Gi
               limits:
-                memory: 10Gi
+                cpu: 700m
+                memory: 5Gi
     persistence:
       config:
         type: persistentVolumeClaim
