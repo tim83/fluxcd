@@ -4,7 +4,7 @@ metadata:
   name: uptime-kuma
 spec:
   type: ExternalName
-  externalName: serverpi-tim.local
+  externalName: 192.168.20.3
   ports:
     - name: http
       port: 3001
