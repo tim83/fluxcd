@@ -35,5 +35,3 @@ spec:
     - default
   retain: 60
   concurrency: 2
-  labels:
-    full-backup-interval: "30"
