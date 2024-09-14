@@ -10,7 +10,7 @@ resources:
   - bazarr.yaml
   - overseerr.yaml
   - plex.yaml
-  - jellyfin.yaml
+  # - jellyfin.yaml
   - tautulli.yaml
 
 configMapGenerator:
