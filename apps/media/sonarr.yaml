@@ -31,7 +31,7 @@ spec:
             image:
               repository: lscr.io/linuxserver/sonarr
               # renovate: datasource=docker depName=lscr.io/linuxserver/sonarr versioning=docker
-              tag: 5.14
+              tag: 4.0.9
             envFrom:
               - configMapRef:
                   name: env-vars
