@@ -1,7 +1,7 @@
 resources:
   - namespace.yaml
   - blocky.yaml
-  - adguard.yaml
+  # - adguard.yaml
 
 namespace: dns
 commonLabels:
