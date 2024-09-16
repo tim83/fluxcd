@@ -107,13 +107,13 @@ spec:
       config:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        size: 300Mi
+        size: 1Gi
         globalMounts:
           - path: /opt/adguardhome/conf
       work:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        size: 300Mi
+        size: 1Gi
         globalMounts:
           - path: /opt/adguardhome/work
     ingress:
