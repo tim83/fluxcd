@@ -24,9 +24,10 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    defaultPodOptions:
+      priorityClassName: high-priority
     controllers:
       plex:
-        priorityClassName: high-priority
         containers:
           plex:
             image:

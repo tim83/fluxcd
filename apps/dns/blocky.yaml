@@ -21,11 +21,12 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    defaultPodOptions:
+      priorityClassName: high-priority
     controllers:
       blocky:
         replicas: 2
         strategy: RollingUpdate
-        priorityClassName: high-priority
         containers:
           app:
             image:
