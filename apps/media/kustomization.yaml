@@ -3,13 +3,13 @@ kind: Kustomization
 namespace: media
 resources:
   - namespace.yaml
-  # - radarr.yaml
+  - radarr.yaml
   - sonarr.yaml
-  # - qbittorrent.yaml
+  - qbittorrent.yaml
   - prowlarr.yaml
-  # - bazarr.yaml
+  - bazarr.yaml
   - overseerr.yaml
-  # - plex.yaml
+  - plex.yaml
   # - jellyfin.yaml
   - tautulli.yaml
 
