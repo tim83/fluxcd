@@ -25,6 +25,7 @@ spec:
       adguard-home:
         replicas: 1
         strategy: RollingUpdate
+        priorityClassName: high-priority
         containers:
           app:
             image:

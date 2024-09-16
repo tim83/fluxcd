@@ -25,6 +25,7 @@ spec:
       blocky:
         replicas: 2
         strategy: RollingUpdate
+        priorityClassName: high-priority
         containers:
           app:
             image:

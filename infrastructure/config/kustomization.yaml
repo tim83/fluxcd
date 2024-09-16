@@ -7,3 +7,4 @@ resources:
   - storageclass.yaml
   - traefik.yaml
   - longhorn-backups.yaml
+  - prioritizations.yaml

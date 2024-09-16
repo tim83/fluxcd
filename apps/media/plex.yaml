@@ -26,6 +26,7 @@ spec:
   values:
     controllers:
       plex:
+        priorityClassName: high-priority
         containers:
           plex:
             image:
