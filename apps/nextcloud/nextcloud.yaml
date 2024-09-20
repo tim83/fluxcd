@@ -77,6 +77,18 @@ spec:
               value: nextcloud-redis-master
             - name: REDIS_HOST_PORT
               value: "6379"
+        - name: chmod-data-dir
+          image: alpine
+          command:
+          - chmod
+          - 0770
+          - /var/www/data
+          securityContext:
+            runAsUser: 0
+            privileged: true
+          volumeMounts:
+          - name: nextcloud-data
+            mountPath: /var/www/data
     nginx:
       enabled: true
     internalDatabase:
