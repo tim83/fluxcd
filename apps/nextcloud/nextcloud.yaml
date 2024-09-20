@@ -21,6 +21,13 @@ spec:
       flavor: fpm-alpine
     ingress:
       enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "Nextcloud"
+        gethomepage.dev/description: "Cloud file storage"
+        gethomepage.dev/group: "User"
+        gethomepage.dev/icon: *app
       tls:
         - hosts:
             - &host nextcloud.meesolivier.com
