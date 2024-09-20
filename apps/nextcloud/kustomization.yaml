@@ -7,4 +7,3 @@ resources:
   - nextcloud.yaml
 
 namespace: nextcloud
-

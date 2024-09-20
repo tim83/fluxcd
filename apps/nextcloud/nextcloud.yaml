@@ -33,7 +33,7 @@ spec:
       datadir: /var/www/data
       extraEnv:
         - name: REDIS_HOST
-          value: redis
+          value: nextcloud-redis-master
         - name: REDIS_HOST_PORT
           value: "6379"
         - name: REDIS_HOST_PASSWORD
@@ -69,7 +69,7 @@ spec:
               done
           env:
             - name: REDIS_HOST
-              value: redis
+              value: nextcloud-redis-master
             - name: REDIS_HOST_PORT
               value: "6379"
     nginx:
