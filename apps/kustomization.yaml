@@ -13,3 +13,4 @@ resources:
   - monitoring
   - speedtest-tracker
   - keycloak
+  - nextcloud

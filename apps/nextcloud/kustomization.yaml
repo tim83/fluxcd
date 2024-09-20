@@ -1,0 +1,10 @@
+resources:
+  - namespace.yaml
+  - database.yaml
+  - secret.yaml
+  - helmrelease.yaml
+  - volume.yaml
+  - nextcloud.yaml
+
+namespace: nextcloud
+
