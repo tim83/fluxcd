@@ -30,7 +30,7 @@ spec:
         gethomepage.dev/icon: *app
       tls:
         - hosts:
-            - &host nextcloud.meesolivier.com
+            - &host nextcloud.mees-olivier.com
           secretName: nextcloud-tls
     nextcloud:
       host: *host
