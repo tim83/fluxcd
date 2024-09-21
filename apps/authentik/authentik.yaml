@@ -40,6 +40,9 @@ spec:
           secret:
             secretName: authentik-secrets
       volumeMounts: &secret-volume-mounts
+        - name: postgresql-credentials
+          mountPath: /postgresql-credentials
+          readOnly: true
         - name: authentik-secrets
           mountPath: /authentik-secrets
           readOnly: true
