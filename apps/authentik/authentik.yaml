@@ -31,14 +31,29 @@ spec:
         redis:
           enabled: true
     server:
-      volumes:
+      volumes: &secret-volumes
         - name: postgresql-credentials
           secret:
             secretName: postgresql-app
-      volumeMounts:
+      volumeMounts: &secret-volume-mounts
         - name: postgresql-credentials
           mountPath: /postgresql-credentials
           readOnly: true
+      initContainers: &wait-depedencies
+        - name: wait-database
+          image: alpine
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+          args:
+            - -c
+            - >-
+              until nc -w 1 -v $MYSQL_HOST:3306 || nc -w 1 -v $POSTGRES_HOST:5432;
+              do echo "Waiting for database";
+              done
+          env:
+            - name: POSTGRES_HOST
+              value: postgresql-r
       autoscaling:
         enabled: true
         minReplicas: 2
@@ -60,26 +75,6 @@ spec:
       autoscaling:
         enabled: true
         minReplicas: 2
-      volumes:
-        - name: postgresql-credentials
-          secret:
-            secretName: postgresql-app
-      volumeMounts:
-        - name: postgresql-credentials
-          mountPath: /postgresql-credentials
-          readOnly: true
-    initContainers:
-      - name: wait-database
-        image: alpine
-        imagePullPolicy: IfNotPresent
-        command:
-          - sh
-        args:
-          - -c
-          - >-
-            until nc -w 1 -v $MYSQL_HOST:3306 || nc -w 1 -v $POSTGRES_HOST:5432;
-            do echo "Waiting for database";
-            done
-        env:
-          - name: POSTGRES_HOST
-            value: postgresql-r
+      volumes: *secret-volumes
+      volumeMounts: *secret-volume-mounts
+      initContainers: *wait-depedencies
