@@ -82,7 +82,7 @@ spec:
           command:
           - chmod
           args:
-          - 0770
+          - "0770"
           - /var/www/data
           securityContext:
             runAsUser: 0
