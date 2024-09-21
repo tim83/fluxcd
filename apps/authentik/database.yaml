@@ -3,7 +3,7 @@ kind: Cluster
 metadata:
   name: postgresql
 spec:
-  instances: 1
+  instances: 2
   storage:
     size: 3Gi
   bootstrap:
