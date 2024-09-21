@@ -84,9 +84,6 @@ spec:
           args:
           - "0770"
           - /var/www/data
-          securityContext:
-            runAsUser: 0
-            privileged: true
           volumeMounts:
           - name: nextcloud-data
             mountPath: /var/www/data
