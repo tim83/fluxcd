@@ -24,7 +24,7 @@ spec:
       deploymentStrategy:
         type: RollingUpdate
     authentik:
-      secret_key: file:///secrets/secret-key
+      secret_key: file:///authentik-secrets/secret-key
       postgresql:
         host: postgresql-rw
         user: file:///postgresql-credentials/username
@@ -41,7 +41,7 @@ spec:
             secretName: authentik-secrets
       volumeMounts: &secret-volume-mounts
         - name: authentik-secrets
-          mountPath: /secrets
+          mountPath: /authentik-secrets
           readOnly: true
       initContainers: &wait-depedencies
         - name: wait-database
