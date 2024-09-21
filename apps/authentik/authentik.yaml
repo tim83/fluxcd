@@ -1,0 +1,78 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authentik
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: authentik
+      version: 2024.8.2
+      sourceRef:
+        kind: HelmRepository
+        name: authentik
+  values:
+    global:
+      deploymentStrategy:
+        type: RollingUpdate
+    authentik:
+      postgresql:
+        host: postgresql-rw
+        user: file:///postgresql-credentials/username
+        password: file:///postgresql-credentials//password
+        redis:
+          enabled: true
+    server:
+      volumes:
+        - name: postgresql-credentials
+          secret:
+            secretName: postgresql-app
+      volumeMounts:
+        - name: postgresql-credentials
+          mountPath: /postgresql-credentials
+          readOnly: true
+      autoscaling:
+        enabled: true
+        minReplicas: 2
+      metrics:
+        prometheus:
+          serviceMonitor:
+            enabled: true
+      ingress:
+        enabled: true
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: *app
+          gethomepage.dev/name: Authentik
+          gethomepage.dev/group: User
+          gethomepage.dev/description: Account Management
+        hosts:
+          - authentik.mees-olivier.com
+    worker:
+      autoscaling:
+        enabled: true
+        minReplicas: 2
+      volumes:
+        - name: postgresql-credentials
+          secret:
+            secretName: postgresql-app
+      volumeMounts:
+        - name: postgresql-credentials
+          mountPath: /postgresql-credentials
+          readOnly: true
+    initContainers:
+      - name: wait-database
+        image: alpine
+        imagePullPolicy: IfNotPresent
+        command:
+          - sh
+        args:
+          - -c
+          - >-
+            until nc -w 1 -v $MYSQL_HOST:3306 || nc -w 1 -v $POSTGRES_HOST:5432;
+            do echo "Waiting for database";
+            done
+        env:
+          - name: POSTGRES_HOST
+            value: postgresql-r
