@@ -40,7 +40,9 @@ spec:
     authentik:
       secret_key: file:///authentik-secrets/secret-key
       postgresql:
-        host: postgresql-rw
+        host: file:///postgresql-credentials/host
+        port: file:///postgresql-credentials/port
+        name: file:///postgresql-credentials/dbname
         user: file:///postgresql-credentials/username
         password: file:///postgresql-credentials/password
         redis:
