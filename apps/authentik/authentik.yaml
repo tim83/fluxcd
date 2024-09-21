@@ -58,9 +58,7 @@ spec:
         enabled: true
         minReplicas: 2
       metrics:
-        prometheus:
-          serviceMonitor:
-            enabled: true
+        enabled: true
       ingress:
         enabled: true
         annotations:
