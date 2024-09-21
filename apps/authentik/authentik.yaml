@@ -42,9 +42,11 @@ spec:
       postgresql:
         host: postgresql-rw
         user: file:///postgresql-credentials/username
-        password: file:///postgresql-credentials//password
+        password: file:///postgresql-credentials/password
         redis:
           enabled: true
+    redis:
+      enabled: true
     server:
       initContainers: &wait-depedencies
         - name: wait-database
