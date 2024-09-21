@@ -60,7 +60,7 @@ spec:
               value: postgresql-r
       autoscaling:
         enabled: true
-        minReplicas: 2
+        minReplicas: &num-replicas 1
       metrics:
         enabled: true
       ingress:
@@ -76,7 +76,7 @@ spec:
     worker:
       autoscaling:
         enabled: true
-        minReplicas: 2
+        minReplicas: *num-replicas
       volumes: *secret-volumes
       volumeMounts: *secret-volume-mounts
       initContainers: *wait-depedencies
