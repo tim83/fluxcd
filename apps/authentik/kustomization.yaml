@@ -1,6 +1,7 @@
 resources:
   - namespace.yaml
   - database.yaml
+  - secret.yaml
   - authentik.yaml
 
 namespace: authentik
