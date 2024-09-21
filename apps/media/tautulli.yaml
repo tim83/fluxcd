@@ -31,7 +31,7 @@ spec:
             image:
               repository: lscr.io/linuxserver/tautulli
               # renovate: datasource=docker depName=lscr.io/linuxserver/tautulli versioning=docker
-              tag: 2.14.4
+              tag: 2.14.5
             envFrom:
               - configMapRef:
                   name: env-vars
