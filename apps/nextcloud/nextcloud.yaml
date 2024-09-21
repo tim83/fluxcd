@@ -81,6 +81,7 @@ spec:
           image: alpine
           command:
           - chmod
+          args:
           - 0770
           - /var/www/data
           securityContext:
