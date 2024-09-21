@@ -23,6 +23,20 @@ spec:
     global:
       deploymentStrategy:
         type: RollingUpdate
+      volumes:
+        - name: postgresql-credentials
+          secret:
+            secretName: postgresql-app
+        - name: authentik-secrets
+          secret:
+            secretName: authentik-secrets
+      volumeMounts:
+        - name: postgresql-credentials
+          mountPath: /postgresql-credentials
+          readOnly: true
+        - name: authentik-secrets
+          mountPath: /authentik-secrets
+          readOnly: true
     authentik:
       secret_key: file:///authentik-secrets/secret-key
       postgresql:
@@ -32,20 +46,6 @@ spec:
         redis:
           enabled: true
     server:
-      volumes: &secret-volumes
-        - name: postgresql-credentials
-          secret:
-            secretName: postgresql-app
-        - name: authentik-secrets
-          secret:
-            secretName: authentik-secrets
-      volumeMounts: &secret-volume-mounts
-        - name: postgresql-credentials
-          mountPath: /postgresql-credentials
-          readOnly: true
-        - name: authentik-secrets
-          mountPath: /authentik-secrets
-          readOnly: true
       initContainers: &wait-depedencies
         - name: wait-database
           image: alpine
@@ -80,6 +80,4 @@ spec:
       autoscaling:
         enabled: true
         minReplicas: *num-replicas
-      volumes: *secret-volumes
-      volumeMounts: *secret-volume-mounts
       initContainers: *wait-depedencies
