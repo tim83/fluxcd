@@ -79,7 +79,11 @@ spec:
           gethomepage.dev/group: User
           gethomepage.dev/description: Account Management
         hosts:
-          - authentik.mees-olivier.com
+          - &host authentik.mees-olivier.com
+        tls:
+          - secretName: authentik-tls
+            hosts:
+              - *host
     worker:
       autoscaling:
         enabled: true
