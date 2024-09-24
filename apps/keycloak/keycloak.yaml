@@ -1,0 +1,15 @@
+apiVersion: glasskube.eu/v1alpha1
+kind: Keycloak
+metadata:
+  name: keycloak
+spec:
+  host: keycloak.mees-olivier.com
+  management:
+    enabled: true
+  smtp:
+    host: smtp.sendgrid.net
+    port: 587
+    fromAddress: Keycloak <noreply+keycloak@em8655.mees-olivier.com>
+    authSecret:
+      name: smtp-secret
+    tlsEnabled: true
