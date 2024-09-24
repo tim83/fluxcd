@@ -31,7 +31,7 @@ spec:
             image:
               repository: lscr.io/linuxserver/overseerr
               # renovate: datasource=docker depName=lscr.io/linuxserver/overseerr versioning=docker
-              tag: 1.33.2
+              tag: 2021.12.12
             envFrom:
               - configMapRef:
                   name: env-vars
