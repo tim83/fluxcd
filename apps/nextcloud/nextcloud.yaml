@@ -8,6 +8,11 @@ spec:
   apps:
     office:
       host: office.nextcloud.mees-olivier.com
+    oidc:
+      name: Keycloak
+      issuerUrl: https://keycloak.mees-olivier.com
+      oidcSecret:
+        name: oidc-login
   smtp:
     host: smtp.sendgrid.net
     port: 587
@@ -15,3 +20,4 @@ spec:
     authSecret:
       name: smtp-secret
     tlsEnabled: true
+  
