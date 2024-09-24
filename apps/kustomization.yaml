@@ -12,5 +12,5 @@ resources:
   - speedtest-tracker
   - keycloak.yaml
   - nextcloud.yaml
-  - authentik
+  # - authentik
   
