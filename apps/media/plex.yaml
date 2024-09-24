@@ -61,7 +61,7 @@ spec:
       config:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        size: 60Gi
+        size: 50Gi
         globalMounts:
           - path: /config
       media:
@@ -81,7 +81,7 @@ spec:
       cache:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        size: 60Gi
+        size: 30Gi
         globalMounts:
           - path: /config/Library/Application Support/Plex Media Server/Cache
     service:
