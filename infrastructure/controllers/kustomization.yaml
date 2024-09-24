@@ -7,3 +7,5 @@ resources:
   - cnpg.yaml
   - traefik.yaml
   - longhorn.yaml
+  - minio.yaml
+  - prometheus.yaml

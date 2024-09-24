@@ -4,13 +4,11 @@ configurations:
   - kustomizeconfig.yaml
 resources:
   - helmrepos.yaml
-  - minio.yaml
   - homepage
   - external-services
   - media
   - cloudflared
   - dns
-  - monitoring
   - speedtest-tracker
   - keycloak
   - nextcloud
