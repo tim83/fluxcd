@@ -6,10 +6,3 @@ spec:
   host: keycloak.mees-olivier.com
   management:
     enabled: true
-  smtp:
-    host: smtp.sendgrid.net
-    port: 587
-    fromAddress: Keycloak <noreply+keycloak@em8655.mees-olivier.com>
-    authSecret:
-      name: smtp-secret
-    tlsEnabled: true
