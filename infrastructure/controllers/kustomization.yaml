@@ -7,5 +7,6 @@ resources:
   - cnpg.yaml
   - traefik.yaml
   - longhorn.yaml
-  - minio.yaml
+  # - minio.yaml # -> already installed by glasskube
+  - glasskube.yaml
   - prometheus.yaml
