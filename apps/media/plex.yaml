@@ -33,7 +33,7 @@ spec:
             image:
               repository: lscr.io/linuxserver/plex
               # renovate: datasource=docker depName=lscr.io/linuxserver/plex versioning=docker
-              tag: 1.40.0
+              tag: 1.41.0
             envFrom:
               - configMapRef:
                   name: env-vars
