@@ -27,8 +27,3 @@ spec:
         kind: HelmRepository
         name: glasskube
         namespace: glasskube
-  values:
-    minio:
-      enabled: true
-    mariadb-operator:
-      enabled: true
