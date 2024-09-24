@@ -1,8 +1,0 @@
-resources:
-  - namespace.yaml
-  - database.yaml
-  - secret.yaml
-  - keycloak.yaml
-
-namespace: keycloak
-

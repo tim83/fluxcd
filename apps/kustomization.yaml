@@ -10,6 +10,6 @@ resources:
   - cloudflared
   - dns
   - speedtest-tracker
-  - keycloak
-  - nextcloud
+  - keycloak.yaml
+  - nextcloud.yaml
   - authentik

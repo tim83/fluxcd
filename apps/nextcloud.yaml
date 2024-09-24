@@ -1,0 +1,10 @@
+apiVersion: glasskube.eu/v1alpha1
+kind: Nextcloud
+metadata:
+  name: nextcloud
+spec:
+  host: nextcloud.mees-olivier.com
+  defaultPhoneRegion: BE
+  apps:
+    office:
+      host: office.nextcloud.mees-olivier.com
