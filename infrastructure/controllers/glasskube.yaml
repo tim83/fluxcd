@@ -21,8 +21,8 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: glasskube
-      version: "6.0.x"
+      chart: glasskube-operator
+      version: "0.12.x"
       sourceRef:
         kind: HelmRepository
         name: glasskube
