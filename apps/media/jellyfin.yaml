@@ -28,7 +28,7 @@ spec:
           readOnly: true # is this volume readonly ? (optional, default true)
           volumeSpec: # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#persistentvolumespec-v1-core
             accessModes:
-              - ReadWriteMany
+              - ReadWriteOnce
             capacity:
               storage: 3Ti
             nfs:
