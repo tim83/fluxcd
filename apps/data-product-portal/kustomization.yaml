@@ -4,3 +4,5 @@ namespace: data-product-portal
 resources:
   - data-product-portal.yaml
   - kestra.yaml
+  - secret.yaml
+  - database.yaml
