@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: *app
-          image: ghcr.io/timDatashift/data-product-portal:main
+          image: ghcr.io/timdatashift/data-product-portal:main
           resources:
             requests:
               memory: 64Mi
