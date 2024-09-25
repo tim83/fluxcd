@@ -5,3 +5,4 @@ resources:
   - namespace.yaml
   - django
   - kestra.yaml
+  - github-runner.yaml
