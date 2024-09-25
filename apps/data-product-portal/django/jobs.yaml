@@ -8,6 +8,8 @@ spec:
   backoffLimit: 15
   template:
     spec:
+      imagePullSecrets:
+        - name: ghcr-auth
       containers:
         - name: migration-container
           image: ghcr.io/timdatashift/data-product-portal:main
@@ -53,6 +55,8 @@ spec:
   backoffLimit: 3
   template:
     spec:
+      imagePullSecrets:
+        - name: ghcr-auth
       volumes:
         - name: staticfiles
           persistentVolumeClaim:
