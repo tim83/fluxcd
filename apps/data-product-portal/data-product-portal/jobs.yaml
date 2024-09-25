@@ -1,0 +1,96 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-db-migrations
+spec:
+  ttlSecondsAfterFinished: 100
+  activeDeadlineSeconds: 60
+  backoffLimit: 15
+  template:
+    spec:
+      containers:
+        - name: migration-container
+          image: ghcr.io/timdatashift/data-product-portal:main
+          imagePullPolicy: Always
+          command: ["python", "manage.py", "migrate"]
+          env:
+            - name: DJANGO_STATIC_ROOT
+              value: "/app/static"
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: data-product-portal-secret
+                  key: secret_key
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: data-product-portal-db-app
+                  key: host
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: data-product-portal-db-app
+                  key: dbname
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: data-product-portal-db-app
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: data-product-portal-db-app
+                  key: password
+      restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-collect-static
+spec:
+  ttlSecondsAfterFinished: 100
+  activeDeadlineSeconds: 60
+  backoffLimit: 3
+  template:
+    spec:
+      volumes:
+        - name: staticfiles
+          persistentVolumeClaim:
+            claimName: staticfiles-pvc
+      containers:
+        - name: migration-container
+          image: ghcr.io/timdatashift/data-product-portal:main
+          imagePullPolicy: Always
+          command: ["python", "manage.py", "migrate"]
+          env:
+            - name: DJANGO_STATIC_ROOT
+              value: "/app/static"
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: data-product-portal-secret
+                  key: secret_key
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: data-product-portal-db-app
+                  key: host
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: data-product-portal-db-app
+                  key: dbname
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: data-product-portal-db-app
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: data-product-portal-db-app
+                  key: password
+          volumeMounts:
+            - mountPath: "/app/static"
+              name: staticfiles
+      restartPolicy: OnFailure

@@ -11,9 +11,14 @@ spec:
       labels:
         app: *app
     spec:
+      volumes:
+        - name: staticfiles
+          persistentVolumeClaim:
+            claimName: staticfiles-pvc
       containers:
         - name: *app
           image: ghcr.io/timdatashift/data-product-portal:main
+          imagePullPolicy: Always
           resources:
             requests:
               memory: 64Mi
@@ -24,6 +29,8 @@ spec:
           ports:
             - containerPort: &port 8000
           env:
+            - name: DJANGO_STATIC_ROOT
+              value: "/app/static"
             - name: DJANGO_SECRET_KEY
               valueFrom:
                 secretKeyRef:
@@ -61,3 +68,6 @@ spec:
               port: *port
             failureThreshold: 30
             periodSeconds: 10
+          volumeMounts:
+            - mountPath: "/app/static"
+              name: staticfiles
