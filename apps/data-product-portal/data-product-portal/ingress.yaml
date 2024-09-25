@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &app data-product-portal
+  labels:
+    name: *app
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+spec:
+  rules:
+    - host: &host data-product-portal.mees-olivier.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: *app
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - *host
+      secretName: data-product-portal-tls
