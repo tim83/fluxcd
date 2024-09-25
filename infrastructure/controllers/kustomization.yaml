@@ -10,3 +10,4 @@ resources:
   # - minio.yaml # -> already installed by glasskube
   - glasskube.yaml
   - prometheus.yaml
+  - github
