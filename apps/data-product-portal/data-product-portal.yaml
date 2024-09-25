@@ -48,7 +48,7 @@ metadata:
   labels:
     name: *app
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
 spec:
   rules:
     - host: &host data-product-portal.mees-olivier.com

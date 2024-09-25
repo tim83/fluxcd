@@ -44,7 +44,7 @@ spec:
     ingress:
       enabled: true
       annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        cert-manager.io/cluster-issuer: "letsencrypt-staging"
       hosts:
         - host: &host kestra.mees-olivier.com
           paths:
