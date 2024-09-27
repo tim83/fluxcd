@@ -26,6 +26,15 @@ spec:
   values:
     defaultPodOptions:
       priorityClassName: high-priority
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: name
+                  operator: In
+                  values:
+                    - talos-home-hybrid-20
     controllers:
       plex:
         containers:
