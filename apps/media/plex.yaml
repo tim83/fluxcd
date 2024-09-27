@@ -70,7 +70,7 @@ spec:
       config:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        size: 50Gi
+        size: 60Gi
         globalMounts:
           - path: /config
       media:
