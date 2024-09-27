@@ -35,17 +35,17 @@ spec:
             envFrom:
               - configMapRef:
                   name: env-vars
-            # probes:
-            #   liveness: &probes
-            #     enabled: true
-            #     custom: true
-            #     spec:
-            #       tcpSocket:
-            #         port: &port 8080
-            #       initialDelaySeconds: 15
-            #       periodSeconds: 30
-            #       failureThreshold: 3
-            #   readiness: *probes
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: &port 8080
+                  initialDelaySeconds: 15
+                  periodSeconds: 30
+                  failureThreshold: 3
+              readiness: *probes
             resources:
               requests:
                 cpu: 10m
@@ -71,7 +71,7 @@ spec:
         ports:
           http:
             port: 80
-            targetPort: &port 8080
+            targetPort: *port
       torrent:
         controller: *app
         type: LoadBalancer
