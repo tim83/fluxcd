@@ -88,7 +88,9 @@ spec:
         globalMounts:
           - path: /config/Library/Application Support/Plex Media Server/Logs
       cache:
-        type: emptyDir
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 30Gi
         globalMounts:
           - path: /config/Library/Application Support/Plex Media Server/Cache
     service:
