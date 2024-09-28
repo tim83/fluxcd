@@ -12,6 +12,7 @@ resources:
   - plex.yaml
   # - jellyfin.yaml
   - tautulli.yaml
+  - transmission.yaml
 
 configMapGenerator:
   - name: env-vars
