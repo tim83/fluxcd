@@ -51,7 +51,7 @@ spec:
                 custom: true
                 spec:
                   tcpSocket:
-                    port: &port
+                    port: *port
                   periodSeconds: 15
                   failureThreshold: 30
             resources:
