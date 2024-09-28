@@ -31,7 +31,7 @@ spec:
             image:
               repository: lscr.io/linuxserver/transmission
               # renovate: datasource=docker depName=lscr.io/linuxserver/qbittorrent versioning=docker
-              tag: 4.0.6
+              tag: 20.04.1
             envFrom:
               - configMapRef:
                   name: env-vars
