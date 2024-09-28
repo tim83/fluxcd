@@ -97,7 +97,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: webui
+                  identifier: *app
                   port: http
         tls:
           - secretName: transmission-tls
