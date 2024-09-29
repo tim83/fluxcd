@@ -49,9 +49,9 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 128Mi
+                memory: 200Mi
               limits:
-                memory: 256Mi
+                memory: 300Mi
     persistence:
       config:
         type: persistentVolumeClaim
