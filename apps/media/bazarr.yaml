@@ -30,7 +30,7 @@ spec:
           bazarr:
             image:
               repository: lscr.io/linuxserver/bazarr
-              # renovate: datasource=docker depName=lscr.io/linuxserver/bazarr versioning=docker
+              # renovate: datasource=github-release depName=lscr.io/linuxserver/bazarr versioning=docker
               tag: 1.4.4
             envFrom:
               - configMapRef:
