@@ -43,7 +43,7 @@ spec:
               repository: lscr.io/linuxserver/plex
               # renovate: datasource=github-release depName=lscr.io/linuxserver/plex versioning=docker
               tag: 1.41.0
-            imagePullPolicy: Always
+              imagePullPolicy: Always
             envFrom:
               - configMapRef:
                   name: env-vars
