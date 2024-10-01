@@ -58,12 +58,13 @@ spec:
                 secretKeyRef:
                   name: data-product-portal-db-app
                   key: password
-          livenessProbe:
+          livenessProbe: &probe
             httpGet:
               path: /health
               port: *port
-            failureThreshold: 1
-            periodSeconds: 10
+            failureThreshold: 3
+            periodSeconds: 5
+          readinessProbe: *probe
           startupProbe:
             httpGet:
               path: /health
