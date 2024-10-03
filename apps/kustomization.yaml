@@ -11,6 +11,5 @@ resources:
   - dns
   # - speedtest-tracker
   - keycloak
-  - data-product-portal
   # - nextcloud
   # - authentik
