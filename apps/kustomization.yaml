@@ -9,7 +9,6 @@ resources:
   - media
   - cloudflared
   - dns
-  # - speedtest-tracker
   - keycloak
   # - nextcloud
   # - authentik
