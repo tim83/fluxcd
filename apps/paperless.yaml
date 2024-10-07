@@ -101,7 +101,7 @@ spec:
             image:
               repository: redis
               # renovate: datasource=docker depName=redis versioning=docker
-              tag: 7.4.0
+              tag: 7.4.1
             resources:
               limits:
                 memory: 50Mi
