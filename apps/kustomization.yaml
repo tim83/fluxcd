@@ -12,3 +12,4 @@ resources:
   - keycloak
   # - nextcloud
   # - authentik
+  - tailscale.yaml
