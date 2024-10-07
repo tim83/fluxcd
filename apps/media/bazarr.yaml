@@ -93,18 +93,3 @@ spec:
           - secretName: bazarr-tls
             hosts:
               - *host
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: bazarr-ts
-spec:
-  defaultBackend:
-    service:
-      name: bazarr
-      port:
-        number: 80
-  ingressClassName: tailscale
-  tls:
-    - hosts:
-        - bazarr

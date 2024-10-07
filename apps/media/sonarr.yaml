@@ -91,18 +91,3 @@ spec:
           - secretName: sonarr-tls
             hosts:
               - *host
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: sonarr-ts
-spec:
-  defaultBackend:
-    service:
-      name: sonarr
-      port:
-        number: 80
-  ingressClassName: tailscale
-  tls:
-    - hosts:
-        - sonarr
