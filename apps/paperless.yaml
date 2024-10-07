@@ -63,6 +63,7 @@ spec:
                   key: password
             image:
               repository: ghcr.io/paperless-ngx/paperless-ngx
+              # renovate: datasource=docker depName=ghcr.io/paperless-ngx/paperless-ngx versioning=docker
               tag: 2.12.1
             probes:
               liveness:
@@ -88,6 +89,7 @@ spec:
               DISABLE_GOOGLE_CHROME: "1"
             image:
               repository: gotenberg/gotenberg
+              # renovate: datasource=docker depName=gotenberg/gotenberg versioning=docker
               tag: 8.11.1
             resources:
               limits:
@@ -98,6 +100,7 @@ spec:
           redis:
             image:
               repository: redis
+              # renovate: datasource=docker depName=redis versioning=docker
               tag: 7.4.0
             resources:
               limits:
@@ -108,6 +111,7 @@ spec:
           tika:
             image:
               repository: ghcr.io/paperless-ngx/tika
+              # renovate: datasource=docker depName=ghcr.io/paperless-ngx/tika versioning=docker
               tag: 2.9.1-minimal
             resources:
               limits:
