@@ -124,18 +124,16 @@ spec:
           - secretName: "{{ .Release.Name }}-tls"
             hosts:
               - *host
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: plex-ts
-spec:
-  defaultBackend:
-    service:
-      name: plex
-      port:
-        number: 32400
-  ingressClassName: tailscale
-  tls:
-    - hosts:
-        - plex
+      plex-ts:
+        ingressClassName: tailscale
+        hosts:
+          - host: &host "{{ .Release.Name }}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: *app
+                  port: http
+        tls:
+          - hosts:
+              - *host
