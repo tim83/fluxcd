@@ -1,17 +1,24 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: paperless
+---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: postgresql
+  name: paperless-db
+  namespace: paperless
 spec:
   instances: 2
   storage:
-    size: 3Gi
+    size: 1Gi
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app paperless-ngx
+  namespace: paperless
 spec:
   interval: 30m
   chart:
@@ -20,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: bjw-s
-        namespace: flux-system
+        namespace: default
       version: 3.5.0
   values:
     controllers:
@@ -38,18 +45,21 @@ spec:
               PAPERLESS_URL: https://paperless.mees-olivier.com
               PAPERLESS_WEBSERVER_WORKERS: 1
               PAPERLESS_DBENGINE: postgresql
-              PAPERLESS_DBHOST: postgresql-tw
+              PAPERLESS_DBHOST:
+                secretKeyRef:
+                  name: paperless-db-app
+                  key: host
               PAPERLESS_DBNAME:
                 secretKeyRef:
-                  name: postgresql-app
+                  name: paperless-db-app
                   key: dbname
               PAPERLESS_DBUSER:
                 secretKeyRef:
-                  name: postgresql-app
+                  name: paperless-db-app
                   key: user
               PAPERLESS_DBPASS:
                 secretKeyRef:
-                  name: postgresql-app
+                  name: paperless-db-app
                   key: password
             image:
               repository: ghcr.io/paperless-ngx/paperless-ngx
