@@ -91,3 +91,18 @@ spec:
           - secretName: transmission-tls
             hosts:
               - *host
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: transmission-ts
+spec:
+  defaultBackend:
+    service:
+      name: transmission
+      port:
+        number: 80
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - transmission
