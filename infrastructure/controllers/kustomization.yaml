@@ -11,3 +11,4 @@ resources:
   - glasskube.yaml
   - prometheus.yaml
   - github
+  - tailscale
