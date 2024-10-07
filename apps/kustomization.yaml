@@ -4,6 +4,7 @@ configurations:
   - kustomizeconfig.yaml
 resources:
   - helmrepos.yaml
+  - paperless.yaml
   - homepage
   - external-services
   - media
