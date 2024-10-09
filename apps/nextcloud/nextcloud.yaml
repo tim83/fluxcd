@@ -3,6 +3,8 @@ kind: Nextcloud
 metadata:
   name: nextcloud
 spec:
+  # renovate: datasource=github-release depName=https://github.com/nextcloud/server/releases
+  version: 30.0.0
   host: nextcloud.mees-olivier.com
   defaultPhoneRegion: BE
   apps:
