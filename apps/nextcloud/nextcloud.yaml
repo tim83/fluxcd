@@ -10,7 +10,7 @@ spec:
       host: office.nextcloud.mees-olivier.com
     oidc:
       name: Keycloak
-      issuerUrl: https://keycloak.mees-olivier.com
+      issuerUrl: https://keycloak.mees-olivier.com/realms/master
       oidcSecret:
         name: oidc-login
   smtp:
