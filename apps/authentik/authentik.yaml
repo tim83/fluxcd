@@ -26,7 +26,7 @@ spec:
       volumes:
         - name: postgresql-credentials
           secret:
-            secretName: postgresql-app
+            secretName: authentik-db-app
         - name: authentik-secrets
           secret:
             secretName: authentik-secrets
