@@ -21,32 +21,33 @@ spec:
         name: goauhtentik
   values:
     global:
-      deploymentStrategy:
-        type: RollingUpdate
-      volumes:
-        - name: postgresql-credentials
-          secret:
-            secretName: authentik-db-app
-        - name: authentik-secrets
-          secret:
-            secretName: authentik-secrets
-      volumeMounts:
-        - name: postgresql-credentials
-          mountPath: /postgresql-credentials
-          readOnly: true
-        - name: authentik-secrets
-          mountPath: /authentik-secrets
-          readOnly: true
+      envFrom:
+        - secretRef:
+            name: authentik-secret
+      env:
+        - name: AUTHENTIK_POSTGRESQL__HOST
+          valueFrom:
+            secretKeyRef:
+              name: authentik-db-app
+              key: host
+        - name: AUTHENTIK_POSTGRESQL__NAME
+          valueFrom:
+            secretKeyRef:
+              name: authentik-db-app
+              key: dbname
+        - name: AUTHENTIK_POSTGRESQL__USER
+          valueFrom:
+            secretKeyRef:
+              name: authentik-db-app
+              key: username
+        - name: AUTHENTIK_POSTGRESQL__PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: authentik-db-app
+              key: password
     authentik:
-      secret_key: file:///authentik-secrets/secret-key
-      postgresql:
-        host: file:///postgresql-credentials/host
-        port: file:///postgresql-credentials/port
-        name: file:///postgresql-credentials/dbname
-        user: file:///postgresql-credentials/username
-        password: file:///postgresql-credentials/password
-        redis:
-          enabled: true
+      redis:
+        enabled: true
     redis:
       enabled: true
     server:
