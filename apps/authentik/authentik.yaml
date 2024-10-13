@@ -76,7 +76,3 @@ spec:
       autoscaling:
         enabled: true
         minReplicas: *num-replicas
-      metrics:
-        enabled: true
-        serviceMonitor:
-          enabled: true
