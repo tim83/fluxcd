@@ -51,18 +51,6 @@ spec:
     redis:
       enabled: true
     server:
-      initContainers: &wait-depedencies
-        - name: wait-database
-          image: alpine
-          imagePullPolicy: IfNotPresent
-          command:
-            - sh
-          args:
-            - -c
-            - >-
-              until nc -w 1 -v $AUTHENTIK_POSTGRESQL__HOST:5432;
-              do echo "Waiting for database";
-              done
       autoscaling:
         enabled: true
         minReplicas: &num-replicas 1
@@ -86,4 +74,3 @@ spec:
       autoscaling:
         enabled: true
         minReplicas: *num-replicas
-      initContainers: *wait-depedencies
