@@ -11,5 +11,5 @@ resources:
   - cloudflared
   - dns
   # - keycloak
-  # - nextcloud
+  - nextcloud
   - authentik

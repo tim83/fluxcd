@@ -4,4 +4,5 @@ namespace: nextcloud
 resources:
   - namespace.yaml
   - secrets.yaml
+  - pvc.yaml
   - nextcloud.yaml
