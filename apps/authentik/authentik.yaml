@@ -56,6 +56,8 @@ spec:
         minReplicas: &num-replicas 1
       metrics:
         enabled: true
+        serviceMonitor:
+          enabled: true
       ingress:
         enabled: true
         annotations:
@@ -74,3 +76,7 @@ spec:
       autoscaling:
         enabled: true
         minReplicas: *num-replicas
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
