@@ -30,6 +30,11 @@ spec:
             secretKeyRef:
               name: authentik-db-app
               key: host
+        - name: AUTHENTIK_POSTGRESQL__PORT
+          valueFrom:
+            secretKeyRef:
+              name: authentik-db-app
+              key: port
         - name: AUTHENTIK_POSTGRESQL__NAME
           valueFrom:
             secretKeyRef:
