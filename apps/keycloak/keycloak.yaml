@@ -1,8 +1,0 @@
-apiVersion: glasskube.eu/v1alpha1
-kind: Keycloak
-metadata:
-  name: keycloak
-spec:
-  host: keycloak.mees-olivier.com
-  management:
-    enabled: true
