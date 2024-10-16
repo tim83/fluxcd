@@ -58,10 +58,9 @@ spec:
               PAPERLESS_DISABLE_REGULAR_LOGIN: true
               PAPERLESS_REDIRECT_LOGIN_TO_SSO: true
               PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
-              PAPERLESS_SOCIALACCOUNT_PROVIDERS:
-                secretKeyRef:
-                  name: paperless-sso
-                  key: config.json
+            envFrom:
+              - secretRef:
+                  name: paperless-secret
             image:
               repository: ghcr.io/paperless-ngx/paperless-ngx
               # renovate: datasource=docker depName=ghcr.io/paperless-ngx/paperless-ngx versioning=docker
