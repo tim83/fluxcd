@@ -23,6 +23,11 @@ spec:
     ingress:
       enabled: true
       annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: *app
+          gethomepage.dev/name: Nextcloud
+          gethomepage.dev/group: Files
+          gethomepage.dev/description: File Storage
       tls:
         - hosts:
             - &host nextcloud.mees-olivier.Com
