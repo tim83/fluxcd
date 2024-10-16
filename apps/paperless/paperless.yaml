@@ -55,8 +55,8 @@ spec:
                   name: paperless-db-app
                   key: password
               # Single Sign On
-              PAPERLESS_DISABLE_REGULAR_LOGIN: true
-              PAPERLESS_REDIRECT_LOGIN_TO_SSO: true
+              # PAPERLESS_DISABLE_REGULAR_LOGIN: true
+              # PAPERLESS_REDIRECT_LOGIN_TO_SSO: true
               PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
             envFrom:
               - secretRef:
