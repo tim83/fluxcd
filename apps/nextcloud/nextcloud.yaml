@@ -23,6 +23,7 @@ spec:
     ingress:
       enabled: true
       annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-staging
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: *app
           gethomepage.dev/name: Nextcloud
