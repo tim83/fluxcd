@@ -23,9 +23,6 @@ spec:
       interval: 15m
   values:
     fullnameOverride: *app
-    image:
-      repository: nextcloud
-      flavor: fpm-alpine
     ingress:
       enabled: true
       annotations:
