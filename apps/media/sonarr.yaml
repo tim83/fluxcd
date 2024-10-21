@@ -30,7 +30,7 @@ spec:
           sonarr:
             image:
               repository: ghcr.io/linuxserver/sonarr
-              # renovate: datasource=docker depName=ghcr.io/linuxserver/sonarr
+              # renovate: datasource=docker depName=ghcr.io/linuxserver/sonarr versioning=semantic
               tag: 4.0.9
             envFrom:
               - configMapRef:
