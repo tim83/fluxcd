@@ -29,8 +29,8 @@ spec:
         containers:
           tautulli:
             image:
-              repository: lscr.io/linuxserver/tautulli
-              # renovate: datasource=docker depName=lscr.io/linuxserver/tautulli
+              repository: ghcr.io/linuxserver/tautulli
+              # renovate: datasource=docker depName=ghcr.io/linuxserver/tautulli
               tag: 2.14.5
             envFrom:
               - configMapRef:

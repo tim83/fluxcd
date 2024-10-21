@@ -29,8 +29,8 @@ spec:
         containers:
           radarr:
             image:
-              repository: lscr.io/linuxserver/radarr
-              # renovate: datasource=docker depName=lscr.io/linuxserver/radarr
+              repository: ghcr.io/linuxserver/radarr
+              # renovate: datasource=docker depName=ghcr.io/linuxserver/radarr
               tag: 5.11.0
             envFrom:
               - configMapRef:

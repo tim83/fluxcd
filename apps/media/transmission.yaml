@@ -29,8 +29,8 @@ spec:
         containers:
           transmission:
             image:
-              repository: lscr.io/linuxserver/transmission
-              # renovate: datasource=docker depName=lscr.io/linuxserver/transmission
+              repository: ghcr.io/linuxserver/transmission
+              # renovate: datasource=docker depName=ghcr.io/linuxserver/transmission
               tag: 4.0.6
             envFrom:
               - configMapRef:
