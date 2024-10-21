@@ -11,7 +11,8 @@
   "regexManagers": [
     {
       "fileMatch": [
-        "\\.yml$","\\.yaml$",
+        "\\.yml$",
+        "\\.yaml$",
         "\\.hcl$",
         "\\.tf$",
         "\\.sh$",
@@ -27,8 +28,10 @@
   ],
   "packageRules": [
     {
-      "packagePatterns": ["^ghcr.io\\/linuxserver\\/"],
-      "versioning": "regex:^(?<compatibility>.*?)-(?<major>v?\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)[\\.-]*r?(?<build>\\d+)*-*r?(?<release>\\w+)*"
+      "packagePatterns": [
+        "^linuxserver\\/"
+      ],
+      "versionScheme": "regex:^(?<compatibility>.*)-v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$"
     }
   ]
 }
