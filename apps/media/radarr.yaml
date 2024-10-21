@@ -30,7 +30,7 @@ spec:
           radarr:
             image:
               repository: ghcr.io/linuxserver/radarr
-              # renovate: datasource=docker depName=ghcr.io/linuxserver/radarr versioning=semantic
+              # renovate: datasource=docker depName=ghcr.io/linuxserver/radarr versioning=loose
               tag: 5.11.0
             envFrom:
               - configMapRef:

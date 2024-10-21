@@ -41,7 +41,7 @@ spec:
           plex:
             image:
               repository: ghcr.io/linuxserver/plex
-              # renovate: datasource=docker depName=ghcr.io/linuxserver/plex versioning=semantic
+              # renovate: datasource=docker depName=ghcr.io/linuxserver/plex versioning=loose
               tag: 1.41.0
               pullPolicy: Always
             envFrom:

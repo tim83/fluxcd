@@ -30,7 +30,7 @@ spec:
           tautulli:
             image:
               repository: ghcr.io/linuxserver/tautulli
-              # renovate: datasource=docker depName=ghcr.io/linuxserver/tautulli versioning=semantic
+              # renovate: datasource=docker depName=ghcr.io/linuxserver/tautulli versioning=loose
               tag: 2.14.5
             envFrom:
               - configMapRef:

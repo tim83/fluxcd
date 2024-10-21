@@ -30,7 +30,7 @@ spec:
           prowlarr:
             image:
               repository: ghcr.io/linuxserver/prowlarr
-              # renovate: datasource=docker depName=ghcr.io/linuxserver/prowlarr versioning=semantic
+              # renovate: datasource=docker depName=ghcr.io/linuxserver/prowlarr versioning=loose
               tag: 1.24.3
             envFrom:
               - configMapRef:
