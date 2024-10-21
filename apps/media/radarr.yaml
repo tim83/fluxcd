@@ -30,7 +30,7 @@ spec:
           radarr:
             image:
               repository: lscr.io/linuxserver/radarr
-              # renovate: datasource=github-release depName=linuxserver/docker-radarr
+              # renovate: datasource=github-release depName=lscr.io/linuxserver/radarr versioning=docker
               tag: 5.11.0
             envFrom:
               - configMapRef:

@@ -30,7 +30,7 @@ spec:
           prowlarr:
             image:
               repository: lscr.io/linuxserver/prowlarr
-              # renovate: datasource=github-release depName=linuxserver/docker-prowlarr
+              # renovate: datasource=github-release depName=lscr.io/linuxserver/prowlarr versioning=docker
               tag: 1.24.3
             envFrom:
               - configMapRef:
