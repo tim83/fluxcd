@@ -41,7 +41,7 @@ spec:
           plex:
             image:
               repository: lscr.io/linuxserver/plex
-              # renovate: datasource=github-release depName=lscr.io/linuxserver/plex versioning=docker
+              # renovate: datasource=github-release depName=linuxserver/docker-plex
               tag: 1.41.0
               pullPolicy: Always
             envFrom:
