@@ -31,7 +31,7 @@ spec:
             image:
               repository: ghcr.io/linuxserver/bazarr
               # renovate: datasource=docker depName=ghcr.io/linuxserver/bazarr
-              tag: 1.4.4
+              tag: 1.4.5
             envFrom:
               - configMapRef:
                   name: env-vars
