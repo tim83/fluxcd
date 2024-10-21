@@ -30,7 +30,7 @@ spec:
           bazarr:
             image:
               repository: ghcr.io/linuxserver/bazarr
-              # renovate: datasource=docker depName=ghcr.io/linuxserver/bazarr versioning=loose
+              # renovate: datasource=docker depName=ghcr.io/linuxserver/bazarr
               tag: 1.4.4
             envFrom:
               - configMapRef:
