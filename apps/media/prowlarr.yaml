@@ -31,7 +31,7 @@ spec:
             image:
               repository: ghcr.io/linuxserver/prowlarr
               # renovate: datasource=docker depName=ghcr.io/linuxserver/prowlarr
-              tag: 1.24.3
+              tag: 1.25.4
             envFrom:
               - configMapRef:
                   name: env-vars
