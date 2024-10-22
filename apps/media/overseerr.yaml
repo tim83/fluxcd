@@ -30,7 +30,7 @@ spec:
           overseerr:
             image:
               repository: ghcr.io/linuxserver/overseerr
-              # renovate: datasource=github-release depName=ghcr.io/linuxserver/docker-overseerr
+              # renovate: datasource=github-release depName=github.com/linuxserver/docker-overseerr
               tag: 1.33.2
             envFrom:
               - configMapRef:

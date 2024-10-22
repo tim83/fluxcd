@@ -30,7 +30,7 @@ spec:
           prowlarr:
             image:
               repository: ghcr.io/linuxserver/prowlarr
-              # renovate: datasource=github-release depName=ghcr.io/linuxserver/docker-prowlarr
+              # renovate: datasource=github-release depName=github.com/linuxserver/docker-prowlarr
               tag: 1.25.4
             envFrom:
               - configMapRef:
