@@ -34,7 +34,7 @@ spec:
           gethomepage.dev/description: File Storage
       tls:
         - hosts:
-            - &host nextcloud.mees-olivier.Com
+            - &host nextcloud.mees-olivier.com
           secretName: nextcloud-tls
     nextcloud:
       host: *host
