@@ -25,5 +25,7 @@ ingress:
     service: http://overseerr.media:80
   - hostname: kuma.mees-olivier.com
     service: http://uptime-kuma.kuma:3001
+  - hostname: plex-relay.mees-olivier.com
+    service: http://plex.media:32400
   # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
   - service: http_status:404
