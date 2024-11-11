@@ -33,7 +33,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     affinity:
       nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
+        requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
                 - key: name
@@ -42,6 +42,7 @@ spec:
                     - talos-home-hybrid-20
     controllers:
       plex:
+        nodeName: talos-home-hybrid-20
         containers:
           plex:
             image:
