@@ -29,8 +29,8 @@ spec:
         containers:
           sonarr:
             image:
-              repository: ghcr.io/linuxserver/sonarr
-              # renovate: datasource=github-release depName=github.com/linuxserver/docker-sonarr
+              repository: ghcr.io/onedr0p/sonarr
+              # renovate: datasource=docker depName=ghcr.io/onedr0p/sonarr
               tag: 4.0.9
             envFrom:
               - configMapRef:

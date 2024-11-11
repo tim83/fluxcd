@@ -29,8 +29,8 @@ spec:
         containers:
           bazarr:
             image:
-              repository: ghcr.io/linuxserver/bazarr
-              # renovate: datasource=github-release depName=github.com/linuxserver/docker-bazarr
+              repository: ghcr.io/onedr0p/bazarr
+              # renovate: datasource=docker depName=ghcr.io/onedr0p/bazarr
               tag: 1.4.5
             envFrom:
               - configMapRef:
