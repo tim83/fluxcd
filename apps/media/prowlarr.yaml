@@ -61,10 +61,10 @@ spec:
           config-backup:
             image:
               repository: docker.io/secoresearch/rsync
-              env:
-                RSYNC_SOURCE: /config
-                RSYNC_TARGET: /config-backup
-                RSYNC_OPTIONS: -avz
+            env:
+              RSYNC_SOURCE: /config
+              RSYNC_TARGET: /config-backup
+              RSYNC_OPTIONS: -avz
     persistence:
       config:
         type: persistentVolumeClaim
