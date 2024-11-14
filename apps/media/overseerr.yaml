@@ -55,6 +55,7 @@ spec:
           config-backup:
             image:
               repository: docker.io/secoresearch/rsync
+              tag: latest
             env:
               RSYNC_SOURCE: /config
               RSYNC_TARGET: /config-backup
