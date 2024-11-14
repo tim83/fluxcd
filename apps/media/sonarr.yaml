@@ -62,7 +62,7 @@ spec:
               tag: latest
             env:
               RSYNC_SOURCE: /config
-              RSYNC_TARGET: /config-backup
+              RSYNC_TARGET: /config-backup/sonarr
               RSYNC_OPTIONS: -avz
     persistence:
       config:
@@ -74,7 +74,7 @@ spec:
       config-backup:
         type: nfs
         server: 192.168.30.1
-        path: /mnt/pool-1/k3s/rsync/sonarr
+        path: /mnt/pool-1/k3s/rsync
         globalMounts:
           - path: /config-backup
       media:
