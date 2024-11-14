@@ -70,7 +70,7 @@ spec:
       config-backup:
         type: nfs
         server: 192.168.30.1
-        path: "/mnt/pool-1/k3s/rsync/{{ .Release.Name }}"
+        path: /mnt/pool-1/k3s/rsync/overseerr
         globalMounts:
           - path: /config-backup
     service:
