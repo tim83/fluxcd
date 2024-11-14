@@ -65,7 +65,7 @@ spec:
             env:
               RSYNC_SOURCE: /config
               RSYNC_TARGET: /config-backup/prowlarr
-              RSYNC_OPTIONS: -avz
+              RSYNC_OPTIONS: -avz --exclude=lost+found
     persistence:
       config:
         type: persistentVolumeClaim
