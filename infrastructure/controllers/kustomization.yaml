@@ -10,4 +10,4 @@ resources:
   - minio.yaml
   - prometheus.yaml
   - github
-  - tailscale
+  # - tailscale

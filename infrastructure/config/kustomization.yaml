@@ -8,4 +8,4 @@ resources:
   - traefik.yaml
   - longhorn-backups.yaml
   - prioritizations.yaml
-  - tailscale.yaml
+  # - tailscale.yaml
