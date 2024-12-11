@@ -39,6 +39,19 @@ spec:
     nextcloud:
       host: *host
       datadir: /var/www/data
+      objectStore:
+        s3:
+          enabled: true
+          host: s3.mees-olivier.com
+          ssl: true
+          bucket: nextcloud-data
+          usePathStyle: true
+          region: us-east-1
+          autocreate: true
+          existingSecret: nextcloud-secret
+          secretKeys:
+            accessKey: accessKey
+            secretKey: secretKey
     nginx:
       enabled: true
     internalDatabase:
