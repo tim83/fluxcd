@@ -6,3 +6,5 @@ resources:
   - proxmox.yaml
   - truenas.yaml
   - uptime-kuma.yaml
+  - nextcloud.yaml
+  - minio.yaml
