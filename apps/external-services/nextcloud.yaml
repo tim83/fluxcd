@@ -3,7 +3,8 @@ kind: Service
 metadata:
   name: nextcloud
   annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: http
+    traefik.ingress.kubernetes.io/service.serversscheme: https
+    traefik.ingress.kubernetes.io/service.serverstransport: traefik-selfsignedssl@kubernetescrd
 spec:
   type: ExternalName
   externalName: truenas.fritz.box
