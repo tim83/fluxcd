@@ -5,6 +5,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/service.serversscheme: https
     traefik.ingress.kubernetes.io/service.serverstransport: traefik-selfsignedssl@kubernetescrd
+    traefik.ingress.kubernetes.io/service.passhostheader: "true"
 spec:
   type: ExternalName
   externalName: truenas.fritz.box
