@@ -27,7 +27,7 @@ spec:
     image:
       repository: ghcr.io/gethomepage/homepage
       # renovate: datasource=docker depName=ghcr.io/gethomepage/homepage
-      tag: 0.10.1
+      tag: 0.10.2
     config:
       useExistingConfigMap: homepage-config
     serviceAccount:
