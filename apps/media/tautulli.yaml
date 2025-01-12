@@ -37,7 +37,7 @@ spec:
             image:
               repository: ghcr.io/onedr0p/tautulli
               # renovate: datasource=docker depName=ghcr.io/onedr0p/tautulli
-              tag: 2.15.0
+              tag: 2.15.1
             envFrom:
               - configMapRef:
                   name: env-vars
