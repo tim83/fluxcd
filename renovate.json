@@ -31,7 +31,9 @@
       "packagePatterns": [
         "^linuxserver\\/"
       ],
-      "versionScheme": "regex:^(?!.*(nig(ht|th)ly|develop|development))(?<compatibility>[a-z]*-|v)?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?:[\\.-]?(?<build>.*))?$"
+      "versionScheme": "regex:^(?!.*(nig(ht|th)ly|develop|development))(?<compatibility>[a-z]*-|v)?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?:[\\.-]?(?<build>.*))?$",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
     }
   ]
 }
