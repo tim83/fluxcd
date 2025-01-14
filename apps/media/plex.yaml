@@ -25,7 +25,6 @@ spec:
       retries: 3
   values:
     defaultPodOptions:
-      priorityClassName: high-priority
       securityContext:
         runAsUser: 65534
         runAsGroup: 65534
