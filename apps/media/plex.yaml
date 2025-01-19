@@ -38,7 +38,7 @@ spec:
                 - key: name
                   operator: In
                   values:
-                    - talos-home-hybrid-20
+                    - talos-home-worker-20
     controllers:
       plex:
         containers:
