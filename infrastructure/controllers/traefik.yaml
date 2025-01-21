@@ -23,7 +23,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: "33.2.x"
+      version: "34.0.x"
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -48,7 +48,7 @@ spec:
     ports:
       web:
         exposedPort: 80
-        redirectTo:
+        redirects:
           port: websecure
       websecure:
         asDefault: true
