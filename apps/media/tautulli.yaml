@@ -32,7 +32,6 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     controllers:
       tautulli:
-        replicas: 0
         containers:
           tautulli:
             image:

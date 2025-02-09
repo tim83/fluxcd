@@ -41,7 +41,6 @@ spec:
                     - talos-home-worker-20
     controllers:
       plex:
-        replicas: 0
         containers:
           plex:
             image:

@@ -26,7 +26,6 @@ spec:
   values:
     controllers:
       overseerr:
-        replicas: 0
         containers:
           overseerr:
             image:

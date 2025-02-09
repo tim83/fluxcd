@@ -32,7 +32,6 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     controllers:
       bazarr:
-        replicas: 0
         containers:
           bazarr:
             image:

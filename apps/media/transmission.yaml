@@ -26,7 +26,6 @@ spec:
   values:
     controllers:
       transmission:
-        replicas: 0
         containers:
           transmission:
             image:

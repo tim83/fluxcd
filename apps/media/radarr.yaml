@@ -32,7 +32,6 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     controllers:
       radarr:
-        replicas: 0
         containers:
           radarr:
             image:

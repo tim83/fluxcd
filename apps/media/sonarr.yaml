@@ -32,7 +32,6 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     controllers:
       sonarr:
-        replicas: 0
         containers:
           sonarr:
             image:
