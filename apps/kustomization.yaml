@@ -11,4 +11,4 @@ resources:
   - cloudflared
   # - dns
   # - nextcloud
-  - authentik
+  # - authentik
