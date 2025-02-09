@@ -32,6 +32,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     controllers:
       prowlarr:
+        replicas: 0
         containers:
           prowlarr:
             image:
