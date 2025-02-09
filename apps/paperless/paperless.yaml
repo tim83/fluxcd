@@ -122,12 +122,12 @@ spec:
         statefulset:
           podManagementPolicy: Parallel
           volumeClaimTemplates:
-            - accessMode: ReadWriteOnce
+            - accessMode: ReadWriteMany
               globalMounts:
                 - path: /usr/src/paperless/data
               name: data
               size: 1Gi
-            - accessMode: ReadWriteOnce
+            - accessMode: ReadWriteMany
               globalMounts:
                 - path: /usr/src/paperless/media
               name: media
