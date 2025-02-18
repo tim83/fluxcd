@@ -3,10 +3,13 @@ kind: Cluster
 metadata:
   name: immich-db
 spec:
+  postgresql:
+    shared_preload_libraries:
+      - "vectors.so"
   bootstrap:
     initdb:
-      postInitTemplateSQL:
-        - CREATE EXTENSION IF NOT EXISTS "vector";
+      postInitSQL:
+        - CREATE EXTENSION IF NOT EXISTS "vectors";
         - CREATE EXTENSION IF NOT EXISTS "cube" CASCADE;
         - CREATE EXTENSION IF NOT EXISTS "earthdistance" CASCADE;
   instances: 2
