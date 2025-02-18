@@ -24,7 +24,7 @@ spec:
               DATABASE_URL:
                 secretKeyRef:
                   name: docmost-db-app
-                  key: url
+                  key: uri
             envFrom:
               - secretRef:
                   name: docmost-env
