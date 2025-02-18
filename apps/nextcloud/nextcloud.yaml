@@ -51,8 +51,6 @@ spec:
           secretKeys:
             accessKey: accessKey
             secretKey: secretKey
-    nginx:
-      enabled: true
     internalDatabase:
       enabled: false
     externalDatabase:
