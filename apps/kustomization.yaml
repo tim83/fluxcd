@@ -13,4 +13,3 @@ resources:
   # - dns
   - nextcloud
   - authentik
-  - immich
