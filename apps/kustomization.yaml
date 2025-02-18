@@ -12,4 +12,4 @@ resources:
   - docmost
   # - dns
   # - nextcloud
-  # - authentik
+  - authentik

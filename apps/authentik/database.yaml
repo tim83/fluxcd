@@ -3,6 +3,33 @@ kind: Cluster
 metadata:
   name: authentik-db
 spec:
-  instances: 3
+  instances: 2
   storage:
-    size: 10Gi
+    storageClass: longhorn-cnpg
+    size: 3Gi
+  walStorage:
+    storageClass: longhorn-cnpg
+    size: 2Gi
+  affinity:
+    enablePodAntiAffinity: true
+    topologyKey: kubernetes.io/hostname
+    podAntiAffinityType: required
+  nodeMaintenanceWindow:
+    reusePVC: false # rebuild from other replica instead
+  backup:
+    retentionPolicy: "60d"
+    barmanObjectStore:
+      destinationPath: s3://k8s-authentik/database
+      endpointURL: https://s3.mees-olivier.com
+      s3Credentials:
+        accessKeyId:
+          name: authentik-s3
+          key: access-key-id
+        secretAccessKey:
+          name: authentik-s3
+          key: secret-access-key
+      wal:
+        compression: gzip # this saves a lot of storage
+      data:
+        compression: gzip
+        jobs: 2
