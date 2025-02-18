@@ -5,4 +5,31 @@ metadata:
 spec:
   instances: 2
   storage:
+    storageClass: longhorn-cnpg
     size: 3Gi
+  walStorage:
+    storageClass: longhorn-cnpg
+    size: 2Gi
+  affinity:
+    enablePodAntiAffinity: true
+    topologyKey: kubernetes.io/hostname
+    podAntiAffinityType: required
+  nodeMaintenanceWindow:
+    reusePVC: false # rebuild from other replica instead
+  backup:
+    retentionPolicy: "60d"
+    barmanObjectStore:
+      destinationPath: s3://k8s-nextcloud/database
+      endpointURL: https://s3.mees-olivier.com
+      s3Credentials:
+        accessKeyId:
+          name: s3-secret
+          key: accessKey
+        secretAccessKey:
+          name: s3-secret
+          key: secretKey
+      wal:
+        compression: gzip # this saves a lot of storage
+      data:
+        compression: gzip
+        jobs: 2

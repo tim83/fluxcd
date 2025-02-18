@@ -38,15 +38,14 @@ spec:
           secretName: nextcloud-tls
     nextcloud:
       host: *host
-      datadir: /var/www/data
       objectStore:
         s3:
           enabled: true
           host: s3.mees-olivier.com
           ssl: true
-          bucket: nextcloud-data
+          bucket: k8s-nextcloud
           usePathStyle: true
-          region: us-east-1
+          region: eu-west-1
           autocreate: true
           existingSecret: nextcloud-secret
           secretKeys:
@@ -66,12 +65,6 @@ spec:
         passwordKey: password
         hostKey: host
         databaseKey: dbname
-    persistence:
-      enabled: true
-      existingClaim: nextcloud-config
-      nextcloudData:
-        enabled: true
-        existingClaim: nextcloud-data
     cronjob:
       enabled: true
     resources:
