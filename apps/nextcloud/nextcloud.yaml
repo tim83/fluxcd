@@ -47,7 +47,7 @@ spec:
           usePathStyle: true
           region: eu-west-1
           autocreate: true
-          existingSecret: nextcloud-secret
+          existingSecret: s3-secret
           secretKeys:
             accessKey: accessKey
             secretKey: secretKey
