@@ -58,7 +58,7 @@ spec:
           gethomepage.dev/name: "Docmost"
           gethomepage.dev/description: "Knowledge Base"
           gethomepage.dev/group: "Files"
-          gethomepage.dev/icon: *app
+          gethomepage.dev/icon: "https://docmost.mees-olivier.com/favicon-32x32.png"
         hosts:
           - host: &host docmost.mees-olivier.com
             paths:
