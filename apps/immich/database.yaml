@@ -3,6 +3,12 @@ kind: Cluster
 metadata:
   name: immich-db
 spec:
+  bootstrap:
+    initdb:
+      postInitTemplateSQL:
+        - CREATE EXTENSION IF NOT EXISTS "vector";
+        - CREATE EXTENSION IF NOT EXISTS "cube" CASCADE;
+        - CREATE EXTENSION IF NOT EXISTS "earthdistance" CASCADE;
   instances: 2
   storage:
     storageClass: longhorn-cnpg
