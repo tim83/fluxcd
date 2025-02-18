@@ -32,6 +32,13 @@ spec:
               repository: docker.io/docmost/docmost
               # renovate: datasource=docker depName=docker.io/docmost/docmost versioning=docker
               tag: 0.7.0
+            probes:
+              liveness:
+                enabled: true
+                type: HTTP
+              readiness:
+                enabled: true
+                type: HTTP
           redis:
             image:
               repository: redis
