@@ -23,7 +23,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: "34.3.x"
+      version: "34.4.x"
       sourceRef:
         kind: HelmRepository
         name: traefik
