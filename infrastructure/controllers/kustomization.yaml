@@ -11,3 +11,4 @@ resources:
   - prometheus.yaml
   - github
   # - tailscale
+  - dragonfly.yaml
