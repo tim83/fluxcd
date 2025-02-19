@@ -31,7 +31,7 @@ spec:
               OIDC_LOGOUT_URI: https://authentik.mees-olivier.com/application/o/outline/end-session/
               OIDC_USERNAME_CLAIM: preferred_username
               OIDC_SCOPES: openid profile email
-              DEFAULT_LANGUAGE: nl_BE
+              DEFAULT_LANGUAGE: nl_NL
               DATABASE_URL:
                 secretKeyRef:
                   name: outline-db-app
