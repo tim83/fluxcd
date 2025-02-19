@@ -90,7 +90,7 @@ spec:
             image:
               repository: gotenberg/gotenberg
               # renovate: datasource=docker depName=gotenberg/gotenberg versioning=docker
-              tag: 8.15.3
+              tag: 8.17.1
             resources:
               limits:
                 memory: 30Mi
