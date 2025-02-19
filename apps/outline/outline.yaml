@@ -32,6 +32,7 @@ spec:
               OIDC_USERNAME_CLAIM: preferred_username
               OIDC_SCOPES: openid profile email
               DEFAULT_LANGUAGE: nl_NL
+              REDIS_URL: redis://localhost:6379
               DATABASE_URL:
                 secretKeyRef:
                   name: outline-db-app
