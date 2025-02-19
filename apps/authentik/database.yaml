@@ -3,7 +3,7 @@ kind: Cluster
 metadata:
   name: authentik-db
 spec:
-  instances: 3
+  instances: 2
   storage:
     storageClass: longhorn-cnpg
     size: 3Gi
