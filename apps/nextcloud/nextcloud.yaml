@@ -122,6 +122,10 @@ spec:
             'oidc_create_groups' => true,
             'oidc_login_auto_redirect' => true, // bypass via /login?noredir=1
           );
+    persistence:
+      enabled: true
+      nextcloudData:
+        enabled: false
     internalDatabase:
       enabled: false
     externalDatabase:
