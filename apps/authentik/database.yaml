@@ -10,12 +10,12 @@ spec:
   walStorage:
     storageClass: longhorn-cnpg
     size: 5Gi
-  # affinity:
-  #   enablePodAntiAffinity: true
-  #   topologyKey: kubernetes.io/hostname
-  #   podAntiAffinityType: required
+  affinity:
+    enablePodAntiAffinity: true
+    topologyKey: kubernetes.io/hostname
+    podAntiAffinityType: required
   nodeMaintenanceWindow:
-    reusePVC: true # rebuild from other replica instead
+    reusePVC: false # rebuild from other replica instead
   backup:
     retentionPolicy: "60d"
     barmanObjectStore:
