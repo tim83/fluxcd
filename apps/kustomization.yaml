@@ -10,6 +10,7 @@ resources:
   - media
   - cloudflared
   - docmost
+  - outline
   # - dns
   - nextcloud
   - authentik
