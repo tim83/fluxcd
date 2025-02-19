@@ -3,19 +3,19 @@ kind: Cluster
 metadata:
   name: authentik-db
 spec:
-  instances: 2
+  instances: 3
   storage:
     storageClass: longhorn-cnpg
     size: 3Gi
   walStorage:
     storageClass: longhorn-cnpg
     size: 5Gi
-  affinity:
-    enablePodAntiAffinity: true
-    topologyKey: kubernetes.io/hostname
-    podAntiAffinityType: required
+  # affinity:
+  #   enablePodAntiAffinity: true
+  #   topologyKey: kubernetes.io/hostname
+  #   podAntiAffinityType: required
   nodeMaintenanceWindow:
-    reusePVC: false # rebuild from other replica instead
+    reusePVC: true # rebuild from other replica instead
   backup:
     retentionPolicy: "60d"
     barmanObjectStore:
