@@ -64,7 +64,7 @@ spec:
             image:
               repository: ghcr.io/paperless-ngx/paperless-ngx
               # renovate: datasource=docker depName=ghcr.io/paperless-ngx/paperless-ngx versioning=docker
-              tag: 2.14.1
+              tag: 2.14.7
             probes:
               liveness:
                 enabled: true
