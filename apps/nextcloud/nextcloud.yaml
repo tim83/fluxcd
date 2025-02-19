@@ -49,6 +49,8 @@ spec:
             secretKeyRef:
               name: *secret
               key: OIDC_CLIENT_SECRET
+        - name: REDIS_HOST
+          value: nextcloud-dragonfly
       existingSecret:
         enabled: true
         secretName: nextcloud-secret

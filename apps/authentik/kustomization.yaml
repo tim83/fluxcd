@@ -1,6 +1,7 @@
 resources:
   - namespace.yaml
   - database.yaml
+  - dragonfly.yaml
   - secret.yaml
   - authentik.yaml
 

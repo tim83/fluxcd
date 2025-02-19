@@ -19,7 +19,7 @@ spec:
           app:
             env:
               STORAGE_DRIVER: s3
-              REDIS_URL: redis://localhost:6379
+              REDIS_URL: redis://docmost-dragonfly:6379
               APP_URL: https://docmost.mees-olivier.com
               DATABASE_URL:
                 secretKeyRef:
@@ -39,17 +39,6 @@ spec:
               readiness:
                 enabled: true
                 type: HTTP
-          redis:
-            image:
-              repository: redis
-              # renovate: datasource=docker depName=redis versioning=docker
-              tag: 7.4.2
-            resources:
-              limits:
-                memory: 50Mi
-              requests:
-                cpu: 10m
-                memory: 18Mi
     ingress:
       app:
         annotations:

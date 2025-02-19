@@ -53,8 +53,9 @@ spec:
     authentik:
       redis:
         enabled: true
+        host: authentik-dragonfly
     redis:
-      enabled: true
+      enabled: false
     server:
       replicas: 2
       metrics:
