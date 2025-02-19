@@ -4,13 +4,11 @@ configurations:
   - kustomizeconfig.yaml
 resources:
   - helmrepos.yaml
-  # - paperless
   - homepage
   - external-services
   - media
   - cloudflared
   - docmost
   - outline
-  # - dns
   - nextcloud
   - authentik
