@@ -41,9 +41,9 @@ spec:
               - secretRef:
                   name: outline-env
             image:
-              repository: docker.getoutline.com/outlinewiki/outline
-              # renovate: datasource=docker depName=docker.getoutline.com/outlinewiki/outline
-              tag: 0.72.0
+              repository: docker.io/outlinewiki/outline
+              # renovate: datasource=docker depName=docker.io/outlinewiki/outline
+              tag: 0.82.0
             probes:
               liveness:
                 enabled: true
