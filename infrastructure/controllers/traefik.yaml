@@ -48,8 +48,9 @@ spec:
     ports:
       web:
         exposedPort: 80
-        redirects:
-          port: websecure
+        redirections:
+          entryPoint:
+            to: websecure
       websecure:
         asDefault: true
         exposedPort: 443
