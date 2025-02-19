@@ -94,6 +94,7 @@ spec:
             'trashbin_retention_obligation' => 'auto, 30',
             'auth.bruteforce.protection.enabled' => true,
           );
+        # SSO requires installing the app: https://apps.nextcloud.com/apps/oidc_login (use the default credentials in nextcloud-secret)
         sso.config.php: |
           <?php $CONFIG = array(
             'oidc_login_button_text' => 'Log in with Authentik',
