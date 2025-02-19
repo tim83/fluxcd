@@ -37,7 +37,7 @@ spec:
             image:
               repository: ghcr.io/onedr0p/radarr
               # renovate: datasource=docker depName=ghcr.io/onedr0p/radarr
-              tag: 5.17.2
+              tag: 5.18.4
             envFrom:
               - configMapRef:
                   name: env-vars
