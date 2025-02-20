@@ -44,13 +44,6 @@ spec:
               repository: docker.io/outlinewiki/outline
               # renovate: datasource=docker depName=docker.io/outlinewiki/outline
               tag: 0.82.0
-            probes:
-              liveness:
-                enabled: true
-                type: HTTP
-              readiness:
-                enabled: true
-                type: HTTP
     ingress:
       app:
         annotations:
@@ -76,5 +69,5 @@ spec:
         controller: *app
         ports:
           http:
-            port: 3000
+            port: 80
             targetPort: 3000
