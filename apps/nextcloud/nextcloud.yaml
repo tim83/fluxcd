@@ -160,8 +160,22 @@ spec:
         aliasgroups:
           - host: "https://nextcloud.mees-olivier.com:443"
         extra_params: --o:ssl.enable=false --o:ssl.termination=true --o:num_prespawn_children=2
+        server_name: &chost collabora.nextcloud.mees-olivier.com
         existingSecret:
           enabled: true
           secretName: "collabora-secret"
           usernameKey: "username"
           passwordKey: "password"
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        hosts:
+            - host: *chost
+              paths:
+              - path: /
+                pathType: ImplementationSpecific
+        tls:
+          - hosts:
+              - *chost
+            secretName: collabora-tls
