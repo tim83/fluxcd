@@ -152,3 +152,15 @@ spec:
       timeoutSeconds: 5
       failureThreshold: 30
       successThreshold: 1
+    collabora:
+      enabled: true
+      collabora:
+        aliasgroups:
+          - host: "https://nextcloud.mees-olivier.com:443"
+        extra_params: --o:ssl.enable=false --o:ssl.termination=true --o:num_prespawn_children=2
+        server_name: collabora
+        existingSecret:
+          enabled: true
+          secretName: "collabora-secret"
+          usernameKey: "username"
+          passwordKey: "password"
