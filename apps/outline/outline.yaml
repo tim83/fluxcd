@@ -18,6 +18,7 @@ spec:
         containers:
           app:
             env:
+              NODE_ENV: production
               URL: https://outline.mees-olivier.com
               FILE_STORAGE: s3
               WEB_CONCURRENCY: 10
@@ -44,6 +45,17 @@ spec:
               repository: docker.io/outlinewiki/outline
               # renovate: datasource=docker depName=docker.io/outlinewiki/outline
               tag: 0.82.0
+            resources:
+              requests:
+                cpu: 10m
+                memory: 250Mi
+              limits:
+                memory: 750Mi
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
     ingress:
       app:
         annotations:
