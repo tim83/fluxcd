@@ -95,6 +95,7 @@ spec:
             'overwriteprotocol' => 'https',
             'trashbin_retention_obligation' => 'auto, 30',
             'auth.bruteforce.protection.enabled' => true,
+            'maintenance_window_start' => 1,
           );
         # SSO requires installing the app: https://apps.nextcloud.com/apps/oidc_login (use the default credentials in nextcloud-secret)
         sso.config.php: |
