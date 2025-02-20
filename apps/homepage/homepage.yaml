@@ -34,6 +34,12 @@ spec:
       create: true
       name: homepage
     enableRbac: true
+    resources:
+      requests:
+        memory: 148Mi
+        cpu: 10m
+      limits:
+        memory: 1024Mi
     ingress:
       main:
         enabled: true
