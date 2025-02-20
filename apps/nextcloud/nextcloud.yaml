@@ -143,8 +143,10 @@ spec:
       enabled: true
     resources:
       requests:
-        cpu: 34m
-        memory: 204Mi
+        cpu: 200m
+        memory: 512Mi
+      limits:
+        memory: 5120Mi
     startupProbe:
       enabled: true
       initialDelaySeconds: 10
