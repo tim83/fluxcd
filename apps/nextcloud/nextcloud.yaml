@@ -160,7 +160,7 @@ spec:
         aliasgroups:
           - host: "https://nextcloud.mees-olivier.com:443"
         extra_params: --o:ssl.enable=false --o:ssl.termination=true --o:num_prespawn_children=2
-        server_name: &chost collabora.nextcloud.mees-olivier.com
+        server_name: &chost collabora.mees-olivier.com
         existingSecret:
           enabled: true
           secretName: "collabora-secret"
