@@ -8,7 +8,6 @@ resources:
   - external-services
   - media
   - cloudflared
-  - docmost
   - outline
   - nextcloud
   - authentik
