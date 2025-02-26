@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: fortuneshift-cron
 spec:
-  schedule: "*/3 * * * *"
+  schedule: "*/2 * * * *"
   jobTemplate:
     spec:
       template:
