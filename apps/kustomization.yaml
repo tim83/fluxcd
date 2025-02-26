@@ -11,3 +11,4 @@ resources:
   - outline
   - nextcloud
   - authentik
+  - datashift

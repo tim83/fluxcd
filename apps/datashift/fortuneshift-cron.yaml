@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: fortuneshift-cron
+spec:
+  schedule: "*/3 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: fortuneshift-cron
+              image: curlimages/curl:latest
+              command:
+                - curl
+                - https://fortuneshift.datashift.eu/cron
+          restartPolicy: OnFailure
