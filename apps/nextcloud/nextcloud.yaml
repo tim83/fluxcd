@@ -76,6 +76,22 @@ spec:
           secretKeys:
             accessKey: accessKey
             secretKey: secretKey
+      extraVolumes:
+        - name: photos
+          nfs:
+            server: truenas.fritz.box
+            path: "/mnt/pool-1/Photos"
+            readOnly: true
+        - name: plex
+          nfs:
+            server: truenas.fritz.box
+            path: "/mnt/pool-1/Plex/media"
+            readOnly: true
+      extraVolumeMounts:
+        - name: photos
+          mountPath: "/photos"
+        - name: plex
+          mountPath: "/plex"
       configs:
         local.config.php: |-
           <?php
@@ -154,22 +170,6 @@ spec:
       timeoutSeconds: 5
       failureThreshold: 30
       successThreshold: 1
-    extraVolumes:
-      - name: photos
-        nfs:
-          server: truenas.fritz.box
-          path: "/mnt/pool-1/Photos"
-          readOnly: true
-      - name: plex
-        nfs:
-          server: truenas.fritz.box
-          path: "/mnt/pool-1/Plex/media"
-          readOnly: true
-    extraVolumeMounts:
-      - name: photos
-        mountPath: "/photos"
-      - name: plex
-        mountPath: "/plex"
     collabora:
       enabled: true
       collabora:
