@@ -30,7 +30,7 @@ spec:
           transmission:
             image:
               repository: ghcr.io/linuxserver/transmission
-              # renovate: datasource=github-release depName=github.com/linuxserver/docker-transmission
+              # renovate: datasource=github-release depName=github.com/linuxserver/docker-transmission versioning=loose
               tag: 4.0.6
             envFrom:
               - configMapRef:
