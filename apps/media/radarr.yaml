@@ -69,12 +69,6 @@ spec:
         path: /mnt/pool-1/Plex
         globalMounts:
           - path: /data
-      media_torrents:
-        type: nfs
-        server: 192.168.30.1
-        path: /mnt/pool-1/Plex/torrents
-        globalMounts:
-          - path: /data/torrents
     service:
       radarr:
         controller: *app
