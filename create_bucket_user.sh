@@ -3,6 +3,18 @@
 name="k8s-$1"
 password=$(pwgen -s 50 1)
 
+function clean_up() {
+  echo -n "Something went wrong, do you want to delete all created objects? [y/N]  "
+  read yn
+  if [ $yn == "y" ] ; then
+    mc rb $name
+    mc admin user rm $name
+    mc admin policy rm $name
+  fi
+  exit 1
+}
+
+
 mc mb "tn/$name" || clean_up
 mc admin user add tn "$name" "$password" || clean_up
 
