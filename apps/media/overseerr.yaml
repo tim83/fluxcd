@@ -31,7 +31,7 @@ spec:
             image:
               repository: ghcr.io/linuxserver/overseerr
               # renovate: datasource=github-release depName=github.com/linuxserver/docker-overseerr
-              tag: 1.33.2
+              tag: 1.34.0
             envFrom:
               - configMapRef:
                   name: env-vars
