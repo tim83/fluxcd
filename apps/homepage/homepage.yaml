@@ -24,6 +24,9 @@ spec:
     envFrom:
       - secretRef:
           name: secret-envs
+    env:
+      - name: HOMEPAGE_ALLOWED_HOSTS
+        value: homepage.mees-olivier.com
     image:
       repository: ghcr.io/gethomepage/homepage
       # renovate: datasource=docker depName=ghcr.io/gethomepage/homepage
