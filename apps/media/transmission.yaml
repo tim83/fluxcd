@@ -26,6 +26,7 @@ spec:
   values:
     controllers:
       transmission:
+        type: statefulset
         containers:
           transmission:
             image:
