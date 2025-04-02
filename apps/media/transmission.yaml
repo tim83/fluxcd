@@ -32,6 +32,7 @@ spec:
             image:
               repository: ghcr.io/linuxserver/transmission
               # renovate: datasource=github-release depName=github.com/linuxserver/docker-transmission
+              tag: 4.0.6
             envFrom:
               - configMapRef:
                   name: env-vars
