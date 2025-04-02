@@ -57,7 +57,7 @@ spec:
     redis:
       enabled: false
     server:
-      replicas: 1
+      replicas: 2
       metrics:
         enabled: true
         serviceMonitor:
@@ -84,7 +84,7 @@ spec:
             hosts:
               - *host
     worker:
-      replicas: 1
+      replicas: 2
       resources:
         requests:
           memory: 512Mi
