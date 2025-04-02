@@ -36,6 +36,9 @@ spec:
         - hosts:
             - &host nextcloud.mees-olivier.com
           secretName: nextcloud-tls
+    image:
+      # renovate: datasource=docker depName=docker.io/nextcloud
+      tag: 31.0.2
     nextcloud:
       host: *host
       extraEnv:
