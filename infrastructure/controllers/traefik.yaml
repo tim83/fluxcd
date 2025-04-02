@@ -32,7 +32,7 @@ spec:
     hostNetwork: false
     deployment:
       kind: Deployment
-      replicas: 1
+      replicas: 2
     ingressClass:
       enabled: true
       isDefaultClass: true

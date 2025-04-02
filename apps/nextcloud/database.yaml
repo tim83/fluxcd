@@ -3,7 +3,7 @@ kind: Cluster
 metadata:
   name: nextcloud-db
 spec:
-  instances: 1
+  instances: 2
   storage:
     storageClass: longhorn-cnpg
     size: 3Gi
