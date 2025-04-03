@@ -35,6 +35,7 @@ spec:
   values:
     defaultSettings:
       backupTarget: nfs://192.168.30.1:/mnt/pool-1/k8s/longhorn
+      orphanAutoDeletion: true
     ingress:
       enabled: true
       host: longhorn.mees-olivier.com
