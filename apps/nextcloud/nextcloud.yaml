@@ -118,7 +118,7 @@ spec:
           );
       extraSidecarContainers:
         - name: nextcloud-maintenance
-          image: "{{ include 'nextcloud.image' .}}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           command:
             - /bin/bash
             - -c
