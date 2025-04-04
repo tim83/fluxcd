@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: copy-photos
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: wait-for-nextcloud
+          image: curlimages/curl:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until curl -sSf -u $WEBDAV_USER:$WEBDAV_PASS http://nextcloud/remote.php/webdav/; do
+                echo "Waiting for Nextcloud..."
+                sleep 10
+              done
+      containers:
+        - name: rclone-sync
+          image: docker.io/rclone/rclone:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              rclone config create webdav remote webdav url http://nextcloud/remote.php/dav/files/$WEBDAV_USER \
+                vendor nextcloud user $WEBDAV_USER pass $WEBDAV_PASS
+              rclone sync /mnt/photos webdav:Photos --verbose
+          envFrom:
+            - secretRef:
+                name: nextcloud-webdav
+          volumeMounts:
+            - name: photos
+              mountPath: /mnt/photos
+      volumes:
+        - name: photos
+          nfs:
+            server: 192.168.30.1
+            path: /mnt/pool-1/Photos
+            readOnly: true
