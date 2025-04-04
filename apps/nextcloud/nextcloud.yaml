@@ -185,6 +185,8 @@ spec:
       timeoutSeconds: 5
       failureThreshold: 30
       successThreshold: 1
+    imaginary:
+      enabled: true
     collabora:
       enabled: true
       collabora:
