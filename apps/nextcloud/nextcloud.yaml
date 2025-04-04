@@ -124,6 +124,7 @@ spec:
             - -c
             - |
               set -e
+              find
               echo "Waiting for Nextcloud to be ready..."
               until curl -s -o /dev/null -w "%{http_code}" https://nextcloud.mees-olivier.com/status.php | grep -q "200"; do
                 sleep 5
