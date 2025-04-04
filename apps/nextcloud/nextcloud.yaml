@@ -116,46 +116,6 @@ spec:
             'auth.bruteforce.protection.enabled' => true,
             'maintenance_window_start' => 1,
           );
-      extraSidecarContainers:
-        - name: nextcloud-maintenance
-          image: docker.io/nextcloud:31.0.2
-          command:
-            - /bin/bash
-            - -c
-            - |
-              set -e
-              echo "Waiting for Nextcloud to be ready..."
-              until curl -s -o /dev/null -w "%{http_code}" https://nextcloud.mees-olivier.com/status.php | grep -q "200"; do
-                sleep 5
-              done
-              echo "Nextcloud is ready. Running maintenance tasks..."
-              php ./html/occ maintenance:repair --include-expensive
-              php ./html/occ db:add-missing-indices
-              php ./html/occ db:add-missing-primary-keys
-              php ./html/occ db:convert-filecache-bigint
-              php ./html/occ app:update --all
-              echo "Maintenance tasks completed."
-          envFrom:
-            - secretRef:
-                name: nextcloud-secret
-          volumeMounts:
-            - name: nextcloud-main
-              mountPath: /var/www/html
-            - name: nextcloud-config
-              mountPath: /var/www/html/config
-            - name: photos
-              mountPath: /photos
-            - name: plex
-              mountPath: /plex
-          resources:
-            requests:
-              cpu: 100m
-              memory: 256Mi
-            limits:
-              memory: 512Mi
-          securityContext:
-            runAsUser: 33
-            runAsGroup: 33
     persistence:
       enabled: true
       nextcloudData:
