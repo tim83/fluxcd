@@ -23,7 +23,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              rclone config create webdav remote webdav url https://nextcloud.mees-olivier.com/remote.php/dav/files/$WEBDAV_USER \
+              rclone config create webdav webdav url https://nextcloud.mees-olivier.com/remote.php/dav/files/$WEBDAV_USER \
                 vendor nextcloud user $WEBDAV_USER pass $WEBDAV_PASS
               rclone sync /mnt/photos webdav:Photos --verbose
           envFrom:
