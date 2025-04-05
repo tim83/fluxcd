@@ -7,5 +7,5 @@ resources:
   - database.yaml
   - dragonfly.yaml
   - nextcloud.yaml
-  # - photos-sync.yaml
-  # - photos-sync-secrets.yaml
+  - photos-sync.yaml
+  - photos-sync-secrets.yaml
