@@ -9,7 +9,7 @@ spec:
     size: 3Gi
   walStorage:
     storageClass: longhorn-cnpg
-    size: 5Gi
+    size: 7Gi
   affinity:
     enablePodAntiAffinity: true
     topologyKey: kubernetes.io/hostname
