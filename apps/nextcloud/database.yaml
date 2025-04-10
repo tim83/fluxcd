@@ -6,10 +6,10 @@ spec:
   instances: 2
   storage:
     storageClass: longhorn-cnpg
-    size: 3Gi
+    size: 5Gi
   walStorage:
     storageClass: longhorn-cnpg
-    size: 13Gi
+    size: 20Gi
   affinity:
     enablePodAntiAffinity: true
     topologyKey: kubernetes.io/hostname
