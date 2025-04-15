@@ -29,6 +29,7 @@ spec:
           key: secretKey
       wal:
         compression: gzip # this saves a lot of storage
+        maxParallel: 3
       data:
         compression: gzip
         jobs: 2
