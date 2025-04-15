@@ -9,7 +9,7 @@ spec:
     size: 5Gi
   walStorage:
     storageClass: longhorn-cnpg
-    size: 25Gi
+    size: 5Gi
   affinity:
     enablePodAntiAffinity: true
     topologyKey: kubernetes.io/hostname
@@ -17,6 +17,7 @@ spec:
   nodeMaintenanceWindow:
     reusePVC: false # rebuild from other replica instead
   backup:
+    retentionPolicy: "60d"
     barmanObjectStore:
       destinationPath: s3://k8s-authentik/database
       endpointURL: https://s3.mees-olivier.com
