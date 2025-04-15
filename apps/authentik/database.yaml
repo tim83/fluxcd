@@ -38,3 +38,13 @@ spec:
       cpu: 50m
     limits:
       memory: 1024Mi
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: authentik-db-backup-weekly
+spec:
+  schedule: "0 0 4 * * 1"
+  backupOwnerReference: self
+  cluster:
+    name: authentik-db
