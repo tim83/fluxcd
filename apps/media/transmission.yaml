@@ -29,8 +29,8 @@ spec:
         containers:
           transmission:
             image:
-              repository: ghcr.io/linuxserver/transmission
-              # renovate: datasource=github-release depName=github.com/linuxserver/docker-transmission
+              repository: ghcr.io/home-operations/transmission
+              # renovate: datasource=docker depName=ghcr.io/home-operations/transmission
               tag: 4.0.6
             envFrom:
               - configMapRef:
