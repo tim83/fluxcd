@@ -35,8 +35,8 @@ spec:
         containers:
           tautulli:
             image:
-              repository: ghcr.io/onedr0p/tautulli
-              # renovate: datasource=docker depName=ghcr.io/onedr0p/tautulli
+              repository: ghcr.io/home-operations/tautulli
+              # renovate: datasource=docker depName=ghcr.io/home-operations/tautulli
               tag: 2.15.1
             envFrom:
               - configMapRef:
