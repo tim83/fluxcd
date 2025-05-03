@@ -37,7 +37,7 @@ spec:
             image:
               repository: ghcr.io/home-operations/tautulli
               # renovate: datasource=docker depName=ghcr.io/home-operations/tautulli
-              tag: 2.15.1
+              tag: 2.15.2
             envFrom:
               - configMapRef:
                   name: env-vars
