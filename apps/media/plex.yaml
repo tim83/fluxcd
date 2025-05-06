@@ -125,16 +125,16 @@ spec:
           - secretName: "{{ .Release.Name }}-tls"
             hosts:
               - *host
-      # plex-ts:
-      #   className: tailscale
-      #   hosts:
-      #     - host: &host "{{ .Release.Name }}"
-      #       paths:
-      #         - path: /
-      #           pathType: Prefix
-      #           service:
-      #             identifier: *app
-      #             port: http
-      #   tls:
-      #     - hosts:
-      #         - *host
+      plex-ts:
+        className: tailscale
+        hosts:
+          - host: &host "{{ .Release.Name }}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: *app
+                  port: http
+        tls:
+          - hosts:
+              - *host
