@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: homepage
-      version: "2.0.x"
+      version: "2.1.x"
       sourceRef:
         kind: HelmRepository
         name: jameswynn
