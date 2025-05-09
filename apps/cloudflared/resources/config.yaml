@@ -29,7 +29,7 @@ ingress:
     service: https://plex.media:32400
     originRequest:
       noTLSVerify: true
-  - hostname: jellyfin.mees-olivier.com
+  - hostname: jellyfin-relay.mees-olivier.com
     service: http://jellyfin.media:8096
   # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
   - service: http_status:404
