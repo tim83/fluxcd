@@ -1,48 +1,115 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: beluga-cloud
-spec:
-  interval: 5m
-  url: https://beluga-cloud.github.io/charts/
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: jellyfin
+  name: &app jellyfin
 spec:
-  releaseName: jellyfin
+  interval: 30m
   chart:
     spec:
-      chart: jellyfin
-      version: "2.3.x"
+      chart: app-template
+      version: 3.x.x
       sourceRef:
         kind: HelmRepository
-        name: beluga-cloud
-  interval: 50m
+        name: bjw-s
+        namespace: default
   values:
-    jellyfin:
-      mediaVolumes:
-        - name: media # this volume will be mounted into `/media/media`
-          readOnly: true
-          volumeSpec:
-            accessModes:
-              - ReadWriteOnce
-            capacity:
-              storage: 3Ti
-            nfs:
-              path: /mnt/pool-1/Plex/media
-              server: 192.168.30.1
-              readonly: true
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 65534
+        runAsGroup: 65534
+        fsGroup: 65534
+        fsGroupChangePolicy: OnRootMismatch
+    controllers:
+      jellyfi,:
+        containers:
+          plex:
+            image:
+              repository: docker.io/jellyfin/jellyfin
+              # renovate: datasource=docker depName=docker.io/jellyfin/jellyfin
+              tag: 10.8.8
+            envFrom:
+              - configMapRef:
+                  name: env-vars
+            env:
+              JELLYFIN_PublishedServerUrl: &host "https://jellyfin.mees-olivier.com"
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: &port 8096
+                  initialDelaySeconds: 15
+                  periodSeconds: 30
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 350m
+                memory: 512Mi
+              limits:
+                cpu: 1100m
+                memory: 1536Mi
+    persistence:
+      config:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 5Gi
+        globalMounts:
+          - path: /config
+      cache:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 5Gi
+        globalMounts:
+          - path: /cache
+      media:
+        type: nfs
+        server: 192.168.30.1
+        path: /mnt/pool-1/Plex/media
+        readOnly: true
+        globalMounts:
+          - path: /data/media
+    service:
+      jellyfin:
+        controller: *app
+        type: ClusterIP
+        ports:
+          http:
+            port: *port
+            targetPort: *port
     ingress:
-      enabled: true
-      hostname: jellyfin.mees-olivier.com
-      path: /
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-        gethomepage.dev/enabled: "true"
-        gethomepage.dev/name: "Jellyfin"
-        gethomepage.dev/description: "TV & Movie streaming"
-        gethomepage.dev/group: "Media"
-        gethomepage.dev/icon: "jellyfin"
-      tls: true
+      plex:
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Jellyfin"
+          gethomepage.dev/description: "TV & Movie streaming"
+          gethomepage.dev/group: "Media"
+          gethomepage.dev/icon: *app
+        hosts:
+          - host: *host
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: *app
+                  port: http
+        tls:
+          - secretName: "{{ .Release.Name }}-tls"
+            hosts:
+              - *host
+      plex-ts:
+        className: tailscale
+        hosts:
+          - host: "{{ .Release.Name }}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: *app
+                  port: http
+        tls:
+          - hosts:
+              - *host
