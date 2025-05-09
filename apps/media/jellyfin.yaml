@@ -27,7 +27,7 @@ spec:
             image:
               repository: docker.io/jellyfin/jellyfin
               # renovate: datasource=docker depName=docker.io/jellyfin/jellyfin
-              tag: 2025050505
+              tag: 10.10.7
             envFrom:
               - configMapRef:
                   name: env-vars
