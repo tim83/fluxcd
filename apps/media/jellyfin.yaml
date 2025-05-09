@@ -80,7 +80,7 @@ spec:
             port: *port
             targetPort: *port
     ingress:
-      plex:
+      jellyfin:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           gethomepage.dev/enabled: "true"
