@@ -19,5 +19,4 @@ metadata:
   namespace: default
 spec:
   interval: 1h
-  type: oci
-  url: oci://ghcr.io/bjw-s/helm
+  url: https://bjw-s-labs.github.io/helm-charts
