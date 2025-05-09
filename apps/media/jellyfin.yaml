@@ -26,7 +26,7 @@ spec:
           jellyfin:
             image:
               repository: docker.io/jellyfin/jellyfin
-              # renovate: datasource=docker depName=docker.io/jellyfin/jellyfin
+              # renovate: datasource=semver depName=docker.io/jellyfin/jellyfin
               tag: 10.10.7
             envFrom:
               - configMapRef:
