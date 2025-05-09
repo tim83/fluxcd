@@ -23,7 +23,7 @@ spec:
     controllers:
       jellyfi,:
         containers:
-          plex:
+          jellyfin:
             image:
               repository: docker.io/jellyfin/jellyfin
               # renovate: datasource=docker depName=docker.io/jellyfin/jellyfin
@@ -100,7 +100,7 @@ spec:
           - secretName: "{{ .Release.Name }}-tls"
             hosts:
               - *host
-      plex-ts:
+      jellyfin-ts:
         className: tailscale
         hosts:
           - host: "{{ .Release.Name }}"
