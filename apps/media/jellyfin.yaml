@@ -68,9 +68,9 @@ spec:
         type: nfs
         server: 192.168.30.1
         path: /mnt/pool-1/Plex/media
-        readOnly: true
         globalMounts:
           - path: /data/media
+            readOnly: true
     service:
       jellyfin:
         controller: *app
