@@ -77,7 +77,7 @@ spec:
         type: ClusterIP
         ports:
           http:
-            port: *port
+            port: 80
             targetPort: *port
     ingress:
       jellyfin:
