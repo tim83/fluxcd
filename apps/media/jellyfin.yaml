@@ -100,16 +100,16 @@ spec:
           - secretName: "{{ .Release.Name }}-tls"
             hosts:
               - *host
-      jellyfin-ts:
-        className: tailscale
-        hosts:
-          - host: "{{ .Release.Name }}"
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: *app
-                  port: http
-        tls:
-          - hosts:
-              - *host
+      # jellyfin-ts:
+      #   className: tailscale
+      #   hosts:
+      #     - host: "{{ .Release.Name }}"
+      #       paths:
+      #         - path: /
+      #           pathType: Prefix
+      #           service:
+      #             identifier: *app
+      #             port: http
+      #   tls:
+      #     - hosts:
+      #         - *host
