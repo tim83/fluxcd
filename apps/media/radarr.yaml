@@ -37,7 +37,7 @@ spec:
             image:
               repository: ghcr.io/home-operations/radarr
               # renovate: datasource=docker depName=ghcr.io/home-operations/radarr
-              tag: 5.23.1
+              tag: 5.23.3
             envFrom:
               - configMapRef:
                   name: env-vars
