@@ -37,7 +37,7 @@ spec:
             image:
               repository: ghcr.io/home-operations/sonarr
               # renovate: datasource=docker depName=ghcr.io/home-operations/sonarr
-              tag: 4.0.14
+              tag: 4.0.15
             envFrom:
               - configMapRef:
                   name: env-vars
