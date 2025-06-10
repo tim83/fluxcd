@@ -46,7 +46,7 @@ spec:
             image:
               repository: ghcr.io/home-operations/plex
               # renovate: datasource=docker depName=ghcr.io/home-operations/plex
-              tag: 1.41.7.9823
+              tag: 1.41.8.9834
             envFrom:
               - configMapRef:
                   name: env-vars
