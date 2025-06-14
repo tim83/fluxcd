@@ -1,24 +1,19 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: bronn
----
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
   name: bronn-infrastructure
-  namespace: bronn
+  namespace: flux-system
 spec:
   interval: 1m0s
   ref:
-    branch: master
+    branch: main
   url: https://gitlab.com/bronn-data/bronn-infrastructure.git
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: bronn-infrastructure
-  namespace: bronn
+  namespace: flux-system
 spec:
   interval: 10m0s
   path: ./clusters/production
