@@ -15,7 +15,10 @@ kind: Kustomization
 metadata:
   name: bronn-infrastructure
 spec:
-  interval: 10m0s
+  interval: 10m
+  dependsOn:
+    - name: infrastructure-config
+      namespace: flux-system
   path: ./clusters/production
   prune: true
   sourceRef:
