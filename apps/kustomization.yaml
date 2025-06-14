@@ -11,4 +11,4 @@ resources:
   - nextcloud
   - authentik
   # - datashift
-  - bronn.yaml
+  - bronn

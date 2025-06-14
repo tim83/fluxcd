@@ -8,6 +8,8 @@ spec:
   ref:
     branch: main
   url: https://gitlab.com/bronn-data/bronn-infrastructure.git
+  secretRef:
+    name: bronn-repo-creds
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
