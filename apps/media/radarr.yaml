@@ -12,7 +12,9 @@ spec:
   template:
     metadata:
       labels:
-        app: radarr
+        app.kubernetes.io/component: radarr
+        app.kubernetes.io/instance: radarr
+        app.kubernetes.io/name: radarr
     spec:
       securityContext:
         runAsUser: 65534
@@ -68,7 +70,7 @@ metadata:
   name: radarr
 spec:
   selector:
-    app: radarr
+    app.kubernetes.io/name: radarr
   ports:
     - port: 80
       targetPort: http
