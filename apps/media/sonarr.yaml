@@ -8,7 +8,9 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: sonarr
+      app.kubernetes.io/component: sonarr
+      app.kubernetes.io/instance: sonarr
+      app.kubernetes.io/name: sonarr
   template:
     metadata:
       labels:
