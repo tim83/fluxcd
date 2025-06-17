@@ -1,93 +1,105 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json
-
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/deployment-apps-v1.json#
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: &app prowlarr
+  name: prowlarr
 spec:
-  interval: 30m
-  chart:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: prowlarr
+      app.kubernetes.io/instance: prowlarr
+      app.kubernetes.io/name: prowlarr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: prowlarr
+        app.kubernetes.io/instance: prowlarr
+        app.kubernetes.io/name: prowlarr
     spec:
-      chart: app-template
-      version: 3.x.x
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: default
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
-  values:
-    defaultPodOptions:
-      securityContext:
-        runAsUser: 65534
-        runAsGroup: 65534
-        fsGroup: 65534
-        fsGroupChangePolicy: OnRootMismatch
-    controllers:
-      prowlarr:
-        containers:
-          prowlarr:
-            image:
-              repository: ghcr.io/home-operations/prowlarr
-              # renovate: datasource=docker depName=ghcr.io/home-operations/prowlarr
-              tag: 2.0.0
-            envFrom:
-              - configMapRef:
-                  name: env-vars
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  tcpSocket:
-                    port: &port 9696
-                  initialDelaySeconds: 15
-                  periodSeconds: 30
-                  failureThreshold: 3
-              readiness: *probes
-            resources:
-              requests:
-                cpu: 10m
-                memory: 128Mi
-    persistence:
-      config:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 3Gi
-        globalMounts:
-          - path: /config
-    service:
-      prowlarr:
-        controller: *app
-        ports:
-          http:
-            port: 80
-            targetPort: *port
-    ingress:
-      prowlarr:
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Prowlarr"
-          gethomepage.dev/description: "Torrent Indexer"
-          gethomepage.dev/group: "Media Downloaders"
-          gethomepage.dev/icon: *app
-        hosts:
-          - host: &host prowlarr.mees-olivier.com
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: *app
-                  port: http
-        tls:
-          - secretName: prowlarr-tls
-            hosts:
-              - *host
+      containers:
+        - name: prowlarr
+          image: ghcr.io/linuxserver/prowlarr:2.0.0
+          envFrom:
+            - configMapRef:
+                name: env-vars
+          resources:
+            requests:
+              cpu: 10m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          ports:
+            - containerPort: &port 9696
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: /config
+          livenessProbe: &probe
+            tcpSocket:
+              port: *port
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            failureThreshold: 3
+          readinessProbe: *probe
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: prowlarr-config
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/persistentvolumeclaim-v1.json#
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prowlarr-config
+spec:
+  resources:
+    requests:
+      storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/service-v1.json#
+apiVersion: v1
+kind: Service
+metadata:
+  name: prowlarr
+spec:
+  selector:
+    app.kubernetes.io/name: prowlarr
+  ports:
+    - port: 80
+      targetPort: http
+      name: http
+  type: ClusterIP
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/ingress-networking-v1.json#
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prowlarr
+  labels:
+    name: prowlarr
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Prowlarr"
+    gethomepage.dev/description: "Torrent Indexer"
+    gethomepage.dev/group: "Media Downloaders"
+    gethomepage.dev/icon: prowlarr
+spec:
+  rules:
+    - host: &host prowlarr.mees-olivier.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: prowlarr
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - *host
+      secretName: prowlarr-tls
