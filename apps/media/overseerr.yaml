@@ -35,8 +35,6 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: media
-              mountPath: /data
           livenessProbe: &probe
             tcpSocket:
               port: *port
@@ -48,10 +46,6 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: overseerr-config
-        - name: media
-          nfs:
-            server: 192.168.30.1
-            path: /mnt/pool-1/Plex
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/persistentvolumeclaim-v1.json#
 apiVersion: v1
