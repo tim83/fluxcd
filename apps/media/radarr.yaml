@@ -6,7 +6,9 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: radarr
+      app.kubernetes.io/component: radarr
+      app.kubernetes.io/instance: radarr
+      app.kubernetes.io/name: radarr
   template:
     metadata:
       labels:
