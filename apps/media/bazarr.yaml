@@ -1,99 +1,116 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json
-
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/deployment-apps-v1.json#
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: &app bazarr
+  name: bazarr
 spec:
-  interval: 30m
-  chart:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: bazarr
+      app.kubernetes.io/instance: bazarr
+      app.kubernetes.io/name: bazarr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: bazarr
+        app.kubernetes.io/instance: bazarr
+        app.kubernetes.io/name: bazarr
     spec:
-      chart: app-template
-      version: 3.x.x
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: default
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
-  values:
-    defaultPodOptions:
       securityContext:
         runAsUser: 65534
         runAsGroup: 65534
         fsGroup: 65534
         fsGroupChangePolicy: OnRootMismatch
-    controllers:
-      bazarr:
-        containers:
-          bazarr:
-            image:
-              repository: ghcr.io/home-operations/bazarr
-              # renovate: datasource=docker depName=ghcr.io/home-operations/bazarr
-              tag: 1.5.2
-            envFrom:
-              - configMapRef:
-                  name: env-vars
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  tcpSocket:
-                    port: &port 6767
-                  initialDelaySeconds: 15
-                  periodSeconds: 30
-                  failureThreshold: 3
-              readiness: *probes
-            resources:
-              requests:
-                cpu: 10m
-                memory: 128Mi
-    persistence:
-      config:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 3Gi
-        globalMounts:
-          - path: /config
-      media:
-        type: nfs
-        server: 192.168.30.1
-        path: /mnt/pool-1/Plex/media
-        globalMounts:
-          - path: /data/media
-    service:
-      bazarr:
-        controller: *app
-        ports:
-          http:
-            port: 80
-            targetPort: *port
-    ingress:
-      bazarr:
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Bazarr"
-          gethomepage.dev/description: "Subtitle Downloader"
-          gethomepage.dev/group: "Media Downloaders"
-          gethomepage.dev/icon: *app
-        hosts:
-          - host: &host bazarr.mees-olivier.com
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: *app
-                  port: http
-        tls:
-          - secretName: bazarr-tls
-            hosts:
-              - *host
+      containers:
+        - name: bazarr
+          image: ghcr.io/home-operations/bazarr:4.0.15
+          envFrom:
+            - configMapRef:
+                name: env-vars
+          resources:
+            requests:
+              cpu: 10m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          ports:
+            - containerPort: &port 6767
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: media
+              mountPath: /data/media
+          livenessProbe: &probe
+            tcpSocket:
+              port: *port
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            failureThreshold: 3
+          readinessProbe: *probe
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: bazarr-config
+        - name: media
+          nfs:
+            server: 192.168.30.1
+            path: /mnt/pool-1/Plex/media
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/persistentvolumeclaim-v1.json#
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bazarr-config
+spec:
+  resources:
+    requests:
+      storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/service-v1.json#
+apiVersion: v1
+kind: Service
+metadata:
+  name: bazarr
+spec:
+  selector:
+    app.kubernetes.io/name: bazarr
+  ports:
+    - port: 80
+      targetPort: http
+      name: http
+  type: ClusterIP
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/ingress-networking-v1.json#
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bazarr
+  labels:
+    name: bazarr
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Bazarr"
+    gethomepage.dev/description: "TV Downloader"
+    gethomepage.dev/group: "Media Downloaders"
+    gethomepage.dev/icon: bazarr
+spec:
+  rules:
+    - host: &host bazarr.mees-olivier.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: bazarr
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - *host
+      secretName: bazarr-tls
