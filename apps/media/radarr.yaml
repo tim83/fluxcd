@@ -35,7 +35,7 @@ spec:
               cpu: 500m
               memory: 512Mi
           ports:
-            - containerPort: 7878
+            - containerPort: &port 7878
               name: http
           volumeMounts:
             - name: config
@@ -44,7 +44,7 @@ spec:
               mountPath: /data
           livenessProbe: &probe
             tcpSocket:
-              port: 8989
+              port: *port
             initialDelaySeconds: 15
             periodSeconds: 30
             failureThreshold: 3
