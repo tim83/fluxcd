@@ -4,7 +4,6 @@ kind: Deployment
 metadata:
   name: tautulli
 spec:
-  replicas: 0
   selector:
     matchLabels:
       app.kubernetes.io/component: tautulli
