@@ -53,7 +53,7 @@ spec:
     persistence:
       config:
         type: persistentVolumeClaim
-        accessMode: ReadWriteMany
+        accessMode: ReadWriteOnce
         size: 3Gi
         globalMounts:
           - path: /config
