@@ -80,10 +80,10 @@ metadata:
       gethomepage.dev/name: "Radarr"
       gethomepage.dev/description: "Movie Downloader"
       gethomepage.dev/group: "Media Downloaders"
-      gethomepage.dev/icon: *app
+      gethomepage.dev/icon: radarr
 spec:
   rules:
-  - host: radarr.mees-olivier.com
+  - host: &host radarr.mees-olivier.com
     http:
       paths:
       - pathType: Prefix
@@ -95,5 +95,5 @@ spec:
               name: http
   tls:
   - hosts:
-    - radarr.mees-olivier.com
+    - *host
     secretName: radarr-tls
