@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/deployment-apps-v1.json#
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -11,30 +12,32 @@ spec:
       labels:
         app: radarr
     spec:
-      defaultPodOptions:
-        securityContext:
-          runAsUser: 65534
-          runAsGroup: 65534
-          fsGroup: 65534
-          fsGroupChangePolicy: OnRootMismatch
+      securityContext:
+        runAsUser: 65534
+        runAsGroup: 65534
+        fsGroup: 65534
+        fsGroupChangePolicy: OnRootMismatch
       containers:
-      - name: radarr
-        image: ghcr.io/home-operations/radarr:5.27.0
-        envFrom:
-          - configMapRef:
-              name: env-vars
-        resources:
-          requests:
-            cpu: 10m
-            memory: 128Mi
-        ports:
-        - containerPort: 7878
-          name: http
-      volumeMounts:
-      - name: config
-        mountPath: /config
-      - name: media
-        mountPath: /data
+        - name: radarr
+          image: ghcr.io/home-operations/radarr:5.27.0
+          envFrom:
+            - configMapRef:
+                name: env-vars
+          resources:
+            requests:
+              cpu: 10m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          ports:
+            - containerPort: 7878
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: media
+              mountPath: /data
       volumes:
         - name: config
           persistentVolumeClaim:
@@ -44,6 +47,7 @@ spec:
             server: 192.168.30.1
             path: /mnt/pool-1/Plex
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/persistentvolumeclaim-v1.json#
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -55,6 +59,7 @@ spec:
   accessModes:
     - ReadWriteOnce
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/service-v1.json#
 apiVersion: v1
 kind: Service
 metadata:
@@ -63,37 +68,38 @@ spec:
   selector:
     app: radarr
   ports:
-  - port: 80
-    targetPort: http
-    name: http
+    - port: 80
+      targetPort: http
+      name: http
   type: ClusterIP
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/ingress-networking-v1.json#
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: radarr
   labels:
     name: radarr
-    annotations:
-      cert-manager.io/cluster-issuer: "letsencrypt-production"
-      gethomepage.dev/enabled: "true"
-      gethomepage.dev/name: "Radarr"
-      gethomepage.dev/description: "Movie Downloader"
-      gethomepage.dev/group: "Media Downloaders"
-      gethomepage.dev/icon: radarr
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Radarr"
+    gethomepage.dev/description: "Movie Downloader"
+    gethomepage.dev/group: "Media Downloaders"
+    gethomepage.dev/icon: radarr
 spec:
   rules:
-  - host: &host radarr.mees-olivier.com
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: radarr
-            port:
-              name: http
+    - host: &host radarr.mees-olivier.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: radarr
+                port:
+                  name: http
   tls:
-  - hosts:
-    - *host
-    secretName: radarr-tls
+    - hosts:
+        - *host
+      secretName: radarr-tls
