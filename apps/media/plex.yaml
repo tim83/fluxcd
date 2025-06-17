@@ -1,141 +1,156 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json
-
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/deployment-apps-v1.json#
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: &app plex
+  name: plex
 spec:
-  interval: 30m
-  chart:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: plex
+      app.kubernetes.io/instance: plex
+      app.kubernetes.io/name: plex
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: plex
+        app.kubernetes.io/instance: plex
+        app.kubernetes.io/name: plex
     spec:
-      chart: app-template
-      version: 3.x.x
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: default
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
-  values:
-    defaultPodOptions:
       securityContext:
         runAsUser: 65534
         runAsGroup: 65534
         fsGroup: 65534
         fsGroupChangePolicy: OnRootMismatch
-    affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: name
-                  operator: In
-                  values:
-                    - talos-home-worker-20
-    controllers:
-      plex:
-        containers:
-          plex:
-            image:
-              repository: ghcr.io/home-operations/plex
-              # renovate: datasource=docker depName=ghcr.io/home-operations/plex
-              tag: 1.41.8.9834
-            envFrom:
-              - configMapRef:
-                  name: env-vars
-            env:
-              HOSTNAME: "Home"
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  tcpSocket:
-                    port: &port 32400
-                  initialDelaySeconds: 15
-                  periodSeconds: 30
-                  failureThreshold: 3
-              readiness: *probes
-            resources:
-              requests:
-                cpu: 350m
-                memory: 512Mi
-              limits:
-                cpu: 1100m
-                memory: 1536Mi
-    persistence:
-      config:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 60Gi
-        globalMounts:
-          - path: /config
-            readOnly: true
-      media:
-        type: nfs
-        server: 192.168.30.1
-        path: /mnt/pool-1/Plex/media
-        globalMounts:
-          - path: /data/media
-      transcode:
-        type: emptyDir
-        globalMounts:
-          - path: /transcode
-      logs:
-        type: emptyDir
-        globalMounts:
-          - path: /config/Library/Application Support/Plex Media Server/Logs
-      cache:
-        type: emptyDir
-        globalMounts:
-          - path: /config/Library/Application Support/Plex Media Server/Cache
-    service:
-      plex:
-        controller: *app
-        type: LoadBalancer
-        loadBalancerIP: 192.168.10.11
-        ports:
-          http:
-            port: *port
-            targetPort: *port
-    ingress:
-      plex:
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Plex"
-          gethomepage.dev/description: "TV & Movie streaming"
-          gethomepage.dev/group: "Media"
-          gethomepage.dev/icon: *app
-        hosts:
-          - host: &host "{{ .Release.Name }}.mees-olivier.com"
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: *app
-                  port: http
-        tls:
-          - secretName: "{{ .Release.Name }}-tls"
-            hosts:
-              - *host
-      plex-ts:
-        className: tailscale
-        hosts:
-          - host: &host "{{ .Release.Name }}"
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: *app
-                  port: http
-        tls:
-          - hosts:
-              - *host
+      containers:
+        - name: plex
+          image: ghcr.io/home-operations/plex:1.41.8.9834
+          envFrom:
+            - configMapRef:
+                name: env-vars
+          env:
+            - name: HOSTNAME
+              value: "Home"
+          resources:
+            requests:
+              cpu: 350m
+              memory: 512Mi
+            limits:
+              cpu: 1100m
+              memory: 1536Mi
+          ports:
+            - containerPort: &port 32400
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: media
+              mountPath: /data/media
+            - name: transcode
+              mountPath: /transcode
+            - name: logs
+              mountPath: /config/Library/Application Support/Plex Media Server/Logs
+            - name: cache
+              mountPath: /config/Library/Application Support/Plex Media Server/Cache
+          livenessProbe: &probe
+            tcpSocket:
+              port: *port
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            failureThreshold: 3
+          readinessProbe: *probe
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: plex-config
+        - name: media
+          nfs:
+            server: 192.168.30.1
+            path: /mnt/pool-1/Plex/media
+        - name: transcode
+          emptyDir: {}
+        - name: logs
+          emptyDir: {}
+        - name: cache
+          emptyDir: {}
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/persistentvolumeclaim-v1.json#
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: plex-config
+spec:
+  resources:
+    requests:
+      storage: 60Gi
+  accessModes:
+    - ReadWriteOnce
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/service-v1.json#
+apiVersion: v1
+kind: Service
+metadata:
+  name: plex
+spec:
+  selector:
+    app.kubernetes.io/name: plex
+  ports:
+    - port: 80
+      targetPort: http
+      name: http
+  type: LoadBalancer
+  loadBalancerIP: 192.168.10.11
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/ingress-networking-v1.json#
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: plex
+  labels:
+    name: plex
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Plex"
+    gethomepage.dev/description: "TV & Movie streaming"
+    gethomepage.dev/group: "Media"
+    gethomepage.dev/icon: plex
+spec:
+  rules:
+    - host: &host plex.mees-olivier.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: plex
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - *host
+      secretName: plex-tls
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/ingress-networking-v1.json#
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: plex-ts
+  labels:
+    name: plex-ts
+spec:
+  ingressClassName: tailscale
+  rules:
+    - host: &host plex
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: plex
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - *host
