@@ -98,7 +98,7 @@ metadata:
     gethomepage.dev/name: "Sonarr"
     gethomepage.dev/description: "TV Downloader"
     gethomepage.dev/group: "Media Downloaders"
-    gethomepage.dev/icon: *app
+    gethomepage.dev/icon: sonarr
 spec:
   rules:
     - host: &host sonarr.mees-olivier.com
