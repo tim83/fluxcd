@@ -1,95 +1,116 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json
-
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/deployment-apps-v1.json#
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: &app overseerr
+  name: overseerr
 spec:
-  interval: 30m
-  chart:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: overseerr
+      app.kubernetes.io/instance: overseerr
+      app.kubernetes.io/name: overseerr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: overseerr
+        app.kubernetes.io/instance: overseerr
+        app.kubernetes.io/name: overseerr
     spec:
-      chart: app-template
-      version: 3.x.x
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: default
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
-  values:
-    controllers:
-      overseerr:
-        containers:
-          overseerr:
-            image:
-              repository: ghcr.io/linuxserver/overseerr
-              # renovate: datasource=github-release depName=github.com/linuxserver/docker-overseerr
-              tag: 1.34.0
-            envFrom:
-              - configMapRef:
-                  name: env-vars
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  tcpSocket:
-                    port: &port 5055
-                  initialDelaySeconds: 15
-                  periodSeconds: 30
-                  failureThreshold: 3
-              readiness: *probes
-            resources:
-              requests:
-                cpu: 10m
-                memory: 128Mi
-    persistence:
-      config:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 3Gi
-        globalMounts:
-          - path: /config
-    service:
-      overseerr:
-        controller: *app
-        ports:
-          http:
-            port: 80
-            targetPort: *port
-    ingress:
-      overseerr:
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Overseerr"
-          gethomepage.dev/description: "Media Requester"
-          gethomepage.dev/group: "Media"
-          gethomepage.dev/icon: *app
-        hosts:
-          - host: &host requests.mees-olivier.com
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: *app
-                  port: http
-          - host: overseerr.mees-olivier.com
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: *app
-                  port: http
-        tls:
-          - secretName: overseerr-tls
-            hosts:
-              - *host
-              - overseerr.mees-olivier.com
+      containers:
+        - name: overseerr
+          image: ghcr.io/linuxserver/overseerr:1.34.0
+          envFrom:
+            - configMapRef:
+                name: env-vars
+          resources:
+            requests:
+              cpu: 10m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          ports:
+            - containerPort: &port 5055
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: /config
+          livenessProbe: &probe
+            tcpSocket:
+              port: *port
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            failureThreshold: 3
+          readinessProbe: *probe
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: overseerr-config
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/persistentvolumeclaim-v1.json#
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: overseerr-config
+spec:
+  resources:
+    requests:
+      storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/service-v1.json#
+apiVersion: v1
+kind: Service
+metadata:
+  name: overseerr
+spec:
+  selector:
+    app.kubernetes.io/name: overseerr
+  ports:
+    - port: 80
+      targetPort: http
+      name: http
+  type: ClusterIP
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/ingress-networking-v1.json#
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: overseerr
+  labels:
+    name: overseerr
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Overseerr"
+    gethomepage.dev/description: "Media Requester"
+    gethomepage.dev/group: "Media"
+    gethomepage.dev/icon: overseerr
+spec:
+  rules:
+    - host: &host overseerr.mees-olivier.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: overseerr
+                port:
+                  name: http
+    - host: &hostrelay request.mees-olivier.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: overseerr
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - *host
+        - *hostrelay
+      secretName: overseerr-tls

@@ -1,99 +1,116 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json
-
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/deployment-apps-v1.json#
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: &app sonarr
+  name: sonarr
 spec:
-  interval: 30m
-  chart:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: sonarr
+      app.kubernetes.io/instance: sonarr
+      app.kubernetes.io/name: sonarr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: sonarr
+        app.kubernetes.io/instance: sonarr
+        app.kubernetes.io/name: sonarr
     spec:
-      chart: app-template
-      version: 3.x.x
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: default
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
-  values:
-    defaultPodOptions:
       securityContext:
         runAsUser: 65534
         runAsGroup: 65534
         fsGroup: 65534
         fsGroupChangePolicy: OnRootMismatch
-    controllers:
-      sonarr:
-        containers:
-          sonarr:
-            image:
-              repository: ghcr.io/home-operations/sonarr
-              # renovate: datasource=docker depName=ghcr.io/home-operations/sonarr
-              tag: 4.0.15
-            envFrom:
-              - configMapRef:
-                  name: env-vars
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  tcpSocket:
-                    port: &port 8989
-                  initialDelaySeconds: 15
-                  periodSeconds: 30
-                  failureThreshold: 3
-              readiness: *probes
-            resources:
-              requests:
-                cpu: 10m
-                memory: 200Mi
-    persistence:
-      config:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 3Gi
-        globalMounts:
-          - path: /config
-      media:
-        type: nfs
-        server: 192.168.30.1
-        path: /mnt/pool-1/Plex
-        globalMounts:
-          - path: /data
-    service:
-      sonarr:
-        controller: *app
-        ports:
-          http:
-            port: 80
-            targetPort: *port
-    ingress:
-      sonarr:
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Sonarr"
-          gethomepage.dev/description: "TV Downloader"
-          gethomepage.dev/group: "Media Downloaders"
-          gethomepage.dev/icon: *app
-        hosts:
-          - host: &host sonarr.mees-olivier.com
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: *app
-                  port: http
-        tls:
-          - secretName: sonarr-tls
-            hosts:
-              - *host
+      containers:
+        - name: sonarr
+          image: ghcr.io/home-operations/sonarr:4.0.15
+          envFrom:
+            - configMapRef:
+                name: env-vars
+          resources:
+            requests:
+              cpu: 10m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          ports:
+            - containerPort: &port 8989
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: media
+              mountPath: /data
+          livenessProbe: &probe
+            tcpSocket:
+              port: *port
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            failureThreshold: 3
+          readinessProbe: *probe
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: sonarr-config
+        - name: media
+          nfs:
+            server: 192.168.30.1
+            path: /mnt/pool-1/Plex
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/persistentvolumeclaim-v1.json#
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sonarr-config
+spec:
+  resources:
+    requests:
+      storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.0/service-v1.json#
+apiVersion: v1
+kind: Service
+metadata:
+  name: sonarr
+spec:
+  selector:
+    app.kubernetes.io/name: sonarr
+  ports:
+    - port: 80
+      targetPort: http
+      name: http
+  type: ClusterIP
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/ingress-networking-v1.json#
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sonarr
+  labels:
+    name: sonarr
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Sonarr"
+    gethomepage.dev/description: "TV Downloader"
+    gethomepage.dev/group: "Media Downloaders"
+    gethomepage.dev/icon: sonarr
+spec:
+  rules:
+    - host: &host sonarr.mees-olivier.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: sonarr
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - *host
+      secretName: sonarr-tls

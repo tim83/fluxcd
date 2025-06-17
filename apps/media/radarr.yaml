@@ -35,13 +35,20 @@ spec:
               cpu: 500m
               memory: 512Mi
           ports:
-            - containerPort: 7878
+            - containerPort: &port 7878
               name: http
           volumeMounts:
             - name: config
               mountPath: /config
             - name: media
               mountPath: /data
+          livenessProbe: &probe
+            tcpSocket:
+              port: *port
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            failureThreshold: 3
+          readinessProbe: *probe
       volumes:
         - name: config
           persistentVolumeClaim:
