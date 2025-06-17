@@ -95,9 +95,8 @@ spec:
   selector:
     app.kubernetes.io/name: plex
   ports:
-    - port: 80
+    - port: 32400
       targetPort: http
-      name: http
   type: LoadBalancer
   loadBalancerIP: 192.168.10.11
 ---
@@ -126,7 +125,7 @@ spec:
               service:
                 name: plex
                 port:
-                  name: http
+                  number: 32400
   tls:
     - hosts:
         - *host
@@ -151,7 +150,7 @@ spec:
               service:
                 name: plex
                 port:
-                  name: http
+                  number: 32400
   tls:
     - hosts:
         - *host
