@@ -38,6 +38,13 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /data
+          livenessProbe: &probe
+            tcpSocket:
+              port: 8989
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            failureThreshold: 3
+          readinessProbe: *probe
       volumes:
         - name: config
           persistentVolumeClaim:

@@ -1,5 +1,6 @@
 
----# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/deployment-apps-v1.json#
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/deployment-apps-v1.json#
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -39,17 +40,13 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /data
-          probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  tcpSocket:
-                    port: &port 8989
-                  initialDelaySeconds: 15
-                  periodSeconds: 30
-                  failureThreshold: 3
-              readiness: *probes
+          livenessProbe: &probe
+            tcpSocket:
+              port: 8989
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            failureThreshold: 3
+          readinessProbe: *probe
       volumes:
         - name: config
           persistentVolumeClaim:
