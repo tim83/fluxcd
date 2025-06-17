@@ -1,88 +1,99 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json
-
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: &app radarr
+  name: radarr
 spec:
-  interval: 30m
-  chart:
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
     spec:
-      chart: app-template
-      version: 3.x.x
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: default
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
-  values:
-    defaultPodOptions:
-      securityContext:
-        runAsUser: 65534
-        runAsGroup: 65534
-        fsGroup: 65534
-        fsGroupChangePolicy: OnRootMismatch
-    controllers:
-      radarr:
-        containers:
-          radarr:
-            image:
-              repository: ghcr.io/home-operations/radarr
-              # renovate: datasource=docker depName=ghcr.io/home-operations/radarr
-              tag: 5.27.0
-            envFrom:
-              - configMapRef:
-                  name: env-vars
-            resources:
-              requests:
-                cpu: 10m
-                memory: 128Mi
-    persistence:
-      config:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 3Gi
-        globalMounts:
-          - path: /config
-      media:
-        type: nfs
-        server: 192.168.30.1
-        path: /mnt/pool-1/Plex
-        globalMounts:
-          - path: /data
-    service:
-      radarr:
-        controller: *app
+      defaultPodOptions:
+        securityContext:
+          runAsUser: 65534
+          runAsGroup: 65534
+          fsGroup: 65534
+          fsGroupChangePolicy: OnRootMismatch
+      containers:
+      - name: radarr
+        image: ghcr.io/home-operations/radarr:5.27.0
+        envFrom:
+          - configMapRef:
+              name: env-vars
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
         ports:
-          http:
-            port: 80
-            targetPort: &port 7878
-    ingress:
-      radarr:
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Radarr"
-          gethomepage.dev/description: "Movie Downloader"
-          gethomepage.dev/group: "Media Downloaders"
-          gethomepage.dev/icon: *app
-        hosts:
-          - host: &host radarr.mees-olivier.com
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: *app
-                  port: http
-        tls:
-          - secretName: radarr-tls
-            hosts:
-              - *host
+        - containerPort: 7878
+          name: http
+      volumeMounts:
+      - name: config
+        mountPath: /config
+      - name: media
+        mountPath: /data
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: radarr-config
+        - name: media
+          nfs:
+            server: 192.168.30.1
+            path: /mnt/pool-1/Plex
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-config
+spec:
+  resources:
+    requests:
+      storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr
+spec:
+  selector:
+    app: radarr
+  ports:
+  - port: 80
+    targetPort: http
+    name: http
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: radarr
+  labels:
+    name: radarr
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-production"
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Radarr"
+      gethomepage.dev/description: "Movie Downloader"
+      gethomepage.dev/group: "Media Downloaders"
+      gethomepage.dev/icon: *app
+spec:
+  rules:
+  - host: radarr.mees-olivier.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: radarr
+            port:
+              name: http
+  tls:
+  - hosts:
+    - radarr.mees-olivier.com
+    secretName: radarr-tls
