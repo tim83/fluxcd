@@ -6,7 +6,7 @@ spec:
   interval: 1m0s
   ref:
     branch: main
-  url: https://gitlab.com/bronn-data/bronn-infrastructure.git
+  url: https://gitlab.com/bronn-org/bronn-infrastructure.git
   secretRef:
     name: bronn-repo-creds
 ---
