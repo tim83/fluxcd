@@ -39,6 +39,7 @@ spec:
               memory: 1536Mi
           ports:
             - containerPort: &port 32400
+              hostPort: *port
               name: http
           volumeMounts:
             - name: config
