@@ -29,8 +29,6 @@ ingress:
     service: https://plex.media:32400
     originRequest:
       noTLSVerify: true
-  - hostname: jellyfin-relay.mees-olivier.com
-    service: http://jellyfin.media:8096
   - hostname: api.bronn.mees-olivier.com
     service: http://bronn-backend.bronn:80
   - hostname: bronn.mees-olivier.com
