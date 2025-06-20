@@ -29,8 +29,9 @@ ingress:
     service: https://plex.media:32400
     originRequest:
       noTLSVerify: true
-  - hostname: api-bronn.mees-olivier.com
+  - hostname: bronn.mees-olivier.com
     service: http://bronn-backend.bronn:80
+    path: /api
   - hostname: bronn.mees-olivier.com
     service: http://bronn-frontend.bronn:80
   # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
